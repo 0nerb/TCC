@@ -59,7 +59,7 @@ if __name__ == "__main__":
 
         # Escreve os dados no arquivo output.json
         try:
-            with open("output.json", "w", encoding="utf-8") as f:
+            with open("siglaTodasAcoes.json", "w", encoding="utf-8") as f:
                 json.dump(output_data, f, ensure_ascii=False, indent=2)
             print(f"\nArquivo 'output.json' criado com sucesso com {len(output_data)} ações.")
             print("Amostra dos dados:")

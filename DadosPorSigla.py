@@ -89,6 +89,8 @@ def get_stock_data(ticker_symbol):
         "dados_historicos": dados_historicos,
     }
 
+#Ler o arquivo JSON completo de todas as siglas
+
 # # --- Lógica Principal ---
 # if __name__ == "__main__":
 #     try:
