@@ -1,28 +1,12 @@
-"""Pegar: 
-* preço da acao
-* volume de negociacao(diario) - Quantidade de ações negociadas em um determinado período (geralmente diário).
-* valor de mercado - Preço da ação multiplicado pelo número total de ações em circulação. Indica o tamanho da empresa.
-* RSI (Relative Strength Index) - Indicador técnico que mede a velocidade e a mudança dos movimentos de preço. Valores acima de 70 indicam que a ação pode estar sobrecomprada, enquanto valores abaixo de 30 sugerem que pode estar sobrevendida.
-* P/L  - Indica quantos anos seriam necessários para recuperar o valor investido na ação com os lucros da empresa. Um P/L baixo pode sugerir uma ação barata.
-* P/VPA - Compara o preço da ação com o valor do patrimônio líquido da empresa por ação. Um P/VPA abaixo de 1 pode indicar que a ação está sendo negociada abaixo do seu valor contábil.
-* EV/EBITDA	- Compara o valor da firma com sua geração de caixa operacional. É considerado um múltiplo mais completo que o P/L, pois inclui a dívida.
-* PSR (Price to Sales Ratio) - Compara o valor de mercado da empresa com sua receita. Útil para empresas que ainda não dão lucro.
-* ROE (Return on Equity) - Mede a rentabilidade do capital próprio investido na empresa. Um ROE alto indica eficiência na geração de lucros com o capital dos acionistas.
-* ROIC (Return on Invested Capital) - Mede a eficiência da empresa em gerar lucros com o capital investido, incluindo dívida e capital próprio. Um ROIC alto indica uma boa gestão do capital.
-* Margem EBITDA - Mede a porcentagem da receita que se transforma em lucro operacional antes de juros, impostos, depreciação e amortização. Uma margem EBITDA alta indica eficiência operacional.
-* Margem Bruta - Mede a porcentagem da receita que se transforma em lucro líquido. Uma margem bruta alta indica eficiência na produção e venda de produtos ou serviços.
-* Margem Líquida - Mede a porcentagem da receita que se transforma em lucro líquido após todas as despesas. Uma margem líquida alta indica eficiência geral da empresa.
-* Setor - Indica o setor de atuação da empresa, como tecnologia, saúde, finanças, etc. Ajuda a entender o contexto do negócio.
-* Industria - Indica a indústria específica dentro do setor, como software, farmacêutica, bancos, etc. Fornece uma visão mais detalhada do mercado em que a empresa opera.
-"""
 import yfinance as yf
-import pandas as pd
+import pandas as pd  # Importação necessária para a função de RSI
 import json
 import time
 
 # --- Configuração ---
-INPUT_FILE = "siglasComErro.json"
-OUTPUT_FILE = "dadosPorAcaoComErro.json"
+# Coloque aqui o nome do arquivo que você gerou na etapa anterior
+INPUT_FILE = "siglaTodasAcoes2.json" 
+OUTPUT_FILE = "dadosPorSigla.json"
 
 def calcular_rsi_manual(precos, periodo=14):
     """
@@ -47,9 +31,10 @@ def calcular_rsi_manual(precos, periodo=14):
     
     return rsi
 
-def get_stock_data(ticker_symbol):
+def get_stock_data(ticker_symbol, data_de_inicio_raw):
     """
-    Coleta, processa e estrutura os dados para um único ticker.
+    Coleta, processa e estrutura os dados para um único ticker,
+    usando uma data de início dinâmica.
     """
     stock = yf.Ticker(ticker_symbol)
 
@@ -57,19 +42,42 @@ def get_stock_data(ticker_symbol):
     info = stock.info
     info_gerais = {
         "nome": info.get('shortName'),
+        "country": info.get('country'),
         "setor": info.get('sector'),
         "industria": info.get('industry'),
         "valor_mercado_atual": info.get('marketCap'),
         "pl_atual": info.get('trailingPE'),
-        "pvpa_atual": info.get('priceToBook')
+        "pvpa_atual": info.get('priceToBook'),
+        "trailing_dividend_yield": info.get('trailingAnnualDividendYield'),
+        "five_year_avg_dividend_yield": info.get('fiveYearAvgDividendYield'),
+        "ebitda_margin": info.get('ebitdaMargins'),
+        "enterprise_to_ebitda": info.get('enterpriseToEbitda'),
+        "price_to_sales": info.get('priceToSalesTrailing12Months'),
     }
 
-    # 2. Obter dados históricos e amostrar a cada 3 dias
-    hist_df = stock.history(start="2021-01-01", end="2022-12-31")
+    # --- LÓGICA DA DATA DE INÍCIO DINÂMICA ---
+    # Se não houver data de início, não podemos buscar o histórico
+    if not data_de_inicio_raw or data_de_inicio_raw == "Não encontrado":
+        return {"info_gerais": info_gerais, "dados_historicos": [], "erro_data": "Data de início não encontrada."}
+
+    data_limite = '2010-01-01'
+    start_date_final = ''
+
+    # Compara as datas como strings (funciona para o formato YYYY-MM-DD)
+    if data_de_inicio_raw < data_limite:
+        # Regra 1: Data é anterior a 2010, usa 2010
+        start_date_final = data_limite
+    else:
+        # Regra 2: Data é 2010 ou posterior, usa a própria data
+        start_date_final = data_de_inicio_raw
+    # ----------------------------------------
+
+    # 2. Obter dados históricos com a data de início correta
+    hist_df = stock.history(start=start_date_final, end="2025-12-31")
     if hist_df.empty:
         return {"info_gerais": info_gerais, "dados_historicos": []}
 
-    # Calcula o RSI usando o método manual e cria a nova coluna 'RSI_14'
+    # Calcula o RSI usando o método manual
     hist_df['RSI_14'] = calcular_rsi_manual(hist_df['Close'])
     
     # Amostra a cada 3 dias
@@ -81,7 +89,7 @@ def get_stock_data(ticker_symbol):
             "data": index.strftime('%Y-%m-%d'),
             "preco_fechamento": row.get('Close'),
             "volume": row.get('Volume'),
-            "rsi_14": row.get('RSI_14')
+            "rsi_14": row.get('RSI_14'),
         })
     
     return {
@@ -89,72 +97,42 @@ def get_stock_data(ticker_symbol):
         "dados_historicos": dados_historicos,
     }
 
-#Ler o arquivo JSON completo de todas as siglas
-
-# # --- Lógica Principal ---
-# if __name__ == "__main__":
-#     try:
-#         with open(INPUT_FILE, 'r', encoding='utf-8') as f:
-#             acoes_para_processar = json.load(f)
-#     except FileNotFoundError:
-#         exit()
-
-#     dados_finais = {}
-    
-#     for acao in acoes_para_processar:
-#         sigla = acao.get("sigla", [])
-#         if not sigla:
-#             continue
-        
-#         try:
-#             dados_da_acao = get_stock_data(sigla)
-#             dados_finais[sigla] = dados_da_acao
-#             time.sleep(1) 
-#         except Exception as e:
-#             dados_finais[sigla] = {"erro": str(e)}
-#             continue
-
-#     try:
-#         with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
-#             json.dump(dados_finais, f, ensure_ascii=False, indent=2)
-#     except IOError:
-#         print("Erro ao escrever o arquivo de saída.")
-#         pass
-
-
 # --- Lógica Principal ---
 if __name__ == "__main__":
     try:
         with open(INPUT_FILE, 'r', encoding='utf-8') as f:
-            # 1. Carrega o JSON inteiro em um dicionário
-            dados_json = json.load(f)
-            # 2. Extrai a lista de siglas de dentro do dicionário usando a chave 'tickers'
-            acoes_para_processar = dados_json['tickers']
+            # 1. Carrega o JSON (que agora é uma LISTA de dicionários)
+            acoes_para_processar = json.load(f)
 
     except FileNotFoundError:
         print(f"ERRO: Arquivo de entrada '{INPUT_FILE}' não encontrado.")
         exit()
-    except KeyError:
-        print(f"ERRO: A chave 'tickers' não foi encontrada no arquivo '{INPUT_FILE}'. Verifique o formato do JSON.")
+    except json.JSONDecodeError:
+        print(f"ERRO: O arquivo '{INPUT_FILE}' não é um JSON válido.")
         exit()
 
     dados_finais = {}
     total_acoes = len(acoes_para_processar)
     print(f"Iniciando processamento para {total_acoes} ações...")
     
-    # 3. Agora o loop itera sobre a lista de siglas diretamente
-    for i, sigla in enumerate(acoes_para_processar):
-        # A variável 'sigla' já é a string que queremos (ex: "AACT")
+    # 3. Agora o loop itera sobre a LISTA de ações
+    for i, acao in enumerate(acoes_para_processar):
+        
+        # Extrai os dados do dicionário 'acao'
+        sigla = acao.get("sigla")
+        primeira_data = acao.get("primeira_data") # <--- Pega a data de início
+
         if not sigla:
             continue
         
-        # Adicionei um print para você acompanhar o progresso
-        print(f"Processando {i+1}/{total_acoes}: {sigla}...")
+        print(f"Processando {i+1}/{total_acoes}: {sigla} (Data de início: {primeira_data})...")
         
         try:
-            dados_da_acao = get_stock_data(sigla)
+            # Passa a sigla E a data de início para a função
+            dados_da_acao = get_stock_data(sigla, primeira_data)
             dados_finais[sigla] = dados_da_acao
-            time.sleep(1) 
+            time.sleep(1)  # Pausa para evitar sobrecarga de requisições
+        
         except Exception as e:
             print(f"  !! Erro ao processar {sigla}: {e}")
             dados_finais[sigla] = {"erro": str(e)}

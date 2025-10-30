@@ -1,35 +1,31 @@
 import yfinance as yf
 import json
 import time
-from concurrent.futures import ThreadPoolExecutor, as_completed
-from tqdm import tqdm
 
 # --- Configuração ---
 INPUT_FILE = 'siglaTodasAcoes.json'
 OUTPUT_FILE = 'datasListagem.json'
-MAX_WORKERS = 10 # Número de "trabalhadores" simultâneos. Ajuste conforme sua conexão.
 
-def get_listing_date(ticker_symbol):
+def get_trading_dates(ticker_symbol):
     """
-    Busca a primeira data de negociação (data de listagem) para um ticker.
-    Retorna a TUPLA (sigla, data_string) ou (sigla, mensagem_de_erro).
+    Busca a primeira e a última data de negociação para um ticker.
+    Retorna uma tupla (primeira_data, ultima_data) no formato YYYY-MM-DD.
     """
-    if not ticker_symbol:
-        return None, "Sigla vazia"
+    stock = yf.Ticker(ticker_symbol)
+    
+    # Busca o histórico máximo de dados disponíveis
+    hist = stock.history(period="max")
+    
+    if not hist.empty:
+        # Pega o primeiro índice (data de listagem)
+        first_date = hist.index[0]
+        # Pega o último índice (última data disponível)
+        last_date = hist.index[-1]
         
-    try:
-        stock = yf.Ticker(ticker_symbol)
-        hist = stock.history(period="max")
-        
-        if not hist.empty:
-            listing_date = hist.index[0]
-            return ticker_symbol, listing_date.strftime('%Y-%m-%d')
-        else:
-            return ticker_symbol, "Não encontrado"
-            
-    except Exception as e:
-        # Retorna a sigla e a mensagem de erro para ser registrada
-        return ticker_symbol, f"Erro na busca: {e}"
+        return first_date.strftime('%Y-%m-%d'), last_date.strftime('%Y-%m-%d')
+    else:
+        # Retorna None para ambas as datas se não encontrar histórico
+        return None, None
 
 # --- Lógica Principal ---
 if __name__ == "__main__":
@@ -40,23 +36,40 @@ if __name__ == "__main__":
         print(f"ERRO: Arquivo de entrada '{INPUT_FILE}' não encontrado.")
         exit()
 
+    # Dicionário para armazenar os resultados finais
     resultados_finais = {}
     total_acoes = len(lista_acoes)
     
-    print(f"Iniciando a busca concorrente para {total_acoes} ações com {MAX_WORKERS} workers...")
+    print(f"Iniciando a busca da primeira e última data para {total_acoes} ações...")
 
-    # Usando o ThreadPoolExecutor para gerenciar as threads
-    with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
-        # Submete todas as tarefas para a "piscina" de workers
-        # Cria um "futuro" para cada chamada da função get_listing_date
-        futures = [executor.submit(get_listing_date, acao.get("sigla")) for acao in lista_acoes]
+    # Itera sobre a lista de ações do arquivo JSON
+    for i, acao in enumerate(lista_acoes):
+        sigla = acao.get("sigla")
+        if not sigla:
+            continue
         
-        # Usa tqdm para criar uma barra de progresso enquanto os resultados chegam
-        for future in tqdm(as_completed(futures), total=total_acoes, desc="Processando ações"):
-            # Pega o resultado da tarefa assim que ela termina
-            sigla, resultado = future.result()
-            if sigla:
-                resultados_finais[sigla] = resultado
+        print(f"Processando {i+1}/{total_acoes}: {sigla}...")
+        
+        try:
+            # Chama a função para obter a primeira e a última data
+            primeira_data, ultima_data = get_trading_dates(sigla)
+            
+            if primeira_data and ultima_data:
+                # Armazena os resultados em um dicionário aninhado
+                resultados_finais[sigla] = {
+                    "primeira_data": primeira_data,
+                    "ultima_data": ultima_data
+                }
+            else:
+                resultados_finais[sigla] = "Não encontrado"
+            
+            # Pausa para não sobrecarregar a API
+            time.sleep(1)
+
+        except Exception as e:
+            print(f"  !! Erro ao buscar dados para {sigla}: {e}")
+            resultados_finais[sigla] = "Erro na busca"
+            continue
 
     # Salva o dicionário de resultados no arquivo de saída
     try:
