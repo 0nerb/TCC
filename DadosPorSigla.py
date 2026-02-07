@@ -1,12 +1,23 @@
 import yfinance as yf
-import pandas as pd  # Importação necessária para a função de RSI
+import pandas as pd
 import json
 import time
+from datetime import datetime
 
 # --- Configuração ---
-# Coloque aqui o nome do arquivo que você gerou na etapa anterior
-INPUT_FILE = "siglaTodasAcoes2.json" 
-OUTPUT_FILE = "dadosPorSigla.json"
+INPUT_FILE = "siglasTeste.json" 
+OUTPUT_FILE = "dadosPorSiglaTeste.json"
+
+# Mapeamento de dias da semana em português
+DIAS_SEMANA = {
+    0: 'segunda-feira',
+    1: 'terça-feira',
+    2: 'quarta-feira',
+    3: 'quinta-feira',
+    4: 'sexta-feira',
+    5: 'sábado',
+    6: 'domingo'
+}
 
 def calcular_rsi_manual(precos, periodo=14):
     """
@@ -32,14 +43,17 @@ def calcular_rsi_manual(precos, periodo=14):
     return rsi
 
 def get_stock_data(ticker_symbol, data_de_inicio_raw):
-    """
-    Coleta, processa e estrutura os dados para um único ticker,
-    usando uma data de início dinâmica.
-    """
     stock = yf.Ticker(ticker_symbol)
 
+    # Obter data atual para data_de_coleta
+    data_hoje = datetime.now().strftime('%Y-%m-%d')
+
     # 1. Obter dados de snapshot (setor, indústria, etc.)
-    info = stock.info
+    try:
+        info = stock.info
+    except:
+        info = {}
+
     info_gerais = {
         "nome": info.get('shortName'),
         "country": info.get('country'),
@@ -53,6 +67,9 @@ def get_stock_data(ticker_symbol, data_de_inicio_raw):
         "ebitda_margin": info.get('ebitdaMargins'),
         "enterprise_to_ebitda": info.get('enterpriseToEbitda'),
         "price_to_sales": info.get('priceToSalesTrailing12Months'),
+        # --- NOVOS CAMPOS SOLICITADOS ---
+        "data_listagem": data_de_inicio_raw, 
+        "data_de_coleta": data_hoje
     }
 
     # --- LÓGICA DA DATA DE INÍCIO DINÂMICA ---
@@ -73,7 +90,11 @@ def get_stock_data(ticker_symbol, data_de_inicio_raw):
     # ----------------------------------------
 
     # 2. Obter dados históricos com a data de início correta
-    hist_df = stock.history(start=start_date_final, end="2025-12-31")
+    try:
+        hist_df = stock.history(start=start_date_final, end="2025-12-31")
+    except Exception as e:
+        return {"info_gerais": info_gerais, "dados_historicos": [], "erro_historico": str(e)}
+
     if hist_df.empty:
         return {"info_gerais": info_gerais, "dados_historicos": []}
 
@@ -85,8 +106,12 @@ def get_stock_data(ticker_symbol, data_de_inicio_raw):
     
     dados_historicos = []
     for index, row in sampled_hist_df.iterrows():
+        # index é um Timestamp do pandas, podemos pegar o dia da semana direto (0-6)
+        dia_num = index.dayofweek
+        
         dados_historicos.append({
             "data": index.strftime('%Y-%m-%d'),
+            "dia_da_semana": DIAS_SEMANA[dia_num],  # --- CAMPO NOVO ADICIONADO ---
             "preco_fechamento": row.get('Close'),
             "volume": row.get('Volume'),
             "rsi_14": row.get('RSI_14'),
@@ -101,7 +126,7 @@ def get_stock_data(ticker_symbol, data_de_inicio_raw):
 if __name__ == "__main__":
     try:
         with open(INPUT_FILE, 'r', encoding='utf-8') as f:
-            # 1. Carrega o JSON (que agora é uma LISTA de dicionários)
+            # 1. Carrega o JSON
             acoes_para_processar = json.load(f)
 
     except FileNotFoundError:
