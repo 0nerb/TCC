@@ -1,3 +1,8 @@
 *.json
 .DS_Stores
 .DS_Store
+Dim_Acao.csv
+Dim_Tempo.csv
+Dim_TipoIndicador.csv
+Fato_Indicadores.csv
+Fato_InfoAcaoDiario.csv
