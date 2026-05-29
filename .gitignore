@@ -2,3 +2,4 @@
 .DS_Stores
 .DS_Store
 *.csv
+node_modules/
