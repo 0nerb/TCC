@@ -2,19 +2,21 @@
   display: grid;
   grid-template-columns: 260px 1fr;
   min-height: 100vh;
-  background-color: #09090b;
-  color: #f4f4f5;
+  background-color: var(--bg-app);
+  color: var(--text-primary);
   font-family: sans-serif;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 /* Menu Lateral */
 .sidebar {
-  background-color: #18181b;
-  border-right: 1px solid #27272a;
+  background-color: var(--bg-surface);
+  border-right: 1px solid var(--border);
   padding: 2rem 1rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .menuList {
@@ -34,20 +36,20 @@
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s;
-  color: #a1a1aa;
-  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-size: 0.95rem;
   font-weight: 500;
 }
 
 .menuItem:hover {
-  background-color: #27272a;
-  color: #f4f4f5;
+  background-color: var(--bg-hover);
+  color: var(--text-primary);
 }
 
 .activeMenuItem {
-  background-color: #27272a;
-  color: #3b82f6;
-  border-left: 4px solid #3b82f6;
+  background-color: var(--bg-hover);
+  color: var(--accent);
+  border-left: 4px solid var(--accent);
 }
 
 /* Conteúdo Principal */
@@ -58,30 +60,53 @@
 
 /* Reutilização de estilos anteriores */
 .container { max-width: 1200px; margin: 0 auto; }
-.header { margin-bottom: 2rem; border-bottom: 1px solid #27272a; padding-bottom: 1rem; }
+.header { margin-bottom: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem; }
 .title { font-size: 1.5rem; font-weight: bold; display: flex; align-items: center; gap: 10px; }
-.accent { color: #3b82f6; }
+.accent { color: var(--accent); }
 
 .controls {
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  background: #18181b;
+  background: var(--bg-surface);
   padding: 1rem;
   border-radius: 12px;
-  border: 1px solid #27272a;
+  border: 1px solid var(--border);
   margin-bottom: 2rem;
 }
 
-.checkboxGroup { display: flex; flex-wrap: wrap; gap: 12px; background: #09090b; padding: 10px; border: 1px solid #27272a; border-radius: 8px; }
-.inputYear { background: #09090b; border: 1px solid #3f3f46; color: white; padding: 8px; border-radius: 6px; width: 70px; }
-.button { background: #3b82f6; color: white; border: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+.checkboxGroup { display: flex; flex-wrap: wrap; gap: 12px; background: var(--bg-inset); padding: 10px; border: 1px solid var(--border); border-radius: 8px; }
+.inputYear { background: var(--bg-inset); border: 1px solid var(--border-strong); color: var(--text-primary); padding: 8px; border-radius: 6px; width: 70px; }
+.button { background: var(--accent); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px; }
 
-.riskPanel { background: #18181b; padding: 1.5rem; border-radius: 12px; border: 1px solid #27272a; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 2rem; }
+.riskPanel { background: var(--bg-surface); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 2rem; }
 .slider { flex: 1; accent-color: #ef4444; }
 
-.chartContainer { background: #18181b; padding: 2rem; border-radius: 12px; border: 1px solid #27272a; height: 500px; width: 100%; }
+.chartContainer { background: var(--bg-surface); padding: 2rem; border-radius: 12px; border: 1px solid var(--border); min-height: 500px; width: 100%; box-sizing: border-box; }
 
 .yieldPanel { display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 1.5rem; }
-.yieldCard { background: #18181b; padding: 12px 20px; border-radius: 10px; border-left: 4px solid #3b82f6; border: 1px solid #27272a; min-width: 180px; }
+.yieldCard { background: var(--bg-surface); padding: 12px 20px; border-radius: 10px; border-left: 4px solid var(--accent); border: 1px solid var(--border); min-width: 180px; }
 .positive { color: #10b981; } .negative { color: #ef4444; }
+
+/* Botão de alternância de tema */
+.themeToggle {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: var(--text-muted);
+  background: var(--bg-inset);
+  border: 1px solid var(--border);
+  font-size: 0.92rem;
+  font-weight: 500;
+}
+
+.themeToggle:hover {
+  background-color: var(--bg-hover);
+  color: var(--text-primary);
+}

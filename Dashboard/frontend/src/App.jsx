@@ -7,12 +7,23 @@ import styles from './App.module.css';
 export default function App() {
   const [activeTab, setActiveTab] = useState('setor');
   const [filtrosDB, setFiltrosDB] = useState([]);
+
+  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => setTheme(prev => prev === 'dark' ? 'light' : 'dark');
   
   const [selPaises, setSelPaises] = useState([]);
-  const [selSetores, setSelSetores] = useState([]);
+  const [selSetores, setSelSetores] = useState(['Energy']);
   const [selIndustrias, setSelIndustrias] = useState([]);
+  const [selRiscos, setSelRiscos] = useState(['1 - Muito Baixo', '5 - Muito Alto']);
+  
   const [anoIni, setAnoIni] = useState(2010);
-  const [anoFim, setAnoFim] = useState(2015);
+  const [anoFim, setAnoFim] = useState(2025);
   const [loading, setLoading] = useState(false);
   
   const [dataIndice, setDataIndice] = useState([]);
@@ -22,9 +33,22 @@ export default function App() {
   const [dataAnomalia, setDataAnomalia] = useState([]);
   const [dataEstresse, setDataEstresse] = useState([]);
   const [dataExposicao, setDataExposicao] = useState([]);
+  const [dataEvolucaoRisco, setDataEvolucaoRisco] = useState([]);
   
+  const [dataMapa, setDataMapa] = useState([]);
+  const [dataSp500, setDataSp500] = useState({ evolucao: [], anomalia: [], estresse: [] });
+  
+  const [dataCustomIndex, setDataCustomIndex] = useState([]);
+  const [loadingCustom, setLoadingCustom] = useState(false);
+
   const [estatisticas, setEstatisticas] = useState({});
   const [maxPerda, setMaxPerda] = useState(3.0);
+
+  const [useDiv, setUseDiv] = useState(true);
+  const [useMargem, setUseMargem] = useState(true);
+  const [useEv, setUseEv] = useState(true);
+
+  const riscosDisponiveis = ['1 - Muito Baixo', '2 - Baixo', '3 - Medio', '4 - Alto', '5 - Muito Alto'];
 
   useEffect(() => {
     fetch('http://localhost:5001/api/filtros')
@@ -49,60 +73,6 @@ export default function App() {
     } else {
       setSelecionados([...disponiveis]); 
     }
-  };
-
-  const fetchData = async () => {
-    setLoading(true);
-    const params = new URLSearchParams({
-      setores: selSetores.join(','),
-      industrias: selIndustrias.join(','),
-      paises: selPaises.join(','),
-      ano_ini: anoIni,
-      ano_fim: anoFim
-    }).toString();
-
-    try {
-      if (activeTab === 'setor') {
-        const res = await fetch(`http://localhost:5001/api/indice?${params}`);
-        const raw = await res.json();
-        if (Array.isArray(raw)) processarIndice(raw);
-      } else if (activeTab === 'volatilidade') {
-        const res = await fetch(`http://localhost:5001/api/volatilidade?${params}`);
-        setDataVolatilidade(await res.json());
-      } else if (activeTab === 'sazonalidade') {
-        const res = await fetch(`http://localhost:5001/api/sazonalidade?${params}`);
-        const json = await res.json();
-        if (Array.isArray(json)) {
-          const meses = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
-          const pivot = Array.from({ length: 12 }, (_, i) => ({ mes: meses[i] }));
-          json.forEach(row => { pivot[row.mes - 1][row.setor] = row.media_retorno; });
-          setDataSazonalidade(pivot);
-        }
-      } else if (activeTab === 'correlacao') {
-        const res = await fetch(`http://localhost:5001/api/correlacao?${params}`);
-        const json = await res.json();
-        const matriz = {};
-        if (Array.isArray(json)) json.forEach(row => { if (!matriz[row.setor_a]) matriz[row.setor_a] = {}; matriz[row.setor_a][row.setor_b] = row.coeficiente; });
-        setDataCorrelacao(matriz);
-      // ... (dentro de fetchData) ...
-      } else if (activeTab === 'anomalia') {
-        const res = await fetch(`http://localhost:5001/api/anomalia-risco?${params}`);
-        const json = await res.json();
-        setDataAnomalia(Array.isArray(json) ? json : []);
-        
-      } else if (activeTab === 'estresse') {
-        const res = await fetch(`http://localhost:5001/api/estresse-risco?${params}`);
-        const json = await res.json();
-        setDataEstresse(Array.isArray(json) ? json : []);
-        
-      } else if (activeTab === 'exposicao') {
-        const res = await fetch(`http://localhost:5001/api/exposicao-setorial?${params}`);
-        const json = await res.json();
-        setDataExposicao(Array.isArray(json) ? json : []);
-      }
-  // ...
-    } catch (err) { console.error("Erro API:", err); }
-    finally { setLoading(false); }
   };
 
   const processarIndice = (raw) => {
@@ -139,39 +109,154 @@ export default function App() {
     }
   };
 
-  useEffect(() => { fetchData(); }, [activeTab, maxPerda]);
+  const processarEvolucaoRisco = (raw) => {
+    const pivot = raw.reduce((acc, curr) => {
+      const d = curr.data.split('T')[0];
+      if (!acc[d]) acc[d] = { data: d };
+      acc[d][curr.faixa_risco] = parseFloat(curr.valor);
+      return acc;
+    }, {});
+    
+    const finalData = Object.values(pivot).sort((a, b) => new Date(a.data) - new Date(b.data));
+    
+    if (finalData.length > 0) {
+      const bases = {};
+      selRiscos.forEach(r => {
+          const firstRowWithR = finalData.find(row => row[r] !== undefined && row[r] !== null);
+          if (firstRowWithR) bases[r] = firstRowWithR[r];
+      });
+
+      const normalized = finalData.map(row => {
+        const newRow = { ...row };
+        selRiscos.forEach(r => {
+          if (row[r] !== undefined && bases[r] !== undefined && bases[r] !== 0) {
+            newRow[r] = (row[r] / bases[r]) * 100;
+          }
+        });
+        return newRow;
+      });
+      setDataEvolucaoRisco(normalized);
+    } else {
+      setDataEvolucaoRisco([]);
+    }
+  };
+
+  const buildCustomIndex = async (ativosSelecionados) => {
+    if (!ativosSelecionados || ativosSelecionados.length === 0) return;
+    setLoadingCustom(true);
+    const tickersStr = ativosSelecionados.map(a => a.ticker).join(',');
+    const pesosStr = ativosSelecionados.map(a => a.newWeight).join(',');
+
+    try {
+      const res = await fetch(`http://localhost:5001/api/indice-customizado?tickers=${tickersStr}&pesos=${pesosStr}&ano_ini=${anoIni}&ano_fim=${anoFim}`);
+      const json = await res.json();
+      setDataCustomIndex(Array.isArray(json) ? json : []);
+    } catch (err) {
+      console.error("Erro ao gerar índice customizado:", err);
+    } finally {
+      setLoadingCustom(false);
+    }
+  };
+
+  const fetchData = async () => {
+    setLoading(true);
+    const params = new URLSearchParams({
+      setores: selSetores.join(','), industrias: selIndustrias.join(','), paises: selPaises.join(','),
+      riscos: selRiscos.join(','), ano_ini: anoIni, ano_fim: anoFim,
+      use_div: useDiv, use_margem: useMargem, use_ev: useEv
+    }).toString();
+
+    try {
+      if (activeTab === 'setor') {
+        const res = await fetch(`http://localhost:5001/api/indice?${params}`);
+        const raw = await res.json();
+        if (Array.isArray(raw)) processarIndice(raw);
+      } else if (activeTab === 'volatilidade') {
+        const res = await fetch(`http://localhost:5001/api/volatilidade?${params}`);
+        const json = await res.json();
+        setDataVolatilidade(Array.isArray(json) ? json : []);
+      } else if (activeTab === 'sazonalidade') {
+        const res = await fetch(`http://localhost:5001/api/sazonalidade?${params}`);
+        const json = await res.json();
+        if (Array.isArray(json)) {
+          const meses = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+          const pivot = Array.from({ length: 12 }, (_, i) => ({ mes: meses[i] }));
+          json.forEach(row => { pivot[row.mes - 1][row.setor] = row.media_retorno; });
+          setDataSazonalidade(pivot);
+        } else {
+          setDataSazonalidade([]);
+        }
+      } else if (activeTab === 'correlacao') {
+        const res = await fetch(`http://localhost:5001/api/correlacao?${params}`);
+        const json = await res.json();
+        if (Array.isArray(json)) {
+          const matriz = {};
+          json.forEach(row => { if (!matriz[row.setor_a]) matriz[row.setor_a] = {}; matriz[row.setor_a][row.setor_b] = row.coeficiente; });
+          setDataCorrelacao(matriz);
+        } else {
+          setDataCorrelacao({});
+        }
+      } else if (activeTab === 'anomalia') {
+        const res = await fetch(`http://localhost:5001/api/anomalia-risco?${params}`);
+        const json = await res.json();
+        setDataAnomalia(Array.isArray(json) ? json : []);
+      } else if (activeTab === 'estresse') {
+        const res = await fetch(`http://localhost:5001/api/estresse-risco?${params}`);
+        const json = await res.json();
+        setDataEstresse(Array.isArray(json) ? json : []);
+      } else if (activeTab === 'exposicao') {
+        const res = await fetch(`http://localhost:5001/api/exposicao-setorial?${params}`);
+        const json = await res.json();
+        setDataExposicao(Array.isArray(json) ? json : []);
+      } else if (activeTab === 'evolucaoRisco') {
+        const res = await fetch(`http://localhost:5001/api/evolucao-risco?${params}`);
+        const raw = await res.json();
+        if (Array.isArray(raw)) processarEvolucaoRisco(raw);
+      } else if (activeTab === 'mapa') {
+        const res = await fetch(`http://localhost:5001/api/mapa-mercado?${params}`);
+        const json = await res.json();
+        setDataMapa(Array.isArray(json) ? json : []);
+      }
+
+      if (['anomalia', 'estresse', 'evolucaoRisco', 'mapa'].includes(activeTab)) {
+        const resSp = await fetch(`http://localhost:5001/api/benchmark-sp500?ano_ini=${anoIni}&ano_fim=${anoFim}`);
+        if (resSp.ok) {
+          const jsonSp = await resSp.json();
+          setDataSp500(jsonSp);
+        } else {
+          setDataSp500({ evolucao: [], anomalia: [], estresse: [] });
+        }
+      }
+
+    } catch (err) { 
+      console.error("Erro API Global:", err); 
+    } finally { 
+      setLoading(false); 
+    }
+  };
+
+  useEffect(() => { fetchData(); }, [activeTab, maxPerda, useDiv, useMargem, useEv]);
 
   return (
     <div className={styles.layout}>
-      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
-      
+      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} theme={theme} toggleTheme={toggleTheme} />
       <main className={styles.mainContent}>
         <FiltrosCascata 
-          paisesDisponiveis={paisesDisponiveis}
-          setoresDisponiveis={setoresDisponiveis}
-          industriasDisponiveis={industriasDisponiveis}
-          selPaises={selPaises} setSelPaises={setSelPaises}
-          selSetores={selSetores} setSelSetores={setSelSetores}
-          selIndustrias={selIndustrias} setSelIndustrias={setSelIndustrias}
-          anoIni={anoIni} setAnoIni={setAnoIni}
-          anoFim={anoFim} setAnoFim={setAnoFim}
-          loading={loading} fetchData={fetchData}
-          toggleFilter={toggleFilter} toggleSelectAll={toggleSelectAll}
+          paisesDisponiveis={paisesDisponiveis} setoresDisponiveis={setoresDisponiveis} industriasDisponiveis={industriasDisponiveis} riscosDisponiveis={riscosDisponiveis}
+          selPaises={selPaises} setSelPaises={setSelPaises} selSetores={selSetores} setSelSetores={setSelSetores}
+          selIndustrias={selIndustrias} setSelIndustrias={setSelIndustrias} selRiscos={selRiscos} setSelRiscos={setSelRiscos}
+          anoIni={anoIni} setAnoIni={setAnoIni} anoFim={anoFim} setAnoFim={setAnoFim}
+          loading={loading} fetchData={fetchData} toggleFilter={toggleFilter} toggleSelectAll={toggleSelectAll}
         />
-
         <PainelVisualizacao 
-          activeTab={activeTab}
-          selSetores={selSetores}
-          estatisticas={estatisticas}
-          maxPerda={maxPerda}
-          setMaxPerda={setMaxPerda}
-          dataIndice={dataIndice}
-          dataVolatilidade={dataVolatilidade}
-          dataSazonalidade={dataSazonalidade}
-          dataCorrelacao={dataCorrelacao}
-          dataAnomalia={dataAnomalia}
-          dataEstresse={dataEstresse}
-          dataExposicao={dataExposicao}
+          activeTab={activeTab} selSetores={selSetores} selRiscos={selRiscos}
+          estatisticas={estatisticas} maxPerda={maxPerda} setMaxPerda={setMaxPerda}
+          dataIndice={dataIndice} dataVolatilidade={dataVolatilidade} dataSazonalidade={dataSazonalidade}
+          dataCorrelacao={dataCorrelacao} dataAnomalia={dataAnomalia} dataEstresse={dataEstresse}
+          dataExposicao={dataExposicao} dataEvolucaoRisco={dataEvolucaoRisco} dataSp500={dataSp500}
+          dataMapa={dataMapa}
+          useDiv={useDiv} setUseDiv={setUseDiv} useMargem={useMargem} setUseMargem={setUseMargem} useEv={useEv} setUseEv={setUseEv}
+          dataCustomIndex={dataCustomIndex} buildCustomIndex={buildCustomIndex} loadingCustom={loadingCustom}
         />
       </main>
     </div>

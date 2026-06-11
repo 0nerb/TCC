@@ -1,7 +1,37 @@
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  background-color: #09090b; /* Cor de fundo escura */
-  color: #f4f4f5;
+  font-size: 17.5px; /* base global — escala todos os tamanhos em rem */
+
+  /* ===== Design Tokens — Tema Escuro (padrão) ===== */
+  --bg-app: #09090b;
+  --bg-surface: #18181b;
+  --bg-inset: #09090b;
+  --bg-hover: #27272a;
+  --border: #27272a;
+  --border-strong: #3f3f46;
+  --axis: #52525b;
+  --text-faint: #71717a;
+  --text-muted: #a1a1aa;
+  --text-primary: #f4f4f5;
+  --accent: #3b82f6;
+
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+}
+
+/* ===== Override — Tema Claro ===== */
+[data-theme="light"] {
+  --bg-app: #f1f5f9;
+  --bg-surface: #ffffff;
+  --bg-inset: #f8fafc;
+  --bg-hover: #e2e8f0;
+  --border: #e2e8f0;
+  --border-strong: #cbd5e1;
+  --axis: #94a3b8;
+  --text-faint: #64748b;
+  --text-muted: #475569;
+  --text-primary: #0f172a;
+  --accent: #2563eb;
 }
 
 body {
@@ -9,6 +39,9 @@ body {
   display: flex;
   min-width: 320px;
   min-height: 100vh;
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 #root {

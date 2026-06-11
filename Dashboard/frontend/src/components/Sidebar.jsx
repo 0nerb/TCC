@@ -1,11 +1,11 @@
 import React from 'react';
-import { 
-  TrendingUp, BarChart3, CalendarDays, Share2, 
-  LayoutDashboard, Activity, Bomb, PieChart 
+import {
+  TrendingUp, BarChart3, CalendarDays, Share2,
+  LayoutDashboard, Activity, Bomb, PieChart, Map, Sun, Moon
 } from 'lucide-react';
 import styles from '../App.module.css';
 
-export default function Sidebar({ activeTab, setActiveTab }) {
+export default function Sidebar({ activeTab, setActiveTab, theme, toggleTheme }) {
   return (
     <aside className={styles.sidebar}>
       <div className={styles.title}>
@@ -26,7 +26,9 @@ export default function Sidebar({ activeTab, setActiveTab }) {
           <li className={`${styles.menuItem} ${activeTab === 'correlacao' ? styles.activeMenuItem : ''}`} onClick={() => setActiveTab('correlacao')}>
             <Share2 size={18} /> Correlação
           </li>
-          <div className={styles.menuSeparator} style={{borderTop: '1px solid #27272a', margin: '15px 0'}}></div>
+          
+          <div className={styles.menuSeparator} style={{borderTop: '1px solid var(--border)', margin: '15px 0'}}></div>
+          
           <li className={`${styles.menuItem} ${activeTab === 'anomalia' ? styles.activeMenuItem : ''}`} onClick={() => setActiveTab('anomalia')}>
             <Activity size={18} /> Anomalia Risco
           </li>
@@ -36,8 +38,23 @@ export default function Sidebar({ activeTab, setActiveTab }) {
           <li className={`${styles.menuItem} ${activeTab === 'exposicao' ? styles.activeMenuItem : ''}`} onClick={() => setActiveTab('exposicao')}>
             <PieChart size={18} /> Exp. Setorial
           </li>
+          
+          <div className={styles.menuSeparator} style={{borderTop: '1px solid var(--border)', margin: '15px 0'}}></div>
+          
+          <li className={`${styles.menuItem} ${activeTab === 'evolucaoRisco' ? styles.activeMenuItem : ''}`} onClick={() => setActiveTab('evolucaoRisco')}>
+            <TrendingUp size={18} /> Evolução por Risco
+          </li>
+
+          <li className={`${styles.menuItem} ${activeTab === 'mapa' ? styles.activeMenuItem : ''}`} onClick={() => setActiveTab('mapa')}>
+            <Map size={18} /> Mapa de Mercado
+          </li>
         </ul>
       </nav>
+
+      <button className={styles.themeToggle} onClick={toggleTheme}>
+        {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+        {theme === 'dark' ? 'Modo Claro' : 'Modo Escuro'}
+      </button>
     </aside>
   );
 }
