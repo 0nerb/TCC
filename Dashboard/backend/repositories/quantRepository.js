@@ -325,14 +325,29 @@ class QuantRepository {
             SELECT MAX(t.data_completa) as max_data
             FROM fato_indicadores f JOIN dim_tempo t ON f.fk_dim_tempo_data_key = t.data_key
         ),
-        UltimoRisco AS (
-            SELECT DISTINCT ON (a.ticker) 
+        RiscoModa AS (
+            -- Faixa de risco = moda (faixa mais frequente) considerando apenas
+            -- janeiro, maio e setembro de cada ano dentro do período selecionado.
+            SELECT DISTINCT ON (a.ticker)
                 a.ticker, f.faixa_risco
             FROM fato_infoacaodiario f
             JOIN dim_acao a ON f.fk_dim_acao_acao_key = a.acao_key
             JOIN dim_tempo t ON f.fk_dim_tempo_data_key = t.data_key
             WHERE t.ano BETWEEN ${parseInt(anoIni)} AND ${parseInt(anoFim)}
+              AND t.mes IN (1, 5, 9)
               AND f.faixa_risco IS NOT NULL
+            GROUP BY a.ticker, f.faixa_risco
+            ORDER BY a.ticker, COUNT(*) DESC, f.faixa_risco DESC
+        ),
+        UltimoRiscoGlobal AS (
+            -- Fallback: faixa de risco mais recente da acao (qualquer data),
+            -- usada quando nao ha registro no periodo/meses filtrados.
+            SELECT DISTINCT ON (a.ticker)
+                a.ticker, f.faixa_risco
+            FROM fato_infoacaodiario f
+            JOIN dim_acao a ON f.fk_dim_acao_acao_key = a.acao_key
+            JOIN dim_tempo t ON f.fk_dim_tempo_data_key = t.data_key
+            WHERE f.faixa_risco IS NOT NULL
             ORDER BY a.ticker, t.data_completa DESC
         ),
         RiscoHistorico AS (
@@ -366,11 +381,12 @@ class QuantRepository {
             FROM FundamentosAtuais
         ),
         ZScoreQualidade AS (
-            SELECT fa.ticker, fa.setor, ur.faixa_risco,
+            SELECT fa.ticker, fa.setor, COALESCE(rm.faixa_risco, urg.faixa_risco) AS faixa_risco,
                    (
                     -- Amortecedores e Amplificadores Opcionais
-                    COALESCE(${wDiv} * ((fa.div_yield - em.avg_yield) / NULLIF(em.std_yield, 0)), 0) + 
-                    COALESCE(${wMargem} * ((fa.margem_ebitda - em.avg_margem) / NULLIF(em.std_margem, 0)), 0) - 
+                    -- Dividend Yield tratado como fator negativo (penaliza o score)
+                    - COALESCE(${wDiv} * ((fa.div_yield - em.avg_yield) / NULLIF(em.std_yield, 0)), 0) +
+                    COALESCE(${wMargem} * ((fa.margem_ebitda - em.avg_margem) / NULLIF(em.std_margem, 0)), 0) -
                     COALESCE(${wEv} * ((fa.ev_ebitda - em.avg_ev) / NULLIF(em.std_ev, 0)), 0) - 
                     -- Risco Base Fixo e Obrigatório
                     COALESCE(rh.risco_medio, 0)
@@ -378,7 +394,8 @@ class QuantRepository {
             FROM FundamentosAtuais fa 
             CROSS JOIN EstatisticasMercadoHoje em
             LEFT JOIN RiscoHistorico rh ON fa.ticker = rh.ticker
-            LEFT JOIN UltimoRisco ur ON fa.ticker = ur.ticker
+            LEFT JOIN RiscoModa rm ON fa.ticker = rm.ticker
+            LEFT JOIN UltimoRiscoGlobal urg ON fa.ticker = urg.ticker
         ),
         PesosBrutos AS (
             SELECT ticker, setor, faixa_risco, COALESCE(score_qualidade, 0) as score_qualidade, 
@@ -389,7 +406,7 @@ class QuantRepository {
             SELECT setor, ticker, faixa_risco, ROUND(CAST(score_qualidade AS NUMERIC), 4) as score,
                    ROUND(CAST((peso_exponencial / SUM(peso_exponencial) OVER(PARTITION BY setor)) * 100 AS NUMERIC), 2) as tamanho,
                    ROW_NUMBER() OVER(PARTITION BY setor ORDER BY peso_exponencial DESC) as rank
-            FROM PesosBrutos WHERE peso_exponencial > 0
+            FROM PesosBrutos WHERE peso_exponencial > 0 AND faixa_risco IS NOT NULL
         )
         SELECT setor, ticker, faixa_risco, score, tamanho
         FROM RankingSetorial
@@ -416,6 +433,76 @@ class QuantRepository {
     } catch (err) {
       throw err;
     }
+  }
+
+  async obterListagemAcoes(listaPaises, listaSetores, listaIndustrias, listaRiscos, alphaEv = 5, alphaDy = 5, alphaEb = 5) {
+    const query = `
+      WITH UltimaDataFundamento AS (
+          SELECT MAX(t.data_completa) AS max_data
+          FROM fato_indicadores f
+          JOIN dim_tempo t ON f.fk_dim_tempo_data_key = t.data_key
+      ),
+      Stats AS (
+          SELECT
+              AVG(CASE WHEN ti.nome_indicador = 'ebitda_margin'         THEN CAST(f.valor_indicador AS NUMERIC) END) AS avg_eb,
+              STDDEV(CASE WHEN ti.nome_indicador = 'ebitda_margin'      THEN CAST(f.valor_indicador AS NUMERIC) END) AS std_eb,
+              AVG(CASE WHEN ti.nome_indicador = 'enterprise_to_ebitda'  THEN CAST(f.valor_indicador AS NUMERIC) END) AS avg_ev,
+              STDDEV(CASE WHEN ti.nome_indicador = 'enterprise_to_ebitda' THEN CAST(f.valor_indicador AS NUMERIC) END) AS std_ev,
+              AVG(CASE WHEN ti.nome_indicador = 'trailing_dividend_yield' THEN CAST(f.valor_indicador AS NUMERIC) END) AS avg_dy,
+              STDDEV(CASE WHEN ti.nome_indicador = 'trailing_dividend_yield' THEN CAST(f.valor_indicador AS NUMERIC) END) AS std_dy
+          FROM fato_indicadores f
+          JOIN dim_tipoindicador ti ON f.fk_dim_tipoindicador_indicador_key = ti.indicador_key
+          JOIN dim_tempo t ON f.fk_dim_tempo_data_key = t.data_key
+          JOIN UltimaDataFundamento u ON t.data_completa = u.max_data
+      ),
+      Fundamentos AS (
+          SELECT
+              a.ticker,
+              MAX(CASE WHEN ti.nome_indicador = 'ebitda_margin'          THEN CAST(f.valor_indicador AS NUMERIC) END) AS eb,
+              MAX(CASE WHEN ti.nome_indicador = 'enterprise_to_ebitda'   THEN CAST(f.valor_indicador AS NUMERIC) END) AS ev,
+              MAX(CASE WHEN ti.nome_indicador = 'trailing_dividend_yield' THEN CAST(f.valor_indicador AS NUMERIC) END) AS dy
+          FROM fato_indicadores f
+          JOIN dim_acao a ON f.fk_dim_acao_acao_key = a.acao_key
+          JOIN dim_tipoindicador ti ON f.fk_dim_tipoindicador_indicador_key = ti.indicador_key
+          JOIN dim_tempo t ON f.fk_dim_tempo_data_key = t.data_key
+          JOIN UltimaDataFundamento u ON t.data_completa = u.max_data
+          GROUP BY a.ticker
+      ),
+      UltimoSnapshot AS (
+          -- Sempre o registro mais recente disponível por ação, sem filtro de ano.
+          -- A aba "Listagem" reflete o snapshot atual do mercado.
+          SELECT DISTINCT ON (a.ticker)
+              a.ticker, a.nome, a.pais, a.setor, a.industria,
+              f.faixa_risco, f.rsi_14, f.risk_score_normalizado AS risco_normalizado
+          FROM fato_infoacaodiario f
+          JOIN dim_acao a ON f.fk_dim_acao_acao_key = a.acao_key
+          JOIN dim_tempo t ON f.fk_dim_tempo_data_key = t.data_key
+          WHERE (CARDINALITY($1::text[]) = 0 OR a.pais       = ANY($1::text[]))
+            AND (CARDINALITY($2::text[]) = 0 OR a.setor      = ANY($2::text[]))
+            AND (CARDINALITY($3::text[]) = 0 OR a.industria  = ANY($3::text[]))
+            AND (CARDINALITY($4::text[]) = 0 OR f.faixa_risco = ANY($4::text[]))
+          ORDER BY a.ticker, t.data_completa DESC
+      )
+      SELECT
+          u.ticker, u.nome, u.pais, u.setor, u.industria,
+          u.faixa_risco, u.rsi_14, u.risco_normalizado,
+          f.dy AS dividend_yield,
+          GREATEST(0::numeric, LEAST(100::numeric,
+              u.risco_normalizado::numeric
+              + COALESCE($5::numeric * ((f.ev - s.avg_ev) / NULLIF(s.std_ev, 0)), 0)
+              + COALESCE($6::numeric * ((f.dy - s.avg_dy) / NULLIF(s.std_dy, 0)), 0)
+              - COALESCE($7::numeric * ((f.eb - s.avg_eb) / NULLIF(s.std_eb, 0)), 0)
+          )) AS risco_modificado
+      FROM UltimoSnapshot u
+      LEFT JOIN Fundamentos f ON u.ticker = f.ticker
+      CROSS JOIN Stats s
+      ORDER BY u.ticker;
+    `;
+    const res = await pool.query(query, [
+      listaPaises, listaSetores, listaIndustrias, listaRiscos,
+      alphaEv, alphaDy, alphaEb
+    ]);
+    return res.rows;
   }
 
   async obterIndiceCustomizado(tickers, pesos, anoIni, anoFim) {

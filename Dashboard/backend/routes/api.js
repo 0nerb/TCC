@@ -14,5 +14,6 @@ router.get('/evolucao-risco', quantController.getEvolucaoRisco.bind(quantControl
 router.get('/benchmark-sp500', quantController.getBenchmarkSP500.bind(quantController));
 router.get('/mapa-mercado', quantController.getMapaMercado.bind(quantController));
 router.get('/indice-customizado', quantController.getIndiceCustomizado.bind(quantController));
+router.get('/listagem-acoes', quantController.getListagemAcoes.bind(quantController));
 
 module.exports = router;

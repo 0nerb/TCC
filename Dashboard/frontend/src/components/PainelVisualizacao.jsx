@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import {
   LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid,
   Tooltip, ResponsiveContainer, Legend, ReferenceLine, Cell
@@ -21,8 +21,39 @@ export default function PainelVisualizacao({
   dataIndice, dataVolatilidade, dataSazonalidade, dataCorrelacao,
   dataAnomalia, dataEstresse, dataExposicao, dataEvolucaoRisco, dataSp500,
   dataMapa, useDiv, setUseDiv, useMargem, setUseMargem, useEv, setUseEv,
-  dataCustomIndex, buildCustomIndex, loadingCustom
+  dataCustomIndex, buildCustomIndex, loadingCustom, customError,
+  dataListagem, alphaEv, setAlphaEv, alphaDy, setAlphaDy, alphaEb, setAlphaEb
 }) {
+  const customChartRef = useRef(null);
+  const [sortKey, setSortKey] = useState('ticker');
+  const [sortDir, setSortDir] = useState('asc');
+
+  const handleSort = (key) => {
+    if (sortKey === key) {
+      setSortDir(prev => prev === 'asc' ? 'desc' : 'asc');
+    } else {
+      setSortKey(key);
+      setSortDir('asc');
+    }
+  };
+
+  const sortedListagem = useMemo(() => {
+    if (!Array.isArray(dataListagem) || dataListagem.length === 0) return [];
+    const compare = (a, b) => {
+      const va = a[sortKey];
+      const vb = b[sortKey];
+      const numA = typeof va === 'number' ? va : parseFloat(va);
+      const numB = typeof vb === 'number' ? vb : parseFloat(vb);
+      const ambosNum = !isNaN(numA) && !isNaN(numB);
+      let r;
+      if (ambosNum) r = numA - numB;
+      else r = String(va ?? '').localeCompare(String(vb ?? ''));
+      return sortDir === 'asc' ? r : -r;
+    };
+    return [...dataListagem].sort(compare);
+  }, [dataListagem, sortKey, sortDir]);
+
+  const setaSort = (key) => sortKey === key ? (sortDir === 'asc' ? ' ▲' : ' ▼') : '';
   const descStyle = { fontSize: '0.95rem', color: 'var(--text-muted)', marginBottom: '24px', lineHeight: '1.6', maxWidth: '960px' };
 
   // Controle de Caixa de Seleção do Índice Customizado
@@ -41,6 +72,77 @@ export default function PainelVisualizacao({
     ticker: t.name,
     newWeight: totalSize > 0 ? (t.size / totalSize) * 100 : 0
   }));
+
+  const corPorFaixaRisco = (faixa, fallbackIndex = 0) => {
+    if (faixa === 'S&P 500') return '#facc15';
+    return CORES_RISCO[faixa] || CORES[fallbackIndex % CORES.length];
+  };
+
+  const AnomaliaTooltip = ({ active, payload, label }) => {
+    if (!active || !payload || !payload.length) return null;
+    const idx = mergedAnomalia.findIndex(d => d.faixa_risco === label);
+    const cor = corPorFaixaRisco(label, idx);
+    const valor = Number(payload[0].value).toFixed(2);
+    return (
+      <div style={{ background: '#000', border: `1px solid ${cor}`, borderRadius: 6, padding: '10px 14px', boxShadow: '0 4px 12px rgba(0,0,0,0.3)' }}>
+        <div style={{ color: '#fff', fontWeight: 'bold', marginBottom: 6, fontSize: '0.95rem' }}>{label}</div>
+        <div style={{ color: '#a1a1aa', fontSize: '0.9rem' }}>
+          Retorno: <span style={{ color: cor, fontWeight: 'bold' }}>{valor}%</span>
+        </div>
+      </div>
+    );
+  };
+
+  const ExposicaoTooltip = ({ active, payload, label }) => {
+    if (!active || !payload || !payload.length) return null;
+    const valorNum = Number(payload[0].value);
+    const cor = valorNum > 0 ? '#ef4444' : '#3b82f6';
+    const valor = valorNum.toFixed(2);
+    return (
+      <div style={{ background: '#000', border: `1px solid ${cor}`, borderRadius: 6, padding: '10px 14px', boxShadow: '0 4px 12px rgba(0,0,0,0.3)' }}>
+        <div style={{ color: '#fff', fontWeight: 'bold', marginBottom: 6, fontSize: '0.95rem' }}>{label}</div>
+        <div style={{ color: '#a1a1aa', fontSize: '0.9rem' }}>
+          Z-Score: <span style={{ color: cor, fontWeight: 'bold' }}>{valor}</span>
+        </div>
+      </div>
+    );
+  };
+
+  const EstresseTooltip = ({ active, payload, label }) => {
+    if (!active || !payload || !payload.length) return null;
+    const idx = mergedEstresse.findIndex(d => d.faixa_risco === label);
+    const cor = corPorFaixaRisco(label, idx);
+    const valor = Number(payload[0].value).toFixed(2);
+    return (
+      <div style={{ background: '#000', border: `1px solid ${cor}`, borderRadius: 6, padding: '10px 14px', boxShadow: '0 4px 12px rgba(0,0,0,0.3)' }}>
+        <div style={{ color: '#fff', fontWeight: 'bold', marginBottom: 6, fontSize: '0.95rem' }}>{label}</div>
+        <div style={{ color: '#a1a1aa', fontSize: '0.9rem' }}>
+          Drawdown: <span style={{ color: cor, fontWeight: 'bold' }}>{valor}%</span>
+        </div>
+      </div>
+    );
+  };
+
+  const VolatilidadeTooltip = ({ active, payload, label }) => {
+    if (!active || !payload || !payload.length) return null;
+    const idx = dataVolatilidade.findIndex(d => d.setor === label);
+    const cor = CORES[(idx >= 0 ? idx : 0) % CORES.length];
+    const valor = Number(payload[0].value).toFixed(2);
+    return (
+      <div style={{ background: '#000', border: `1px solid ${cor}`, borderRadius: 6, padding: '10px 14px', boxShadow: '0 4px 12px rgba(0,0,0,0.3)' }}>
+        <div style={{ color: '#fff', fontWeight: 'bold', marginBottom: 6, fontSize: '0.95rem' }}>{label}</div>
+        <div style={{ color: '#a1a1aa', fontSize: '0.9rem' }}>
+          Volatilidade: <span style={{ color: cor, fontWeight: 'bold' }}>{valor}%</span>
+        </div>
+      </div>
+    );
+  };
+
+  useEffect(() => {
+    if (!loadingCustom && dataCustomIndex && dataCustomIndex.length > 0 && customChartRef.current) {
+      customChartRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, [dataCustomIndex, loadingCustom]);
 
   const mergedChartData = useMemo(() => {
     if (!dataCustomIndex || dataCustomIndex.length === 0) return [];
@@ -99,7 +201,7 @@ export default function PainelVisualizacao({
   }, [dataEvolucaoRisco, dataSp500]);
 
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${activeTab === 'listagem' ? styles.containerWide : ''}`}>
       {activeTab === 'setor' && (
         <>
           <h3 className={styles.chartTitle} style={{ marginBottom: '5px' }}>Performance do Índice Sintético</h3>
@@ -159,7 +261,7 @@ export default function PainelVisualizacao({
               <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
               <XAxis dataKey="setor" stroke="var(--axis)" label={{ value: 'Setores Econômicos', position: 'insideBottom', offset: -20, fill: 'var(--text-muted)', fontSize: 14 }} />
               <YAxis stroke="var(--axis)" unit="%" label={{ value: 'Volatilidade (%)', angle: -90, position: 'insideLeft', offset: -15, fill: 'var(--text-muted)', fontSize: 14 }} />
-              <Tooltip cursor={{ fill: 'var(--border)', opacity: 0.4 }} formatter={(v) => [`${Number(v).toFixed(2)}%`, 'Volatilidade']} />
+              <Tooltip cursor={{ fill: 'var(--border)', opacity: 0.4 }} content={<VolatilidadeTooltip />} />
               <Bar dataKey="volatilidade_anualizada">{dataVolatilidade.map((e, i) => (<Cell key={i} fill={CORES[i % CORES.length]} />))}</Bar>
             </BarChart>
           </ResponsiveContainer>
@@ -230,13 +332,12 @@ export default function PainelVisualizacao({
               <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
               <XAxis dataKey="faixa_risco" stroke="var(--axis)" label={{ value: 'Quintis de Classificação & Benchmark', position: 'insideBottom', offset: -20, fill: 'var(--text-muted)', fontSize: 14 }} />
               <YAxis stroke="var(--axis)" unit="%" label={{ value: 'Retorno (%)', angle: -90, position: 'insideLeft', offset: -15, fill: 'var(--text-muted)', fontSize: 14 }} />
-              <Tooltip formatter={(v) => [`${Number(v).toFixed(2)}%`, 'Retorno']} contentStyle={{ backgroundColor: 'var(--bg-inset)', border: '1px solid var(--border)' }} />
+              <Tooltip cursor={{ fill: 'var(--border)', opacity: 0.4 }} content={<AnomaliaTooltip />} />
               <Bar dataKey="retorno_anualizado_pct">
                 {mergedAnomalia.map((e, i) => {
-                  let cor = '#3b82f6';
-                  if (e.faixa_risco === 'S&P 500') cor = '#facc15';
-                  else if (e.faixa_risco.startsWith('1') || e.faixa_risco.startsWith('2')) cor = '#10b981';
-                  else if (e.faixa_risco.startsWith('5')) cor = '#ef4444';
+                  const cor = e.faixa_risco === 'S&P 500'
+                    ? '#facc15'
+                    : CORES_RISCO[e.faixa_risco] || CORES[i % CORES.length];
                   return <Cell key={i} fill={cor} />;
                 })}
               </Bar>
@@ -254,12 +355,15 @@ export default function PainelVisualizacao({
               <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
               <XAxis dataKey="faixa_risco" stroke="var(--axis)" label={{ value: 'Quintis de Classificação & Benchmark', position: 'insideBottom', offset: -20, fill: 'var(--text-muted)', fontSize: 14 }} />
               <YAxis stroke="var(--axis)" unit="%" label={{ value: 'Retração (%)', angle: -90, position: 'insideLeft', offset: -15, fill: 'var(--text-muted)', fontSize: 14 }} />
-              <Tooltip formatter={(v) => [`${Number(v).toFixed(2)}%`, 'Drawdown']} contentStyle={{ backgroundColor: 'var(--bg-inset)', border: '1px solid var(--border)' }} />
+              <Tooltip cursor={{ fill: 'var(--border)', opacity: 0.4 }} content={<EstresseTooltip />} />
               <ReferenceLine y={0} stroke="var(--axis)" />
               <Bar dataKey="maximum_drawdown_pct" radius={[0, 0, 4, 4]}>
-                {mergedEstresse.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={entry.faixa_risco === 'S&P 500' ? '#facc15' : '#ef4444'} />
-                ))}
+                {mergedEstresse.map((entry, index) => {
+                  const cor = entry.faixa_risco === 'S&P 500'
+                    ? '#facc15'
+                    : CORES_RISCO[entry.faixa_risco] || CORES[index % CORES.length];
+                  return <Cell key={`cell-${index}`} fill={cor} />;
+                })}
               </Bar>
             </BarChart>
           </ResponsiveContainer>
@@ -275,7 +379,7 @@ export default function PainelVisualizacao({
               <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" horizontal={false} />
               <XAxis type="number" stroke="var(--axis)" label={{ value: 'Z-Score', position: 'insideBottom', offset: -20, fill: 'var(--text-muted)', fontSize: 14 }} />
               <YAxis dataKey="setor" type="category" stroke="var(--axis)" width={120} label={{ value: 'Setor', angle: -90, position: 'insideLeft', offset: -45, fill: 'var(--text-muted)', fontSize: 14 }} />
-              <Tooltip formatter={(v) => [Number(v).toFixed(2), 'Z-Score']} />
+              <Tooltip cursor={{ fill: 'var(--border)', opacity: 0.4 }} content={<ExposicaoTooltip />} />
               <ReferenceLine x={0} stroke="var(--text-primary)" />
               <Bar dataKey="z_score_medio_setor">
                 {dataExposicao.map((e, i) => (<Cell key={i} fill={e.z_score_medio_setor > 0 ? '#ef4444' : '#3b82f6'} />))}
@@ -312,7 +416,7 @@ export default function PainelVisualizacao({
           <div style={{ display: 'flex', gap: '15px', marginBottom: '20px', flexWrap: 'wrap' }}>
             <button
               onClick={() => setUseDiv(!useDiv)}
-              style={{ padding: '8px 12px', borderRadius: '6px', fontSize: '0.92rem', fontWeight: 'bold', border: `1px solid ${useDiv ? '#10b981' : 'var(--border)'}`, backgroundColor: useDiv ? 'rgba(16, 185, 129, 0.1)' : 'transparent', color: useDiv ? '#10b981' : 'var(--text-muted)', cursor: 'pointer', transition: 'all 0.2s' }}
+              style={{ padding: '8px 12px', borderRadius: '6px', fontSize: '0.92rem', fontWeight: 'bold', border: `1px solid ${useDiv ? '#ef4444' : 'var(--border)'}`, backgroundColor: useDiv ? 'rgba(239, 68, 68, 0.1)' : 'transparent', color: useDiv ? '#ef4444' : 'var(--text-muted)', cursor: 'pointer', transition: 'all 0.2s' }}
             >
               Trailing Div. Yield {useDiv ? '(Ativo)' : '(Inativo)'}
             </button>
@@ -400,10 +504,15 @@ export default function PainelVisualizacao({
             >
               {loadingCustom ? 'Aguarde, calculando vetores quantitativos...' : 'Processar Gráfico de Evolução contra S&P 500'}
             </button>
+            {customError && (
+              <div style={{ marginTop: '12px', padding: '10px 14px', background: 'rgba(239, 68, 68, 0.1)', border: '1px solid #ef4444', borderRadius: '6px', color: '#ef4444', fontSize: '0.88rem' }}>
+                {customError}
+              </div>
+            )}
           </div>
 
           {mergedChartData.length > 0 && (
-            <div style={{ marginTop: '30px' }}>
+            <div ref={customChartRef} style={{ marginTop: '30px' }}>
                <h4 style={{ color: 'var(--text-primary)', marginBottom: '15px' }}>Performance Histórica (Retorno Cumulativo Base 100)</h4>
                <ResponsiveContainer width="100%" height={450}>
                   <LineChart data={mergedChartData} margin={{ top: 10, right: 30, left: 20, bottom: 30 }}>
@@ -419,6 +528,109 @@ export default function PainelVisualizacao({
             </div>
           )}
 
+        </div>
+      )}
+
+      {activeTab === 'listagem' && (
+        <div className={styles.chartContainer} style={{ height: 'auto', minHeight: '500px', padding: '1.5rem' }}>
+          <h3 className={styles.chartTitle} style={{ marginBottom: '5px' }}>Listagem de Ações</h3>
+          <p style={descStyle}>Lista todas as ações que passam pelos filtros (país, setor, indústria, faixa de risco), exibindo o último RSI, indicação de dividend yield, o risco normalizado (0–100) e o <b>Risco Modificado</b> — versão refinada do score que incorpora EV/EBITDA e Dividend Yield como amplificadores e EBITDA Margin como amortecedor. Clique no cabeçalho de qualquer coluna para ordenar.<br/><span style={{ color: 'var(--text-faint)', fontSize: '0.85rem' }}>⚠ Esta aba mostra sempre o <b>snapshot mais recente</b> disponível no banco — o filtro de ano não se aplica aqui.</span></p>
+
+          <div style={{ display: 'flex', gap: '15px', marginBottom: '20px', flexWrap: 'wrap', alignItems: 'center' }}>
+            <span style={{ fontSize: '0.85rem', color: 'var(--text-faint)', fontWeight: 'bold' }}>PESOS (α) DA FÓRMULA</span>
+            <label style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.88rem', color: 'var(--text-muted)' }}>
+              EV/EBITDA <input type="number" step="1" min="0" max="20" value={alphaEv} onChange={e => setAlphaEv(parseFloat(e.target.value) || 0)} style={{ width: '60px', padding: '4px 6px', background: 'var(--bg-inset)', border: '1px solid var(--border-strong)', borderRadius: '4px', color: 'var(--text-primary)' }} />
+            </label>
+            <label style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.88rem', color: 'var(--text-muted)' }}>
+              Dividend Yield <input type="number" step="1" min="0" max="20" value={alphaDy} onChange={e => setAlphaDy(parseFloat(e.target.value) || 0)} style={{ width: '60px', padding: '4px 6px', background: 'var(--bg-inset)', border: '1px solid var(--border-strong)', borderRadius: '4px', color: 'var(--text-primary)' }} />
+            </label>
+            <label style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.88rem', color: 'var(--text-muted)' }}>
+              EBITDA Margin <input type="number" step="1" min="0" max="20" value={alphaEb} onChange={e => setAlphaEb(parseFloat(e.target.value) || 0)} style={{ width: '60px', padding: '4px 6px', background: 'var(--bg-inset)', border: '1px solid var(--border-strong)', borderRadius: '4px', color: 'var(--text-primary)' }} />
+            </label>
+            <span style={{ marginLeft: 'auto', fontSize: '0.85rem', color: 'var(--text-faint)' }}>
+              {sortedListagem.length} ações listadas
+            </span>
+          </div>
+
+          <div style={{ overflowX: 'auto', maxHeight: '70vh', overflowY: 'auto' }}>
+            <table style={{ borderCollapse: 'collapse', width: '100%', textAlign: 'left', fontSize: '0.88rem', tableLayout: 'auto' }}>
+              <thead style={{ position: 'sticky', top: 0, backgroundColor: 'var(--bg-surface)', zIndex: 1, boxShadow: '0 1px 0 var(--border)' }}>
+                <tr>
+                  {[
+                    { key: 'ticker',              label: 'Ticker' },
+                    { key: 'nome',                label: 'Nome' },
+                    { key: 'pais',                label: 'País' },
+                    { key: 'setor',               label: 'Setor' },
+                    { key: 'industria',           label: 'Indústria' },
+                    { key: 'faixa_risco',         label: 'Risco' },
+                    { key: 'rsi_14',              label: 'Último RSI', align: 'right' },
+                    { key: 'dividend_yield',      label: 'Div. Yield', align: 'center' },
+                    { key: 'risco_normalizado',   label: 'Risco Norm.', align: 'right' },
+                    { key: 'risco_modificado',    label: 'Risco Mod.', align: 'right' }
+                  ].map(col => (
+                    <th key={col.key}
+                        onClick={() => handleSort(col.key)}
+                        style={{ padding: '10px 8px', color: 'var(--text-muted)', textAlign: col.align || 'left', cursor: 'pointer', userSelect: 'none', whiteSpace: 'nowrap' }}>
+                      {col.label}{setaSort(col.key)}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {sortedListagem.length === 0 ? (
+                  <tr>
+                    <td colSpan="10" style={{ padding: '30px', textAlign: 'center', color: 'var(--axis)' }}>
+                      Nenhuma ação encontrada para os filtros selecionados.
+                    </td>
+                  </tr>
+                ) : sortedListagem.map((a, i) => {
+                  const rsi = a.rsi_14 != null ? Number(a.rsi_14) : null;
+                  const rsiCor = rsi == null ? 'var(--text-muted)' : rsi >= 70 ? '#ef4444' : rsi <= 30 ? '#10b981' : 'var(--text-primary)';
+                  const dy = a.dividend_yield != null ? Number(a.dividend_yield) : null;
+                  const temDy = dy != null && dy > 0;
+                  const rn = a.risco_normalizado != null ? Number(a.risco_normalizado) : null;
+                  const rm = a.risco_modificado != null ? Number(a.risco_modificado) : null;
+                  const corRisco = (v) => v == null ? 'var(--text-muted)' : v >= 70 ? '#ef4444' : v >= 40 ? '#f59e0b' : '#10b981';
+                  return (
+                    <tr key={a.ticker} style={{ backgroundColor: i % 2 === 0 ? 'transparent' : 'rgba(127, 127, 127, 0.06)' }}>
+                      <td style={{ padding: '8px 8px', borderBottom: '1px solid var(--border)', color: 'var(--text-primary)', fontWeight: 'bold' }}>{a.ticker}</td>
+                      <td style={{ padding: '8px 8px', borderBottom: '1px solid var(--border)', color: 'var(--text-muted)', maxWidth: '260px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{a.nome}</td>
+                      <td style={{ padding: '10px', borderBottom: '1px solid var(--border)', color: 'var(--text-primary)' }}>{a.pais}</td>
+                      <td style={{ padding: '10px', borderBottom: '1px solid var(--border)', color: 'var(--text-primary)' }}>{a.setor}</td>
+                      <td style={{ padding: '10px', borderBottom: '1px solid var(--border)', color: 'var(--text-primary)' }}>{a.industria}</td>
+                      <td style={{ padding: '10px', borderBottom: '1px solid var(--border)' }}>
+                        <span style={{
+                          backgroundColor: a.faixa_risco?.startsWith('1') || a.faixa_risco?.startsWith('2') ? 'rgba(16, 185, 129, 0.1)' :
+                                           a.faixa_risco?.startsWith('4') || a.faixa_risco?.startsWith('5') ? 'rgba(239, 68, 68, 0.1)' : 'rgba(59, 130, 246, 0.1)',
+                          color: a.faixa_risco?.startsWith('1') || a.faixa_risco?.startsWith('2') ? '#10b981' :
+                                 a.faixa_risco?.startsWith('4') || a.faixa_risco?.startsWith('5') ? '#ef4444' : '#3b82f6',
+                          padding: '3px 7px', borderRadius: '4px', fontSize: '0.78rem', fontWeight: 'bold', border: '1px solid currentColor', whiteSpace: 'nowrap'
+                        }}>{a.faixa_risco || 'N/D'}</span>
+                      </td>
+                      <td style={{ padding: '10px', borderBottom: '1px solid var(--border)', textAlign: 'right', color: rsiCor, fontWeight: 'bold' }}>
+                        {rsi != null ? rsi.toFixed(2) : '—'}
+                      </td>
+                      <td style={{ padding: '10px', borderBottom: '1px solid var(--border)', textAlign: 'center' }}>
+                        {temDy ? (
+                          <span style={{ color: '#10b981', fontWeight: 'bold' }} title={`${(dy * 100).toFixed(2)}%`}>
+                            Sim ({(dy * 100).toFixed(2)}%)
+                          </span>
+                        ) : (
+                          <span style={{ color: 'var(--text-faint)' }}>Não</span>
+                        )}
+                      </td>
+                      <td style={{ padding: '10px', borderBottom: '1px solid var(--border)', textAlign: 'right', color: corRisco(rn), fontWeight: 'bold' }}>
+                        {rn != null ? rn.toFixed(2) : '—'}
+                      </td>
+                      <td style={{ padding: '10px', borderBottom: '1px solid var(--border)', textAlign: 'right', color: corRisco(rm), fontWeight: 'bold' }}>
+                        {rm != null ? rm.toFixed(2) : '—'}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
 

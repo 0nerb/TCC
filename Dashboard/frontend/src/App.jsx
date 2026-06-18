@@ -23,7 +23,7 @@ export default function App() {
   const [selRiscos, setSelRiscos] = useState(['1 - Muito Baixo', '5 - Muito Alto']);
   
   const [anoIni, setAnoIni] = useState(2010);
-  const [anoFim, setAnoFim] = useState(2025);
+  const [anoFim, setAnoFim] = useState(2014);
   const [loading, setLoading] = useState(false);
   
   const [dataIndice, setDataIndice] = useState([]);
@@ -40,6 +40,12 @@ export default function App() {
   
   const [dataCustomIndex, setDataCustomIndex] = useState([]);
   const [loadingCustom, setLoadingCustom] = useState(false);
+  const [customError, setCustomError] = useState(null);
+
+  const [dataListagem, setDataListagem] = useState([]);
+  const [alphaEv, setAlphaEv] = useState(5);
+  const [alphaDy, setAlphaDy] = useState(5);
+  const [alphaEb, setAlphaEb] = useState(5);
 
   const [estatisticas, setEstatisticas] = useState({});
   const [maxPerda, setMaxPerda] = useState(3.0);
@@ -142,17 +148,44 @@ export default function App() {
   };
 
   const buildCustomIndex = async (ativosSelecionados) => {
-    if (!ativosSelecionados || ativosSelecionados.length === 0) return;
+    setCustomError(null);
+    if (!ativosSelecionados || ativosSelecionados.length === 0) {
+      setCustomError('Selecione pelo menos uma ação na tabela acima.');
+      return;
+    }
+
+    const ativosValidos = ativosSelecionados.filter(a => a.ticker && Number.isFinite(a.newWeight));
+    if (ativosValidos.length === 0) {
+      setCustomError('Os ativos selecionados não têm peso válido.');
+      return;
+    }
+
     setLoadingCustom(true);
-    const tickersStr = ativosSelecionados.map(a => a.ticker).join(',');
-    const pesosStr = ativosSelecionados.map(a => a.newWeight).join(',');
+    const tickersStr = ativosValidos.map(a => a.ticker).join(',');
+    const pesosStr = ativosValidos.map(a => a.newWeight).join(',');
+    const url = `http://localhost:5001/api/indice-customizado?tickers=${encodeURIComponent(tickersStr)}&pesos=${encodeURIComponent(pesosStr)}&ano_ini=${anoIni}&ano_fim=${anoFim}`;
+    console.log('[Índice Customizado] requisição:', { tickers: tickersStr, pesos: pesosStr, anoIni, anoFim });
 
     try {
-      const res = await fetch(`http://localhost:5001/api/indice-customizado?tickers=${tickersStr}&pesos=${pesosStr}&ano_ini=${anoIni}&ano_fim=${anoFim}`);
+      const res = await fetch(url);
       const json = await res.json();
-      setDataCustomIndex(Array.isArray(json) ? json : []);
+      console.log('[Índice Customizado] resposta:', { status: res.status, linhas: Array.isArray(json) ? json.length : 'erro', amostra: Array.isArray(json) ? json[0] : json });
+
+      if (!res.ok) {
+        setCustomError(`Erro ${res.status}: ${json?.error || 'falha ao processar.'}`);
+        setDataCustomIndex([]);
+        return;
+      }
+      if (!Array.isArray(json) || json.length === 0) {
+        setCustomError('Backend retornou vazio para esses tickers no período selecionado.');
+        setDataCustomIndex([]);
+        return;
+      }
+      setDataCustomIndex(json);
     } catch (err) {
-      console.error("Erro ao gerar índice customizado:", err);
+      console.error('[Índice Customizado] erro de rede:', err);
+      setCustomError(`Falha de conexão: ${err.message}. O backend está rodando em localhost:5001?`);
+      setDataCustomIndex([]);
     } finally {
       setLoadingCustom(false);
     }
@@ -216,6 +249,15 @@ export default function App() {
         const res = await fetch(`http://localhost:5001/api/mapa-mercado?${params}`);
         const json = await res.json();
         setDataMapa(Array.isArray(json) ? json : []);
+      } else if (activeTab === 'listagem') {
+        const listParams = new URLSearchParams({
+          paises: selPaises.join(','), setores: selSetores.join(','),
+          industrias: selIndustrias.join(','), riscos: selRiscos.join(','),
+          alpha_ev: alphaEv, alpha_dy: alphaDy, alpha_eb: alphaEb
+        }).toString();
+        const res = await fetch(`http://localhost:5001/api/listagem-acoes?${listParams}`);
+        const json = await res.json();
+        setDataListagem(Array.isArray(json) ? json : []);
       }
 
       if (['anomalia', 'estresse', 'evolucaoRisco', 'mapa'].includes(activeTab)) {
@@ -235,7 +277,7 @@ export default function App() {
     }
   };
 
-  useEffect(() => { fetchData(); }, [activeTab, maxPerda, useDiv, useMargem, useEv]);
+  useEffect(() => { fetchData(); }, [activeTab, maxPerda, useDiv, useMargem, useEv, alphaEv, alphaDy, alphaEb]);
 
   return (
     <div className={styles.layout}>
@@ -256,7 +298,11 @@ export default function App() {
           dataExposicao={dataExposicao} dataEvolucaoRisco={dataEvolucaoRisco} dataSp500={dataSp500}
           dataMapa={dataMapa}
           useDiv={useDiv} setUseDiv={setUseDiv} useMargem={useMargem} setUseMargem={setUseMargem} useEv={useEv} setUseEv={setUseEv}
-          dataCustomIndex={dataCustomIndex} buildCustomIndex={buildCustomIndex} loadingCustom={loadingCustom}
+          dataCustomIndex={dataCustomIndex} buildCustomIndex={buildCustomIndex} loadingCustom={loadingCustom} customError={customError}
+          dataListagem={dataListagem}
+          alphaEv={alphaEv} setAlphaEv={setAlphaEv}
+          alphaDy={alphaDy} setAlphaDy={setAlphaDy}
+          alphaEb={alphaEb} setAlphaEb={setAlphaEb}
         />
       </main>
     </div>

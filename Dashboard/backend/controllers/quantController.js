@@ -81,6 +81,23 @@ async getMapaMercado(req, res) {
     }
   }
 
+  async getListagemAcoes(req, res) {
+    try {
+      const p = extrairParametros(req.query);
+      const alphaEv = req.query.alpha_ev !== undefined ? parseFloat(req.query.alpha_ev) : 5;
+      const alphaDy = req.query.alpha_dy !== undefined ? parseFloat(req.query.alpha_dy) : 5;
+      const alphaEb = req.query.alpha_eb !== undefined ? parseFloat(req.query.alpha_eb) : 5;
+      const dados = await quantRepository.obterListagemAcoes(
+        p.listaPaises, p.listaSetores, p.listaIndustrias, p.listaRiscos,
+        alphaEv, alphaDy, alphaEb
+      );
+      res.json(dados);
+    } catch (err) {
+      console.error('[Backend] Erro no endpoint getListagemAcoes:', err);
+      res.status(500).json({ error: err.message });
+    }
+  }
+
   // Rota do Benchmark S&P 500
   async getBenchmarkSP500(req, res) {
     try {
