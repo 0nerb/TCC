@@ -1,4 +1,4 @@
-# QuantLab
+# Ambiente Analítico
 
 Ambiente analítico integrado para análise de risco e retorno de ações da NYSE e NASDAQ, com benchmark contra o S&P 500. Combina uma camada de coleta em Python, um Data Warehouse em PostgreSQL, uma API REST em Node.js e um dashboard interativo em React.
 
