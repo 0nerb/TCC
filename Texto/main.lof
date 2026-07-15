@@ -1,0 +1,32 @@
+\babel@toc {brazil}{}\relax 
+\contentsline {figure}{\numberline {1}{\ignorespaces Exemplo de esquema estrela, com a tabela fato \textit {Sales} ao centro conectada a cinco tabelas dimensão.}}{22}{figure.2.1}%
+\contentsline {figure}{\numberline {2}{\ignorespaces Esquema estrela do modelo dimensional proposto}}{31}{figure.3.2}%
+\contentsline {figure}{\numberline {3}{\ignorespaces Fluxo ETL em alto nível}}{34}{figure.3.3}%
+\contentsline {figure}{\numberline {4}{\ignorespaces Seção de filtros do \textit {dashboard}.}}{48}{figure.4.4}%
+\contentsline {figure}{\numberline {5}{\ignorespaces Índice sintético setorial em base 100, período 2010 a 2025, sensibilidade de 7\%.}}{52}{figure.5.5}%
+\contentsline {figure}{\numberline {6}{\ignorespaces Índice sintético setorial em base 100, período 2010 a 2016, sensibilidade de 7\%.}}{53}{figure.5.6}%
+\contentsline {figure}{\numberline {7}{\ignorespaces Índice sintético setorial em base 100, período 2016 a 2022, sensibilidade de 7\%.}}{54}{figure.5.7}%
+\contentsline {figure}{\numberline {8}{\ignorespaces Comparação setorial filtrada entre \textit {Technology}, \textit {Real Estate} e \textit {Healthcare}, período 2016 a 2022.}}{55}{figure.5.8}%
+\contentsline {figure}{\numberline {9}{\ignorespaces Desvio padrão anualizado por setor, período 2010 a 2016.}}{56}{figure.5.9}%
+\contentsline {figure}{\numberline {10}{\ignorespaces Desvio padrão anualizado por setor, período 2016 a 2022.}}{56}{figure.5.10}%
+\contentsline {figure}{\numberline {11}{\ignorespaces Desvio padrão anualizado por setor, período 2020 a 2025.}}{57}{figure.5.11}%
+\contentsline {figure}{\numberline {12}{\ignorespaces Retorno médio mensal por setor, período 2010 a 2025, visão completa.}}{58}{figure.5.12}%
+\contentsline {figure}{\numberline {13}{\ignorespaces Matriz de correlação setorial calculada sobre séries semanais dos índices sintéticos, período 2010 a 2025.}}{59}{figure.5.13}%
+\contentsline {figure}{\numberline {14}{\ignorespaces Retorno anualizado por faixa de risco no período de 2010 a 2025.}}{60}{figure.5.14}%
+\contentsline {figure}{\numberline {15}{\ignorespaces Retorno anualizado por faixa de risco no período de 2012 a 2015.}}{61}{figure.5.15}%
+\contentsline {figure}{\numberline {16}{\ignorespaces Retorno anualizado por faixa de risco no período de 2020 a 2023.}}{61}{figure.5.16}%
+\contentsline {figure}{\numberline {17}{\ignorespaces \textit {Maximum drawdown} por faixa de risco no período de 2010 a 2025.}}{62}{figure.5.17}%
+\contentsline {figure}{\numberline {18}{\ignorespaces \textit {Maximum drawdown} por faixa de risco no período de 2010 a 2017.}}{63}{figure.5.18}%
+\contentsline {figure}{\numberline {19}{\ignorespaces \textit {Maximum drawdown} por faixa de risco no período de 2019 a 2023.}}{63}{figure.5.19}%
+\contentsline {figure}{\numberline {20}{\ignorespaces \textit {Z-score} médio de risco por setor no período de 2010 a 2025.}}{64}{figure.5.20}%
+\contentsline {figure}{\numberline {21}{\ignorespaces \textit {Z-score} médio de risco por setor no período de 2019 a 2023.}}{65}{figure.5.21}%
+\contentsline {figure}{\numberline {22}{\ignorespaces Evolução temporal dos portfólios equiponderados por faixa de risco e S\&P 500, base 100, período 2010 a 2025.}}{66}{figure.5.22}%
+\contentsline {figure}{\numberline {23}{\ignorespaces Painel de Listagem de Ações com filtros de peso ativos para os modificadores de risco.}}{68}{figure.5.23}%
+\contentsline {figure}{\numberline {24}{\ignorespaces Desempenho histórico do índice customizado da faixa Muito Baixo contra o S\&P 500, base 100, período 2010 a 2025.}}{69}{figure.5.24}%
+\contentsline {figure}{\numberline {25}{\ignorespaces Desempenho histórico do índice customizado da faixa Baixo contra o S\&P 500, base 100, período 2010 a 2025.}}{70}{figure.5.25}%
+\contentsline {figure}{\numberline {26}{\ignorespaces Desempenho histórico do índice customizado da faixa Médio contra o S\&P 500, base 100, período 2010 a 2025, sem aplicação dos modificadores.}}{71}{figure.5.26}%
+\contentsline {figure}{\numberline {27}{\ignorespaces Desempenho histórico do índice customizado da faixa Médio contra o S\&P 500, base 100, período 2010 a 2025, com aplicação dos modificadores.}}{72}{figure.5.27}%
+\contentsline {figure}{\numberline {28}{\ignorespaces Desempenho histórico do índice customizado da faixa Alto contra o S\&P 500, base 100, período 2010 a 2025, protocolo padrão.}}{73}{figure.5.28}%
+\contentsline {figure}{\numberline {29}{\ignorespaces Desempenho histórico do índice customizado da faixa Alto contra o S\&P 500, base 100, período 2010 a 2025, composto por três ações de cada um dos três setores de maior \textit {Z-Score} de risco.}}{74}{figure.5.29}%
+\contentsline {figure}{\numberline {30}{\ignorespaces Desempenho histórico do índice customizado da faixa Muito Alto contra o S\&P 500, base 100, período 2010 a 2025.}}{75}{figure.5.30}%
+\contentsline {figure}{\numberline {31}{\ignorespaces Desempenho histórico do índice customizado composto pelas cinco maiores alocações de \textit {Industrials} e pelas cinco maiores alocações de \textit {Real Estate} contra o S\&P 500, base 100, período 2010 a 2025.}}{77}{figure.5.31}%

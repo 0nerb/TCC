@@ -310,11 +310,13 @@ class QuantRepository {
     return result.rows;
   }
 
-  async obterMapaMercado(setores, industrias, paises, anoIni, anoFim, useDiv = true, useMargem = true, useEv = true) {
+  async obterMapaMercado(setores, industrias, paises, riscos, anoIni, anoFim, useDiv = true, useMargem = true, useEv = true) {
     try {
-      const filtroSetor = setores && setores.length > 0 ? `AND a.setor IN (${setores.map(s => `'${s}'`).join(',')})` : '';
-      const filtroIndustria = industrias && industrias.length > 0 ? `AND a.industria IN (${industrias.map(s => `'${s}'`).join(',')})` : '';
-      const filtroPais = paises && paises.length > 0 ? `AND a.pais IN (${paises.map(s => `'${s}'`).join(',')})` : '';
+      const escape = (s) => String(s).replace(/'/g, "''");
+      const filtroSetor = setores && setores.length > 0 ? `AND a.setor IN (${setores.map(s => `'${escape(s)}'`).join(',')})` : '';
+      const filtroIndustria = industrias && industrias.length > 0 ? `AND a.industria IN (${industrias.map(s => `'${escape(s)}'`).join(',')})` : '';
+      const filtroPais = paises && paises.length > 0 ? `AND a.pais IN (${paises.map(s => `'${escape(s)}'`).join(',')})` : '';
+      const filtroRisco = riscos && riscos.length > 0 ? `AND faixa_risco IN (${riscos.map(s => `'${escape(s)}'`).join(',')})` : '';
 
       const wDiv = useDiv ? 1 : 0;
       const wMargem = useMargem ? 1 : 0;
@@ -406,7 +408,8 @@ class QuantRepository {
             SELECT setor, ticker, faixa_risco, ROUND(CAST(score_qualidade AS NUMERIC), 4) as score,
                    ROUND(CAST((peso_exponencial / SUM(peso_exponencial) OVER(PARTITION BY setor)) * 100 AS NUMERIC), 2) as tamanho,
                    ROW_NUMBER() OVER(PARTITION BY setor ORDER BY peso_exponencial DESC) as rank
-            FROM PesosBrutos WHERE peso_exponencial > 0 AND faixa_risco IS NOT NULL
+            FROM PesosBrutos
+            WHERE peso_exponencial > 0 AND faixa_risco IS NOT NULL ${filtroRisco}
         )
         SELECT setor, ticker, faixa_risco, score, tamanho
         FROM RankingSetorial
@@ -506,9 +509,14 @@ class QuantRepository {
   }
 
   async obterIndiceCustomizado(tickers, pesos, anoIni, anoFim) {
+    // ÍNDICE PROGRESSIVO — rebalanceamento semanal.
+    // Estratégia: em vez de normalizar cada ticker em 100 no seu próprio primeiro dia
+    // (o que causava saltos quando um novo ticker entrava na série), calculamos o
+    // retorno semanal ponderado da carteira usando apenas os tickers que possuem
+    // retorno válido naquela semana (rebalanceamento entre disponíveis).
+    // O índice acumula esses retornos via produto geométrico: I_t = 100 · ∏(1 + r_i).
     const query = `
       WITH PesosCarteira AS (
-          -- Transforma os Arrays vindos do Node.js em uma tabela de Ticker e Peso
           SELECT ticker, peso
           FROM UNNEST($1::text[], $2::numeric[]) AS t(ticker, peso)
       ),
@@ -520,32 +528,47 @@ class QuantRepository {
           FROM fato_infoacaodiario f
           JOIN dim_acao a ON f.fk_dim_acao_acao_key = a.acao_key
           JOIN dim_tempo t ON f.fk_dim_tempo_data_key = t.data_key
-          WHERE a.ticker = ANY($1::text[]) 
+          WHERE a.ticker = ANY($1::text[])
             AND t.ano BETWEEN $3 AND $4
           GROUP BY 1, 2
       ),
-      PrecosBase AS (
-          -- Isola o primeiro preço cronológico disponível de cada ação para padronizar na Base 100
-          SELECT ticker, preco as preco_base
-          FROM (
-              SELECT ticker, preco, ROW_NUMBER() OVER(PARTITION BY ticker ORDER BY semana ASC) as rn
-              FROM PrecosSemanais
-          ) sub
-          WHERE rn = 1
+      Retornos AS (
+          -- Retorno semanal por ticker; a primeira semana de cada ticker tem LAG NULL.
+          SELECT
+              p.semana, p.ticker,
+              p.preco / NULLIF(LAG(p.preco) OVER (PARTITION BY p.ticker ORDER BY p.semana), 0) - 1 AS ret
+          FROM PrecosSemanais p
+      ),
+      RetornoCarteira AS (
+          -- Retorno agregado da carteira: média dos retornos ponderada pelos pesos
+          -- dos tickers com retorno válido na semana (renormalizados via divisão pela
+          -- soma dos pesos ativos). Assim tickers ausentes não distorcem o índice.
+          SELECT r.semana,
+                 SUM(pc.peso * r.ret) / NULLIF(SUM(pc.peso), 0) AS ret_semana
+          FROM Retornos r
+          JOIN PesosCarteira pc ON r.ticker = pc.ticker
+          WHERE r.ret IS NOT NULL
+          GROUP BY r.semana
+      ),
+      IndiceProgressivo AS (
+          -- Semana inicial (primeira em que qualquer ticker tem preço) = 100.
+          SELECT MIN(semana) AS data, 100::numeric AS valor_indice
+          FROM PrecosSemanais
+          UNION ALL
+          -- Semanas subsequentes: acumulação geométrica dos retornos.
+          -- EXP(SUM(LN(...)) OVER (ORDER BY ...)) == produto acumulado.
+          SELECT semana AS data,
+                 100 * EXP(SUM(LN(GREATEST(1 + ret_semana, 0.01))) OVER (ORDER BY semana)) AS valor_indice
+          FROM RetornoCarteira
       )
-      SELECT
-          p.semana as data,
-          -- (Preço / Preço Inicial) * 100 * (Peso / 100) = Contribuição do ativo no índice sintético
-          SUM( (p.preco / NULLIF(pb.preco_base, 0)) * 100 * (pc.peso / 100.0) ) as valor_indice
-      FROM PrecosSemanais p
-      JOIN PrecosBase pb ON p.ticker = pb.ticker
-      JOIN PesosCarteira pc ON p.ticker = pc.ticker
-      GROUP BY p.semana
-      ORDER BY p.semana ASC;
+      SELECT data, valor_indice
+      FROM IndiceProgressivo
+      ORDER BY data ASC;
     `;
     const res = await pool.query(query, [tickers, pesos, anoIni, anoFim]);
     return res.rows;
   }
+
 }
 
 module.exports = new QuantRepository();

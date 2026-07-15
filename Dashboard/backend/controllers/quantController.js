@@ -43,10 +43,11 @@ class QuantController {
   }
 async getMapaMercado(req, res) {
     try {
-      const setores = req.query.setores ? req.query.setores.split(',') : [];
-      const industrias = req.query.industrias ? req.query.industrias.split(',') : [];
-      const paises = req.query.paises ? req.query.paises.split(',') : [];
-      
+      const setores = req.query.setores ? req.query.setores.split(',').filter(Boolean) : [];
+      const industrias = req.query.industrias ? req.query.industrias.split(',').filter(Boolean) : [];
+      const paises = req.query.paises ? req.query.paises.split(',').filter(Boolean) : [];
+      const riscos = req.query.riscos ? req.query.riscos.split(',').filter(Boolean) : [];
+
       const anoIni = req.query.ano_ini || 2010;
       const anoFim = req.query.ano_fim || 2025;
 
@@ -55,11 +56,11 @@ async getMapaMercado(req, res) {
       const useEv = req.query.use_ev !== 'false';
 
       const dados = await quantRepository.obterMapaMercado(
-        setores, industrias, paises, anoIni, anoFim, useDiv, useMargem, useEv
+        setores, industrias, paises, riscos, anoIni, anoFim, useDiv, useMargem, useEv
       );
       res.json(dados);
-    } catch (err) { 
-      res.status(500).json({ error: err.message }); 
+    } catch (err) {
+      res.status(500).json({ error: err.message });
     }
   }
 

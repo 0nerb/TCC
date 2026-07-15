@@ -1,0 +1,35 @@
+\chapter{CONSIDERAÇÕES FINAIS}
+\label{chap:conclusao}
+
+Este capítulo encerra o trabalho retomando os objetivos declarados no Capítulo~\ref{introducao}, reconhecendo as limitações identificadas ao longo da experimentação e apontando desdobramentos naturais da proposta. A discussão parte do balanço já consolidado na Seção~\ref{sec:resultados-todo} e concentra-se em interpretar o alcance efetivo do ambiente analítico construído.
+
+\section{CONCLUSÕES}
+\label{sec:conclusoes}
+
+O objetivo geral declarado neste trabalho não era propor um novo indicador de risco, mas construir e avaliar um ambiente analítico integrado no qual coleta, tratamento, modelagem dimensional e composição de métricas operassem como um sistema único, orientado à viabilização de análises que dificilmente seriam sustentadas por índices tradicionais isolados. Os resultados discutidos ao longo do Capítulo~\ref{chap:experimentacao} sustentam que esse objetivo foi atingido: as leituras setoriais, as divisões por risco e os testes de alocação operam sobre a mesma base dimensional, dialogam entre si por meio da interface e podem ser reconfigurados pelo usuário sem qualquer intervenção sobre a camada de dados.
+
+Os cinco objetivos específicos delineados na Seção~\ref{sec:objetivos-especificos} foram cumpridos em graus distintos. A caracterização das fontes de dados e a modelagem dimensional deram origem ao universo consolidado de 2010 a 2025 sobre o qual todas as consultas operam. O \textit{pipeline} de transformação materializou os indicadores derivados e a coluna de faixa de risco utilizada nos painéis de risco. A construção da métrica composta traduziu-se em uma classificação de ativos coerente com o comportamento esperado do mercado em janelas longas, com hierarquia preservada em retorno anualizado e separação nítida da faixa Muito Alto no \textit{Maximum Drawdown}.
+
+A manifestação do paradoxo da baixa volatilidade em três painéis metodologicamente distintos, retomada em detalhe na Seção~\ref{sec:resultados-todo} reforça a leitura do ambiente como um sistema integrado. Juntamente com o ganho de desempenho observado quando a agrupação por faixa é combinada com a leitura setorial na Seção~\ref{subsubsec:validacao-alto}, no qual a informação produzida por um painel restringe o conjunto de seleção de outro. Ambas estas observações só se tornam notáveis quando as consultas dialogam sobre a mesma base, o que corrobora a proposta do ambiente analítico como diferencial em relação ao consumo isolado de índices consolidados.
+
+\section{LIMITAÇÕES}
+\label{sec:limitacoes}
+
+As limitações identificadas ao longo do trabalho não invalidam os achados reportados, mas delimitam o escopo interpretativo dos resultados e devem ser explicitadas para leitura adequada das conclusões.
+
+A limitação mais estrutural refere-se à cobertura temporal dos modificadores. A API pública utilizada como fonte de dados institucionais disponibiliza os valores de EV/EBITDA, \textit{Trailing Dividend Yield} e Margem EBITDA apenas em corte pontual, referente ao trimestre imediatamente anterior à coleta, sem histórico completo. Como consequência, a fórmula do Risco Modificado é aplicada retrospectivamente sobre o intervalo de 2010 a 2025 utilizando valores capturados em um único instante do tempo, o que caracteriza \textit{look-ahead bias}. Os testes de alocação com modificadores ativos discutidos nas Seções~\ref{subsubsec:validacao-medio} e~\ref{subsubsec:validacao-alto} incorporam essa limitação e devem ser lidos como evidência de que a incorporação dos modificadores adiciona informação relevante ao critério de seleção, e não como validação estatística formal de uma estratégia de investimento.
+
+Por fim, o \textit{benchmark} de comparação foi restrito ao S\&P 500 pelas razões metodológicas discutidas na Seção~\ref{sec:validacao-sp500}. A escolha é defensável pela elevada correlação histórica entre os principais índices norte-americanos, mas implica que a validação reportada permanece dentro do escopo do mercado de ações listadas na NYSE e na NASDAQ, sem extrapolação para mercados emergentes, renda fixa ou classes alternativas de ativos.
+
+\section{TRABALHOS FUTUROS}
+\label{sec:trabalhos-futuros}
+
+Os desdobramentos naturais deste trabalho decorrem diretamente das limitações discutidas na seção anterior e das possibilidades ainda não exploradas do ambiente analítico construído.
+
+A extensão prioritária consiste em substituir a coleta pontual dos modificadores por uma arquitetura de captura incremental e contínua. A implementação de um processo periódico de ingestão, encadeado ao \textit{pipeline} de ETL, permitiria acumular a série histórica dos indicadores EV/EBITDA, \textit{Trailing Dividend Yield} e Margem EBITDA à medida que novos períodos fossem publicados. Uma vez consolidado esse histórico, a fórmula do Risco Modificado poderia ser aplicada sobre cada instante do intervalo utilizando valores contemporâneos aos dados observados, eliminando o \textit{look-ahead bias} identificado na Seção~\ref{sec:limitacoes} e viabilizando a separação entre janelas de treino e teste para validação estatística formal.
+
+Uma segunda direção de trabalho é a incorporação analítica do \textit{Trailing RSI}, atualmente presente no modelo de dados e exibido no painel de Listagem de Ações, mas não utilizado como componente da fórmula de risco nem como critério de composição de índices customizados. A integração do indicador ao ambiente permitiria testar hipóteses sobre a interação entre risco estatístico, fundamentos e sinais técnicos de curto prazo, ampliando o espaço de configurações analíticas disponíveis ao usuário.
+
+A ampliação do universo de dados constitui uma terceira frente. A extensão da coleta a mercados adicionais, notadamente bolsas europeias e mercados emergentes, permitiria avaliar a generalidade das leituras produzidas pelo modelo, particularmente as convergências identificadas no Capítulo~\ref{chap:experimentacao} entre estratificação por risco e comportamento setorial. A modelagem dimensional adotada já suporta essa extensão sem alteração estrutural, uma vez que a dimensão de ação carrega o país de listagem como atributo descritivo.
+
+Por fim, o ambiente analítico foi concebido desde o início como projeto de código aberto, com repositório público destinado à comunidade acadêmica. Essa disponibilização abre espaço para contribuições externas voltadas à evolução do modelo, à incorporação de novos indicadores e à adaptação da interface a casos de uso não antecipados neste trabalho, o que fortalece o caráter integrado e extensível do ambiente e sustenta sua continuidade para além do escopo desta monografia.

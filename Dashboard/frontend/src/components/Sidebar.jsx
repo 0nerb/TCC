@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   TrendingUp, BarChart3, CalendarDays, Share2,
-  LayoutDashboard, Activity, Bomb, PieChart, Map, Sun, Moon, ListFilter
+  LayoutDashboard, Activity, Bomb, PieChart, Map, Sun, Moon, ListFilter, LayoutGrid
 } from 'lucide-react';
 import styles from '../App.module.css';
 
@@ -10,10 +10,16 @@ export default function Sidebar({ activeTab, setActiveTab, theme, toggleTheme })
     <aside className={styles.sidebar}>
       <div className={styles.title}>
         <TrendingUp className={styles.accent} size={24} /> 
-        QUANTLAB <span className={styles.accent}>PRO</span>
+        AMBIENTE <span className={styles.accent}>ANALÍTICO</span>
       </div>
       <nav>
         <ul className={styles.menuList}>
+          <li className={`${styles.menuItem} ${activeTab === 'capa' ? styles.activeMenuItem : ''}`} onClick={() => setActiveTab('capa')}>
+            <LayoutGrid size={18} /> Capa
+          </li>
+
+          <div className={styles.menuSeparator} style={{borderTop: '1px solid var(--border)', margin: '15px 0'}}></div>
+
           <li className={`${styles.menuItem} ${activeTab === 'setor' ? styles.activeMenuItem : ''}`} onClick={() => setActiveTab('setor')}>
             <LayoutDashboard size={18} /> Performance
           </li>

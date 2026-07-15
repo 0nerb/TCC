@@ -1,0 +1,294 @@
+% % ---
+% % GLOSSÁRIO
+% % ---
+
+% % =========================
+% % Arquitetura de dados
+% % =========================
+
+% \newglossaryentry{datawarehouse}{
+%     name={Data Warehouse},
+%     description={repositório analítico centralizado que consolida dados provenientes de fontes heterogêneas em uma estrutura otimizada para consultas de leitura e agregação, servindo de camada de suporte a análises históricas e a painéis de \gls{bi}}
+% }
+
+% \newglossaryentry{modelagemdimensional}{
+%     name={modelagem dimensional},
+%     description={abordagem de modelagem de dados voltada a ambientes analíticos, organizada em tabelas fato e tabelas dimensão, cujo objetivo é reduzir a profundidade das junções e privilegiar o desempenho de leitura sobre agregações históricas}
+% }
+
+% \newglossaryentry{esquemaestrela}{
+%     name={esquema estrela},
+%     see={modelagemdimensional},
+%     description={topologia de \gls{modelagemdimensional} em que uma tabela fato central é conectada diretamente às tabelas dimensão que descrevem seus atributos de contexto, formando um grafo em estrela e minimizando a quantidade de junções necessárias para responder às consultas}
+% }
+
+% \newglossaryentry{tabelafato}{
+%     name={tabela fato},
+%     plural={tabelas fato},
+%     description={tabela do \gls{datawarehouse} que armazena as métricas mensuráveis dos eventos observados, em granularidade previamente definida, e cujas chaves estrangeiras referenciam as tabelas dimensão associadas}
+% }
+
+% \newglossaryentry{tabeladimensao}{
+%     name={tabela dimensão},
+%     plural={tabelas dimensão},
+%     description={tabela do \gls{datawarehouse} que armazena os atributos descritivos utilizados para contextualizar as medidas registradas nas \glspl{tabelafato}, como identificação do ativo, marcadores de tempo e tipos de indicador}
+% }
+
+% \newglossaryentry{surrogatekey}{
+%     name={surrogate key},
+%     description={chave primária artificial, tipicamente sequencial e dissociada dos identificadores de negócio, adotada em tabelas dimensão para preservar a integridade referencial diante de alterações nos códigos originais dos registros}
+% }
+
+% \newglossaryentry{bi}{
+%     name={Business Intelligence},
+%     description={conjunto de práticas, tecnologias e processos destinados à coleta, integração e análise de dados corporativos com o propósito de apoiar decisões fundamentadas}
+% }
+
+% \newglossaryentry{drilldown}{
+%     name={drill-down},
+%     description={operação analítica que parte de uma visão agregada dos dados e navega progressivamente para níveis de maior detalhamento, permitindo ao usuário isolar subconjuntos específicos do universo observado}
+% }
+
+% \newglossaryentry{dashboard}{
+%     name={dashboard},
+%     description={interface visual que agrega múltiplas consultas analíticas em painéis interativos, permitindo ao usuário aplicar filtros e recortes sem intervenção sobre a camada de dados}
+% }
+
+% % =========================
+% % Índices e ativos
+% % =========================
+
+% \newglossaryentry{indicemercado}{
+%     name={índice de mercado},
+%     description={carteira teórica de ativos, regida por regras predefinidas de inclusão e ponderação, cuja variação sintetiza o desempenho médio de um segmento do mercado}
+% }
+
+% \newglossaryentry{benchmark}{
+%     name={benchmark},
+%     description={referência de comparação adotada para avaliar o desempenho relativo de uma carteira ou estratégia, tipicamente um \gls{indicemercado} representativo do universo analisado}
+% }
+
+% \newglossaryentry{sp500}{
+%     name={S\&P 500},
+%     description={\gls{indicemercado} ponderado por capitalização que reúne quinhentas empresas de grande capitalização listadas na \gls{nyse} e na \gls{nasdaq}, adotado neste trabalho como \gls{benchmark} exclusivo de validação}
+% }
+
+% \newglossaryentry{nyse}{
+%     name={NYSE},
+%     description={New York Stock Exchange, uma das duas principais bolsas norte-americanas cujo universo de ações compõe o escopo de análise deste trabalho}
+% }
+
+% \newglossaryentry{nasdaq}{
+%     name={NASDAQ},
+%     description={Nasdaq Stock Market, bolsa norte-americana especializada em ações de empresas de tecnologia e crescimento, integrante do escopo de análise deste trabalho}
+% }
+
+% \newglossaryentry{ticker}{
+%     name={ticker},
+%     description={código alfanumérico utilizado pelas bolsas para identificar de forma unívoca um ativo negociado}
+% }
+
+% \newglossaryentry{base100}{
+%     name={base 100},
+%     description={reescalonamento aplicado a séries históricas em que o valor inicial do intervalo é ajustado para cem, permitindo comparação direta de trajetórias de ativos e carteiras em um mesmo eixo}
+% }
+
+% % =========================
+% % Métricas e conceitos de risco
+% % =========================
+
+% \newglossaryentry{volatilidadeanualizada}{
+%     name={volatilidade anualizada},
+%     description={medida do risco total de um ativo obtida pelo desvio padrão amostral dos retornos logarítmicos sobre uma janela móvel, multiplicada pela raiz do número de períodos de negociação contidos em um ano}
+% }
+
+% \newglossaryentry{retornologaritmico}{
+%     name={retorno logarítmico},
+%     plural={retornos logarítmicos},
+%     description={variação relativa de preço calculada como o logaritmo natural da razão entre o preço observado e o preço imediatamente anterior, adotado por sua propriedade de aditividade temporal e melhor aderência à hipótese de normalidade em séries financeiras}
+% }
+
+% \newglossaryentry{beta}{
+%     name={Beta},
+%     description={coeficiente que mensura a sensibilidade dos retornos de um ativo em relação aos retornos do mercado, calculado pela razão entre a covariância das duas séries e a variância dos retornos do \gls{benchmark}}
+% }
+
+% \newglossaryentry{riscosistemico}{
+%     name={risco sistêmico},
+%     description={parcela do risco de um ativo decorrente da exposição a fatores comuns ao mercado como um todo, como ciclos macroeconômicos e choques de política monetária, capturada pelo \gls{beta}}
+% }
+
+% \newglossaryentry{riscoidiossincratico}{
+%     name={risco idiossincrático},
+%     description={parcela do risco de um ativo específica de suas próprias características operacionais e independente do comportamento agregado do mercado, capturada pela \gls{volatilidadeanualizada}}
+% }
+
+% \newglossaryentry{mdd}{
+%     name={Maximum Drawdown},
+%     description={maior retração percentual acumulada de uma carteira ou ativo entre um pico histórico e um vale subsequente ao longo de uma janela temporal, adotada como medida da severidade das perdas experimentadas no percurso}
+% }
+
+% \newglossaryentry{correlacaopearson}{
+%     name={correlação de Pearson},
+%     description={coeficiente que mensura a intensidade da associação linear entre duas séries de retornos, utilizado na construção da matriz de correlação setorial}
+% }
+
+% \newglossaryentry{zscore}{
+%     name={Z-score},
+%     description={escore padronizado obtido pela subtração da média e divisão pelo desvio padrão de uma população de referência, adotado neste trabalho para tornar aritmeticamente comparáveis métricas de naturezas e escalas distintas}
+% }
+
+% \newglossaryentry{normalizacaominmax}{
+%     name={normalização Min-Max},
+%     description={transformação que remapeia uma variável para um intervalo fechado predefinido preservando integralmente a ordenação relativa dos valores originais, aplicada neste trabalho para converter o risco base em escala de zero a cem}
+% }
+
+% \newglossaryentry{faixarisco}{
+%     name={faixa de risco},
+%     plural={faixas de risco},
+%     description={classificação categórica derivada do \gls{zscore} do risco base, materializada no repositório analítico em cinco níveis simétricos denominados Muito Baixo, Baixo, Médio, Alto e Muito Alto}
+% }
+
+% \newglossaryentry{riscomodificado}{
+%     name={Risco Modificado},
+%     description={métrica composta de risco que soma ao risco estatístico base as contribuições padronizadas de três modificadores fundamentalistas, adotada como principal indicador analítico proposto no trabalho}
+% }
+
+% \newglossaryentry{smartbeta}{
+%     name={smart beta},
+%     description={estratégia de composição de carteiras em que a ponderação dos ativos se apoia em métricas contábeis de qualidade ou em indicadores de risco, em contraste com a ponderação tradicional por capitalização de mercado}
+% }
+
+% \newglossaryentry{softmax}{
+%     name={softmax},
+%     description={função que converte um vetor de escores reais em uma distribuição de probabilidades por meio da exponenciação de cada componente seguida de normalização pela soma total, empregada neste trabalho para transformar o \gls{scorequalidade} em pesos percentuais de alocação}
+% }
+
+% \newglossaryentry{scorequalidade}{
+%     name={Score de Qualidade},
+%     description={escore atribuído a cada ativo a partir da média ponderada dos \glspl{zscore} dos três modificadores fundamentalistas e da penalidade pelo risco normalizado médio, utilizado como insumo da lógica de alocação}
+% }
+
+% \newglossaryentry{paradoxobaixavol}{
+%     name={paradoxo da baixa volatilidade},
+%     description={anomalia empírica segundo a qual ativos classificados como de menor risco tendem a apresentar retornos ajustados equivalentes ou superiores aos de ativos de risco mais elevado, contrariando a expectativa derivada do \gls{capm}}
+% }
+
+% \newglossaryentry{halloween}{
+%     name={Halloween indicator},
+%     description={padrão sazonal do mercado acionário segundo o qual o desempenho tende a ser mais fraco entre maio e outubro e mais forte entre novembro e abril, também conhecido pela expressão sell in May and go away}
+% }
+
+% \newglossaryentry{lookahead}{
+%     name={look-ahead bias},
+%     description={viés metodológico que ocorre quando uma decisão de investimento simulada em um instante do passado incorpora informação que só se tornou disponível em momento posterior, comprometendo a validade dos resultados retrospectivos}
+% }
+
+% % =========================
+% % Perfil do investidor
+% % =========================
+
+% \newglossaryentry{perfilinvestidor}{
+%     name={perfil do investidor},
+%     description={classificação do investidor segundo sua tolerância à perda e sua disposição a assumir volatilidade, tipicamente dividida em conservador, moderado e arrojado}
+% }
+
+% \newglossaryentry{suitability}{
+%     name={suitability},
+%     description={processo regulatório de adequação de produtos financeiros ao \gls{perfilinvestidor}, tradicionalmente conduzido por meio de questionários psicométricos}
+% }
+
+% \newglossaryentry{aversaoperda}{
+%     name={aversão à perda},
+%     description={viés comportamental identificado pela teoria do prospecto segundo o qual perdas de determinada magnitude produzem impacto psicológico maior do que ganhos equivalentes}
+% }
+
+% \newglossaryentry{framing}{
+%     name={viés de enquadramento},
+%     description={distorção decisória em que a forma de apresentação de uma escolha influencia a resposta do indivíduo, mesmo quando o conteúdo objetivo permanece inalterado}
+% }
+
+% % =========================
+% % Indicadores fundamentalistas
+% % =========================
+
+% \newglossaryentry{margemebitda}{
+%     name={Margem EBITDA},
+%     description={razão entre o \gls{ebitda} e a receita, adotada como amortecedor do risco base por refletir a eficiência operacional e a resiliência da empresa diante de choques econômicos}
+% }
+
+% \newglossaryentry{evebitda}{
+%     name={EV/EBITDA},
+%     description={múltiplo de avaliação que compara o valor da firma à sua geração de caixa operacional, adotado como amplificador do risco base por sinalizar expectativas elevadas incorporadas ao preço do ativo}
+% }
+
+% \newglossaryentry{trailingdy}{
+%     name={Trailing Dividend Yield},
+%     description={razão entre os dividendos pagos nos últimos doze meses e o preço corrente da ação, adotada como amplificador do risco base por sua associação, na literatura contemporânea, a cenários de deterioração de fundamentos}
+% }
+
+% \newglossaryentry{trailingrsi}{
+%     name={Trailing RSI},
+%     description={indicador técnico de momentum que compara a magnitude dos ganhos e das perdas recentes de um ativo em uma janela definida, presente na base de dados do trabalho mas não incorporado à fórmula de risco}
+% }
+
+% % =========================
+% % Stack tecnológico
+% % =========================
+
+% \newglossaryentry{postgresql}{
+%     name={PostgreSQL},
+%     description={sistema de gerenciamento de banco de dados relacional adotado como camada de armazenamento do \gls{datawarehouse} construído neste trabalho}
+% }
+
+% \newglossaryentry{nodejs}{
+%     name={Node.js},
+%     description={ambiente de execução de JavaScript no servidor, utilizado neste trabalho para hospedar a camada de aplicação da API REST}
+% }
+
+% \newglossaryentry{express}{
+%     name={Express},
+%     see={nodejs},
+%     description={framework minimalista para construção de APIs sobre \gls{nodejs}, adotado na camada de aplicação para expor os endpoints REST consumidos pelo \gls{dashboard}}
+% }
+
+% \newglossaryentry{react}{
+%     name={React},
+%     description={biblioteca JavaScript para construção de interfaces declarativas, empregada na camada de visualização do ambiente analítico}
+% }
+
+% \newglossaryentry{recharts}{
+%     name={Recharts},
+%     see={react},
+%     description={biblioteca de gráficos declarativa integrada ao \gls{react}, utilizada para renderizar os painéis do \gls{dashboard}}
+% }
+
+% \newglossaryentry{yfinance}{
+%     name={yfinance},
+%     description={biblioteca Python que oferece acesso programático a séries históricas de cotação e a fundamentos corporativos publicados por um provedor público de dados financeiros}
+% }
+
+% \newglossaryentry{apirest}{
+%     name={API REST},
+%     description={interface programática que expõe recursos de uma aplicação por meio de operações HTTP e retorna respostas em formato JSON, isolando o consumidor da estrutura interna do banco de dados}
+% }
+
+% % =========================
+% % Acrônimos
+% % =========================
+
+% \newacronym{etl}{ETL}{Extract, Transform, Load}
+% \newacronym{dw}{DW}{Data Warehouse}
+% \newacronym{olap}{OLAP}{Online Analytical Processing}
+% \newacronym{oltp}{OLTP}{Online Transaction Processing}
+% \newacronym{capm}{CAPM}{Capital Asset Pricing Model}
+% \newacronym{ebitda}{EBITDA}{Earnings Before Interest, Taxes, Depreciation and Amortization}
+% \newacronym{ev}{EV}{Enterprise Value}
+% \newacronym{dy}{DY}{Dividend Yield}
+% \newacronym{rsi}{RSI}{Relative Strength Index}
+% \newacronym{sql}{SQL}{Structured Query Language}
+% \newacronym{cte}{CTE}{Common Table Expression}
+% \newacronym{json}{JSON}{JavaScript Object Notation}
+% \newacronym{var}{VaR}{Value-at-Risk}
+% \newacronym{pca}{PCA}{Principal Component Analysis}
+% \newacronym{fda}{FDA}{Food and Drug Administration}

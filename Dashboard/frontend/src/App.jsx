@@ -249,6 +249,47 @@ export default function App() {
         const res = await fetch(`http://localhost:5001/api/mapa-mercado?${params}`);
         const json = await res.json();
         setDataMapa(Array.isArray(json) ? json : []);
+      } else if (activeTab === 'capa') {
+        // Busca todos os endpoints em paralelo para popular as miniaturas.
+        const j = async (url) => { try { const r = await fetch(url); return r.ok ? await r.json() : null; } catch { return null; } };
+        const listParamsCapa = new URLSearchParams({
+          paises: selPaises.join(','), setores: selSetores.join(','),
+          industrias: selIndustrias.join(','), riscos: selRiscos.join(','),
+          alpha_ev: alphaEv, alpha_dy: alphaDy, alpha_eb: alphaEb
+        }).toString();
+        const [rIndice, rVol, rSaz, rCor, rAno, rEstr, rExp, rEvo, rMapa, rSp, rLis] = await Promise.all([
+          j(`http://localhost:5001/api/indice?${params}`),
+          j(`http://localhost:5001/api/volatilidade?${params}`),
+          j(`http://localhost:5001/api/sazonalidade?${params}`),
+          j(`http://localhost:5001/api/correlacao?${params}`),
+          j(`http://localhost:5001/api/anomalia-risco?${params}`),
+          j(`http://localhost:5001/api/estresse-risco?${params}`),
+          j(`http://localhost:5001/api/exposicao-setorial?${params}`),
+          j(`http://localhost:5001/api/evolucao-risco?${params}`),
+          j(`http://localhost:5001/api/mapa-mercado?${params}`),
+          j(`http://localhost:5001/api/benchmark-sp500?ano_ini=${anoIni}&ano_fim=${anoFim}`),
+          j(`http://localhost:5001/api/listagem-acoes?${listParamsCapa}`),
+        ]);
+        if (Array.isArray(rIndice)) processarIndice(rIndice);
+        setDataVolatilidade(Array.isArray(rVol) ? rVol : []);
+        if (Array.isArray(rSaz)) {
+          const meses = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+          const pivot = Array.from({ length: 12 }, (_, i) => ({ mes: meses[i] }));
+          rSaz.forEach(row => { pivot[row.mes - 1][row.setor] = row.media_retorno; });
+          setDataSazonalidade(pivot);
+        } else setDataSazonalidade([]);
+        if (Array.isArray(rCor)) {
+          const matriz = {};
+          rCor.forEach(row => { if (!matriz[row.setor_a]) matriz[row.setor_a] = {}; matriz[row.setor_a][row.setor_b] = row.coeficiente; });
+          setDataCorrelacao(matriz);
+        } else setDataCorrelacao({});
+        setDataAnomalia(Array.isArray(rAno) ? rAno : []);
+        setDataEstresse(Array.isArray(rEstr) ? rEstr : []);
+        setDataExposicao(Array.isArray(rExp) ? rExp : []);
+        if (Array.isArray(rEvo)) processarEvolucaoRisco(rEvo);
+        setDataMapa(Array.isArray(rMapa) ? rMapa : []);
+        setDataSp500(rSp || { evolucao: [], anomalia: [], estresse: [] });
+        setDataListagem(Array.isArray(rLis) ? rLis : []);
       } else if (activeTab === 'listagem') {
         const listParams = new URLSearchParams({
           paises: selPaises.join(','), setores: selSetores.join(','),
@@ -290,8 +331,9 @@ export default function App() {
           anoIni={anoIni} setAnoIni={setAnoIni} anoFim={anoFim} setAnoFim={setAnoFim}
           loading={loading} fetchData={fetchData} toggleFilter={toggleFilter} toggleSelectAll={toggleSelectAll}
         />
-        <PainelVisualizacao 
+        <PainelVisualizacao
           activeTab={activeTab} selSetores={selSetores} selRiscos={selRiscos}
+          anoIni={anoIni} anoFim={anoFim}
           estatisticas={estatisticas} maxPerda={maxPerda} setMaxPerda={setMaxPerda}
           dataIndice={dataIndice} dataVolatilidade={dataVolatilidade} dataSazonalidade={dataSazonalidade}
           dataCorrelacao={dataCorrelacao} dataAnomalia={dataAnomalia} dataEstresse={dataEstresse}

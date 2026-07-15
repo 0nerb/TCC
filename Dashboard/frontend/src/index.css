@@ -21,8 +21,8 @@
 
 /* ===== Override — Tema Claro ===== */
 [data-theme="light"] {
-  --bg-app: #f1f5f9;
-  --bg-surface: #ffffff;
+  --bg-app: #ffffff;
+  --bg-surface: #f1f3f4;
   --bg-inset: #f8fafc;
   --bg-hover: #e2e8f0;
   --border: #e2e8f0;
