@@ -30,19 +30,19 @@ export default function Sidebar({ activeTab, setActiveTab, theme, toggleTheme })
             <CalendarDays size={18} /> Sazonalidade
           </li>
           <li className={`${styles.menuItem} ${activeTab === 'correlacao' ? styles.activeMenuItem : ''}`} onClick={() => setActiveTab('correlacao')}>
-            <Share2 size={18} /> Correlação
+            <Share2 size={18} /> Matriz Pearson
           </li>
           
           <div className={styles.menuSeparator} style={{borderTop: '1px solid var(--border)', margin: '15px 0'}}></div>
           
           <li className={`${styles.menuItem} ${activeTab === 'anomalia' ? styles.activeMenuItem : ''}`} onClick={() => setActiveTab('anomalia')}>
-            <Activity size={18} /> Anomalia Risco
+            <Activity size={18} /> Retorno por Faixa de Risco
           </li>
           <li className={`${styles.menuItem} ${activeTab === 'estresse' ? styles.activeMenuItem : ''}`} onClick={() => setActiveTab('estresse')}>
-            <Bomb size={18} /> Teste Estresse
+            <Bomb size={18} /> Maximum Drawdown
           </li>
           <li className={`${styles.menuItem} ${activeTab === 'exposicao' ? styles.activeMenuItem : ''}`} onClick={() => setActiveTab('exposicao')}>
-            <PieChart size={18} /> Exp. Setorial
+            <PieChart size={18} /> Risco por Setor
           </li>
           
           <div className={styles.menuSeparator} style={{borderTop: '1px solid var(--border)', margin: '15px 0'}}></div>
@@ -52,7 +52,7 @@ export default function Sidebar({ activeTab, setActiveTab, theme, toggleTheme })
           </li>
 
           <li className={`${styles.menuItem} ${activeTab === 'mapa' ? styles.activeMenuItem : ''}`} onClick={() => setActiveTab('mapa')}>
-            <Map size={18} /> Mapa de Mercado
+            <Map size={18} /> Tabela de Alocação
           </li>
 
           <li className={`${styles.menuItem} ${activeTab === 'listagem' ? styles.activeMenuItem : ''}`} onClick={() => setActiveTab('listagem')}>
