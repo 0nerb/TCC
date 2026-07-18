@@ -1,4 +1,4 @@
-\chapter{Projetando um Ambiente Analítico}
+\chapter{Projetando o Ambiente Analítico}
 \label{metodologia}
 \section{Identificação de Dados}
 \label{coleta}
@@ -57,7 +57,7 @@ A dimensão Tempo e a dimensão Ação são compartilhadas pelos dois fatos, car
 \subsection{Dicionário de Dados}
 \label{sec:dicionario-dados}
 
-O dicionário de dados formaliza a documentação do modelo dimensional apresentado nas subseções anteriores, associando a cada atributo persistido no repositório a tabela em que ele reside, sua descrição semântica e o campo de origem no dado bruto do qual ele é derivado. A Tabela \ref{tab:dicionario-dados} apresenta essa consolidação.
+O dicionário de dados formaliza a documentação do modelo dimensional apresentado nas subseções anteriores, associando a cada atributo persistido no repositório a tabela em que ele reside, sua descrição semântica e o campo de origem no dado bruto do qual ele é derivado. O Quadro \ref{tab:dicionario-dados} apresenta essa consolidação.
 
 {\footnotesize
 \begin{longtable}{|p{2.5cm}|p{4cm}|p{5.5cm}|p{2.5cm}|}
@@ -118,7 +118,7 @@ O dicionário de dados formaliza a documentação do modelo dimensional apresent
 \end{longtable}
 }
 
-\fonte{Elaborada pelo autor.}
+\fonte{Elaborado pelos autores.}
 
 A Figura~\ref{fig:esquema-estrela} apresenta o esquema estrela resultante do modelo lógico proposto, evidenciando os dois fatos no centro e as dimensões compartilhadas em suas bordas.
 
@@ -127,7 +127,7 @@ A Figura~\ref{fig:esquema-estrela} apresenta o esquema estrela resultante do mod
 \caption{Esquema estrela do modelo dimensional proposto}
 \label{fig:esquema-estrela}
 \includegraphics[width=0.9\textwidth]{figuras/logico_2.png}
-\fonte{Elaborada pelo autor.}
+\fonte{Elaborado pelos autores.}
 \end{figure}
 
 \section{Planejamento do ETL}
@@ -137,7 +137,7 @@ Definido o modelo dimensional, é necessário planejar o processo de Extração,
 
 A primeira etapa consistiu na identificação dos artefatos brutos produzidos pelos scripts de coleta, delimitando os arquivos de entrada. A segunda etapa estabeleceu o mapeamento entre os campos desses artefatos e os atributos das tabelas do modelo dimensional apresentado na Seção~\ref{sec:modelagem-dimensional}, incluindo o tratamento requerido em cada correspondência (renomeação, conversão de tipo, cálculo derivado ou agregação). A terceira etapa organizou essas correspondências em uma sequência lógica de transformações, cujo resultado orienta a implementação do fluxo apresentada na Seção \ref{sec:pipeline-etl}.
 
-O mapeamento de-para consolidado durante a segunda etapa do planejamento é apresentado na Tabela~\ref{tab:mapeamento-etl}. Ele documenta a origem de cada atributo materializado no \textit{data mart}, a transformação aplicada até a carga e a tabela de destino, permitindo a rastreabilidade completa entre o dado bruto e o dado consumido pelas consultas analíticas.
+O mapeamento de-para consolidado durante a segunda etapa do planejamento é apresentado no Quadro~\ref{tab:mapeamento-etl}. Ele documenta a origem de cada atributo materializado no \textit{data mart}, a transformação aplicada até a carga e a tabela de destino, permitindo a rastreabilidade completa entre o dado bruto e o dado consumido pelas consultas analíticas.
 
 {\footnotesize
 \begin{longtable}{|p{4cm}|p{5cm}|p{2cm}|p{3cm}|}
@@ -202,7 +202,7 @@ Resultado do cálculo & Valor numérico final do índice & \ttbreak{Fato\_Indica
 
 \fonte{Elaborado pelos autores.}
 
-\section{Implementação do \textit{Pipeline} ETL}
+\section{Construção do \textit{Pipeline} ETL}
 \label{sec:pipeline-etl}
 
 A partir do planejamento apresentado na Seção \ref{sec:planejamento-etl}, o \textit{pipeline} foi orquestrado no Tableau Prep Builder, uma ferramenta visual de preparação de dados, cujos nós encapsulam as transformações identificadas na fase de planejamento e as aplicam sobre os arquivos brutos coletados pelos scripts em Python. A Figura~\ref{fig:fluxo-etl} apresenta o fluxo em alto nível, com os passos renomeados para descrições funcionais que tornam imediata a leitura da jornada do dado, do artefato bruto ao carregamento nas tabelas fato e nas tabelas dimensão.
@@ -212,7 +212,7 @@ A partir do planejamento apresentado na Seção \ref{sec:planejamento-etl}, o \t
 \caption{Fluxo ETL em alto nível}
 \label{fig:fluxo-etl}
 \includegraphics[width=\textwidth]{figuras/fluxo2.png}
-\fonte{Elaborada pelo autor.}
+\fonte{Elaborado pelos autores.}
 \end{figure}
 
 A jornada começa nos arquivos JSON gerados pela camada de coleta, que consolidam, por \textit{ticker}, o histórico de preços a partir de 2010, o conjunto de fundamentos corporativos no instante da extração e os metadados descritivos da empresa, como setor, indústria e país. Esses arquivos são lidos como entradas no fluxo de ETL e, em seguida, sofrem uma desnormalização controlada que separa os atributos descritivos, candidatos à dimensão de ação, dos atributos mensuráveis, candidatos às tabelas fato.
@@ -240,7 +240,7 @@ A opção pela nulidade explícita se justifica, já que qualquer imputação in
 
 \subsection{Remoção de \textit{Outliers}}
 
-A última etapa do tratamento consiste em remover ativos cujos retornos ou indicadores apresentam valores extremos, suficientemente distantes do restante do universo para distorcer as análises. Esses ativos comprometem o estudo tanto na visualização, tendo em vista que poucos pontos extremos passam a definir a escala dos gráficos comparativos de retorno, comprimindo os demais ativos em uma faixa visualmente indistinta. Quanto na padronização via \textit{Z-score} aplicada aos modificadores, valores extremos inflam o desvio padrão populacional e reduzem artificialmente as distâncias relativas entre os ativos típicos.
+A última etapa do tratamento consiste em remover ativos cujos retornos ou indicadores apresentam valores extremos, suficientemente distantes do restante do universo para distorcer as análises. Esses ativos comprometem o estudo tanto na visualização, tendo em vista que poucos pontos extremos passam a definir a escala dos gráficos comparativos de retorno, comprimindo os demais ativos em uma faixa visualmente indistinta, quanto na padronização via \textit{Z-score} aplicada aos modificadores, dado que valores extremos inflam o desvio padrão populacional e reduzem artificialmente as distâncias relativas entre os ativos típicos.
 
 A esse critério estatístico soma-se um critério de integridade referencial. Identificou-se um ativo cujo \textit{ticker} foi reaproveitado ao longo do período analisado para representar empresas distintas, em decorrência de descontinuidade da empresa original e posterior alocação do mesmo código a uma nova listagem. Como a série histórica associada a esse \textit{ticker} não corresponde a uma entidade econômica única, sua manutenção comprometeria tanto o cálculo das métricas de risco, que pressupõem continuidade do ativo subjacente, quanto a interpretação dos resultados agregados. O ativo foi, portanto, excluído do universo de análise.
 
@@ -307,7 +307,7 @@ O \textit{score} de risco base, expresso em unidades de desvio padrão, é estat
 \subsection{Faixas de Risco}
 \label{subsec:faixas-risco}
 
-A última etapa da modelagem traduz o \textit{score} contínuo em uma classificação categórica composta por cinco faixas, denominadas Muito Baixo, Baixo, Médio, Alto e Muito Alto. A motivação para essa categorização é dupla. Sob o ponto de vista analítico, a discretização viabiliza agrupamentos diretos para comparações entre coortes de ativos, como cálculo de retorno médio por faixa, exposição setorial e análise de \textit{drawdown}. Sob o ponto de vista comunicacional, ela aproxima o modelo da linguagem usual da indústria de investimentos, em que perfis de risco são tipicamente expressos em rótulos qualitativos.
+A última etapa da modelagem traduz o \textit{score} contínuo em uma classificação categórica composta por cinco faixas, denominadas Muito Baixo, Baixo, Médio, Alto e Muito Alto, além da categoria de risco desconhecido para caracterizar casos de ativos que ainda não têm dados suficientes disponíveis para o calculo do risco. A motivação para essa categorização é dupla. Sob o ponto de vista analítico, a discretização viabiliza agrupamentos diretos para comparações entre coortes de ativos, como cálculo de retorno médio por faixa, exposição setorial e análise de \textit{drawdown}. Sob o ponto de vista comunicacional, ela aproxima o modelo da linguagem usual da indústria de investimentos, em que perfis de risco são tipicamente expressos em rótulos qualitativos.
 
 A calibração das fronteiras entre as faixas foi conduzida a partir do exame da distribuição empírica do \textit{score} de risco base sobre toda a massa de dados disponível. Foram avaliadas três estratégias alternativas. A primeira consistiu na aplicação de cortes fixos tradicionais, baseados em múltiplos inteiros do desvio padrão. A segunda dividiu o intervalo total em cinco partes de amplitude uniforme. A terceira utilizou cortes derivados de quantis da distribuição observada, particionando a população em cinco subconjuntos de tamanho equivalente.
 

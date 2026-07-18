@@ -10,7 +10,7 @@ A camada de armazenamento é sustentada pelo \textit{PostgreSQL}, escolhido por 
 
 A camada de aplicação foi construída em \textit{Node.js} sobre o \textit{framework Express}, organizada no padrão arquitetural \textit{controller}, \textit{repository} e \textit{service}. O controlador recebe e valida os parâmetros das requisições, o repositório concentra a lógica SQL analítica, e o serviço auxiliar carrega o histórico do S\&P 500 em memória para servir como \textit{benchmark} sob demanda. A API expõe \textit{endpoints REST} que respondem em JSON e isolam o \textit{frontend} de qualquer dependência direta com o banco.
 
-A camada de visualização foi desenvolvida em \textit{React}, com gráficos renderizados pela biblioteca \textit{Recharts}. A escolha do \textit{Recharts} se deveu à sua integração nativa com o paradigma declarativo do \textit{React} e à flexibilidade na composição de eixos, séries e indicadores customizados, necessária para a apresentação simultânea do índice sintético, do \textit{benchmark} e dos modificadores de risco. O stack tecnológico completo deste trabalho pode ser verificado na tabela \ref{tab:stack}
+A camada de visualização foi desenvolvida em \textit{React}, com gráficos renderizados pela biblioteca \textit{Recharts}. A escolha do \textit{Recharts} se deveu à sua integração nativa com o paradigma declarativo do \textit{React} e à flexibilidade na composição de eixos, séries e indicadores customizados, necessária para a apresentação simultânea do índice sintético, do \textit{benchmark} e dos modificadores de risco. O stack tecnológico completo deste trabalho pode ser verificado no Quadro \ref{tab:stack}
 
 \begin{table}[ht]
 \centering
@@ -20,13 +20,13 @@ A camada de visualização foi desenvolvida em \textit{React}, com gráficos ren
 \hline
 \textbf{Camada} & \textbf{Tecnologia} & \textbf{Função} \\
 \hline
-Coleta e transformação & Python, \textit{pandas}, \textit{yfinance} & Extração, tratamento e cálculo de risco \\
+Coleta e transformação & \textit{Python}, \textit{pandas}, \textit{yfinance}, \textit{Tableau} & Extração, tratamento e cálculo de risco \\
 Armazenamento & PostgreSQL & Data Warehouse dimensional \\
 Aplicação & Node.js, Express & API REST analítica \\
 Visualização & React, Recharts & Painel interativo \\
 \hline
 \end{tabular}
-\fonte{Elaborada pelo autor.}
+\fonte{Elaborado pelos autores.}
 \end{table}
 
 \section{Conversão do Modelo Lógico para o Modelo Físico}
@@ -67,7 +67,7 @@ No bloco de construção de carteira individual, as perguntas foram:
     \item Dados os filtros de país, setor, indústria e faixa de risco escolhidos pelo usuário, quais ações compõem o universo selecionado, qual o perfil atual de cada uma e como seu risco estatístico se compara ao Risco Modificado obtido após a incorporação dos indicadores com pesos $\alpha$ configuráveis?
 \end{enumerate}
 
-Cada uma dessas perguntas foi mapeada de forma direta para um \textit{endpoint} da API \textit{REST} e para uma aba do painel, preservando a rastreabilidade entre a intenção analítica original e a sua materialização técnica. A Tabela \ref{tab:mapeamentoconsultas} descreve esse mapeamento.
+Cada uma dessas perguntas foi mapeada de forma direta para um \textit{endpoint} da API \textit{REST} e para uma aba do painel, preservando a rastreabilidade entre a intenção analítica original e a sua materialização técnica. O Quadro \ref{tab:mapeamentoconsultas} descreve esse mapeamento.
 
 \begin{table}[h]
 \centering
@@ -90,12 +90,20 @@ Listagem detalhada com Risco Modificado por ativo & \texttt{/listagem-acoes} & L
 \end{tabular}
 \end{table}
 
-A formulação das consultas em SQL, com as respectivas expressões de tabela comuns para agregação semanal, normalização em base 100, cálculo de desvio padrão anualizado, matriz de correlação de Pearson, retração máxima, padronização por \textit{Z-score} e ponderação exponencial por \textit{softmax}, encontra-se reproduzida integralmente no Apêndice \ref{ap:consultas} para consulta do leitor interessado nos detalhes de implementação.
-
 \section{Construção do \textit{Dashboard}}
 \label{sec:construcao-dashboard}
 
-A camada de visualização do trabalho foi implementada em \textit{React}, consumindo os \textit{endpoints} descritos na seção \ref{sec:planejamentoconsultas} e renderizando os resultados por meio da biblioteca \textit{Recharts}. O componente \texttt{App.jsx} centraliza o estado dos filtros e dispara as requisições à API; o componente \texttt{FiltrosCascata.jsx} encapsula os controles de seleção; o componente \texttt{PainelVisualizacao.jsx} concentra a lógica de cada aba analítica. A organização em três componentes principais separa a orquestração de estado, a captura de parâmetros do usuário e a renderização gráfica, permitindo que cada aba reaproveite o mesmo conjunto de filtros sem duplicação de código.
+A camada de visualização do trabalho foi implementada em \textit{React}, consumindo os \textit{endpoints} descritos na seção \ref{sec:planejamentoconsultas} e renderizando os resultados por meio da biblioteca \textit{Recharts}. O componente \texttt{App.jsx} centraliza o estado dos filtros e dispara as requisições à API; o componente \texttt{FiltrosCascata.jsx} encapsula os controles de seleção; o componente \texttt{PainelVisualizacao.jsx} concentra a lógica de cada aba analítica. A organização em três componentes principais separa a orquestração de estado, a captura de parâmetros do usuário e a renderização gráfica, permitindo que cada aba reaproveite o mesmo conjunto de filtros sem duplicação de código.\ref{fig:capaCompleto}
+
+\begin{figure}[htb]
+   \centering
+   \caption{Tela inicial do ambiente analítico.}
+   \includegraphics[width=\textwidth]{figuras/capaCompleto.jpg}
+   \label{fig:capaCompleto}
+   \fonte{Elaborado pelos autores.}
+\end{figure}
+
+Grande parte da agilidade obtida nessa etapa decorreu diretamente das camadas construídas anteriormente. A modelagem dimensional em esquema estrela, apresentada na Seção \ref{sec:modelagem-dimensional} e materializada no modelo físico descrito na Seção \ref{sec:arquitetura-dw}, forneceu ao painel uma estrutura de consulta previsível: os filtros em cascata de país, setor, indústria e faixa de risco correspondem de forma quase direta aos atributos já normalizados nas tabelas dimensão, o que dispensou qualquer reorganização dos dados no \textit{frontend}. De modo análogo, a etapa de coleta e transformação já havia calculado os indicadores de risco e classificado cada ativo em sua faixa, de forma que o painel não precisou reproduzir nenhuma lógica estatística em tempo de execução, limitando-se a requisitar recortes de valores previamente calculados. O esforço de implementação da camada visual concentrou-se, portanto, na composição dos gráficos e na interatividade dos filtros, e não no tratamento ou no enriquecimento dos dados, tarefas já resolvidas nas camadas de modelagem e de transformação.
 
 A construção do \textit{dashboard} foi feita com base nas ideias apresentadas no início do projeto. A primeira delas é que o trabalho deve ser parametrizável por janela temporal e por recortes setoriais. A segunda estabelece a coexistência de duas perspectivas de análise, uma histórica e outra de cenário atual, justificada pela disponibilidade desigual dos dados institucionais em relação às séries de cotação. A terceira impõe que toda comparação entre a carteira analisada e o \textit{benchmark} (S\&P500) sejam apresentadas em um único gráfico e com a mesma escala, evitando interpretações enviesadas.
 
@@ -109,7 +117,7 @@ O \textit{dashboard} foi tratado como prototipagem de um ambiente analítico, e 
    \caption{Seção de filtros do \textit{dashboard}.}
    \includegraphics[width=\textwidth]{figuras/filtros.png}
    \label{fig:listagem-acoes}
-   \fonte{Elaborado pelo autor.}
+   \fonte{Elaborado pelos autores.}
 \end{figure}
 
 A seleção de país restringe as opções de setor, que por sua vez restringem as opções de indústria, que finalmente são cruzadas com a faixa de risco. Em paralelo, dois campos numéricos definem o ano inicial e o ano final da janela de análise, com limites entre 2010 e 2025. Toda alteração nesses controles dispara, via efeito colateral do \textit{React}, uma nova chamada aos \textit{endpoints} ativos na aba em uso, atualizando os gráficos em tempo de execução. Essa arquitetura atende à recomendação de que o \textit{dashboard} não fosse estático, permitindo ao usuário alternar livremente entre recortes temporais de qualquer intervalo de anos sem necessidade de reexecutar consultas no banco.
@@ -119,11 +127,27 @@ A interatividade dos filtros é o que viabiliza, na prática, o detalhamento. Pa
 \subsection{Visão Histórica e Visão de Cenário Atual}
 \label{subsec:duas-perspectivas}
 
-O \textit{dashboard} foi organizado tendo em mente a perspectiva histórica, que reúne as abas que exploram as séries temporais densas, isto é, Performance, Volatilidade, Sazonalidade, Correlação, Anomalia de Risco, Teste de Estresse e Evolução por Risco. Mas também a perspectiva de cenário atual que concentra-se nas abas que dependem dos indicadores, isto é, Mapa de Mercado e Listagem de Ações. Nessas duas abas, o filtro de ano é deliberadamente ignorado, e o sistema opera sobre o último registro disponível de cada ação. Essa decisão preserva a coerência entre o \textit{snapshot} de fundamentos e a referência estatística usada na padronização \textit{Z-score}, evitando comparações enganosas entre indicadores recentes e risco histórico.
+O \textit{dashboard} foi organizado tendo em mente a perspectiva histórica, que reúne as abas que exploram as séries temporais densas, isto é, Performance, Volatilidade, Sazonalidade, Correlação, Anomalia de Risco, Teste de Estresse e Evolução por Risco. Mas também a perspectiva de cenário atual que concentra-se nas abas que dependem dos indicadores, isto é, Tabela de Alocação e Listagem de Ações. Nessas duas abas, os modificadores operam sobre o último registro disponível de cada ação, essa escolha decorre de uma limitação no fornecimento de dados da API, que disponibiliza os indicadores apenas como um recorte pontual, e não como série histórica. A Figura\ref{fig:alocacaoCompleto} mostra os modificadores utilizados no calculo de risco aplicados sobre o recorte temporal.
+
+\begin{figure}[htb]
+   \centering
+   \caption{Aba de alocação, representativa da perspectiva de cenário atual, com o \textit{backtest} da carteira customizada frente ao S\&P 500.}
+   \includegraphics[width=\textwidth]{figuras/alocacaoCompleto.png}
+   \label{fig:alocacaoCompleto}
+   \fonte{Elaborado pelos autores.}
+\end{figure}
 
 \subsection{Consulta Paramétrica de Ações}
 \label{subsec:consulta-parametrica}
 
-Dentro da perspectiva de cenário atual introduzida na subseção anterior, a aba Listagem de Ações ocupa uma posição particular: é a única do \textit{dashboard} em que o usuário não apenas filtra o conjunto de resultados, mas também intervém diretamente na fórmula que produz o próprio indicador exibido. Enquanto as demais abas oferecem parâmetros que apenas recortam dados pré-calculados, essa aba, visível na figura \ref{fig:listagem-acoes}, expõe ao usuário os coeficientes internos do Risco Modificado, permitindo que a mesma base de ativos seja reavaliada sob diferentes configurações do modelo sem qualquer intervenção no código.
+Dentro da perspectiva de cenário atual introduzida na subseção anterior, a aba Listagem de Ações ocupa uma posição particular: é a única do \textit{dashboard} em que o usuário não apenas filtra o conjunto de resultados, mas também intervém diretamente na fórmula que produz o próprio indicador exibido. Enquanto as demais abas oferecem parâmetros que apenas recortam dados pré-calculados, essa aba, visível na figura \ref{fig:listagemCompleto}, expõe ao usuário os coeficientes internos do Risco Modificado, permitindo que a mesma base de ativos seja reavaliada sob diferentes configurações do modelo sem qualquer intervenção no código.
+
+\begin{figure}[htb]
+   \centering
+   \caption{Aba Listagem de Ações, com os pesos $\alpha$ da fórmula do Risco Modificado editáveis pelo usuário.}
+   \includegraphics[width=\textwidth]{figuras/listagemCompleto.jpg}
+   \label{fig:listagemCompleto}
+   \fonte{Elaborado pelos autores.}
+\end{figure}
 
 Essa combinação transforma a aba em um instrumento de experimentação: zerando um peso, sua contribuição à fórmula desaparece; isolando um único peso, é possível medir o efeito exclusivo de um modificador sobre o conjunto de ações retornado; e combinando os três pesos nos valores padrão, obtém-se a configuração final proposta pelo modelo. O usuário pode, assim, formular perguntas do tipo "quais ações de determinado setor permanecem em faixa de risco muito baixa mesmo após a aplicação de todos os modificadores", e obter a resposta diretamente na tabela, sem necessidade de reescrever consultas SQL ou de alternar entre ferramentas distintas.
