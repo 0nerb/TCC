@@ -6,87 +6,87 @@
 \setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
 \setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
-\contentsline {chapter}{\chapternumberline {1}\MakeTextUppercase []{INTRODUÇÃO}}{14}{chapter.1}%
-\contentsline {section}{\numberline {1.1}OBJETIVO GERAL}{15}{section.1.1}%
-\contentsline {section}{\numberline {1.2}Objetivos Específicos}{15}{section.1.2}%
-\contentsline {section}{\numberline {1.3}Estrutura do Trabalho}{16}{section.1.3}%
+\contentsline {chapter}{\chapternumberline {1}\MakeTextUppercase []{INTRODUÇÃO}}{15}{chapter.1}%
+\contentsline {section}{\numberline {1.1}OBJETIVO GERAL}{16}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Objetivos Específicos}{16}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Estrutura do Trabalho}{17}{section.1.3}%
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
-\contentsline {chapter}{\chapternumberline {2}\MakeTextUppercase []{Fundamentação Teórica}}{17}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Índices e Indicadores de Mercado}{17}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Perfil do Investidor e Tolerância a Perda}{18}{section.2.2}%
-\contentsline {section}{\numberline {2.3}Métricas Quantitativas de Risco}{19}{section.2.3}%
-\contentsline {section}{\numberline {2.4}Indicadores como Modificadores}{20}{section.2.4}%
-\contentsline {subsection}{\numberline {2.4.1}Margem EBITDA}{20}{subsection.2.4.1}%
-\contentsline {subsection}{\numberline {2.4.2}EV/EBITDA}{21}{subsection.2.4.2}%
-\contentsline {subsection}{\numberline {2.4.3}\textit {Trailing Dividend Yield}}{21}{subsection.2.4.3}%
-\contentsline {section}{\numberline {2.5}Modelagem Dimensional vs. Relacional Normalizada}{21}{section.2.5}%
-\contentsline {section}{\numberline {2.6}Trabalhos Relacionados}{23}{section.2.6}%
+\contentsline {chapter}{\chapternumberline {2}\MakeTextUppercase []{Fundamentação Teórica}}{18}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Índices e Indicadores de Mercado}{18}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Perfil do Investidor e Tolerância a Perda}{19}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Métricas Quantitativas de Risco}{20}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Indicadores como Modificadores}{21}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Margem EBITDA}{21}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}EV/EBITDA}{22}{subsection.2.4.2}%
+\contentsline {subsection}{\numberline {2.4.3}\textit {Trailing Dividend Yield}}{22}{subsection.2.4.3}%
+\contentsline {section}{\numberline {2.5}Modelagem Dimensional vs. Relacional Normalizada}{22}{section.2.5}%
+\contentsline {section}{\numberline {2.6}Trabalhos Relacionados}{24}{section.2.6}%
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
-\contentsline {chapter}{\chapternumberline {3}\MakeTextUppercase []{Projetando um Ambiente Analítico}}{25}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Identificação de Dados}{25}{section.3.1}%
-\contentsline {subsection}{\numberline {3.1.1}Universo de ativos analisados}{25}{subsection.3.1.1}%
-\contentsline {subsection}{\numberline {3.1.2}Séries históricas de preços e volume}{25}{subsection.3.1.2}%
-\contentsline {subsection}{\numberline {3.1.3}Indicadores}{26}{subsection.3.1.3}%
-\contentsline {subsection}{\numberline {3.1.4}Recorte temporal}{26}{subsection.3.1.4}%
-\contentsline {section}{\numberline {3.2}Modelagem Dimensional do \textit {Data Mart}}{27}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Dimensões}{27}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}Fatos}{28}{subsection.3.2.2}%
-\contentsline {subsection}{\numberline {3.2.3}Dicionário de Dados}{28}{subsection.3.2.3}%
-\contentsline {section}{\numberline {3.3}Planejamento do ETL}{32}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Implementação do \textit {Pipeline} ETL}{34}{section.3.4}%
-\contentsline {section}{\numberline {3.5}Tratamento de Dados}{35}{section.3.5}%
-\contentsline {subsection}{\numberline {3.5.1}Limpeza e Padronização}{35}{subsection.3.5.1}%
-\contentsline {subsection}{\numberline {3.5.2}Tratamento de Carência Estatística}{36}{subsection.3.5.2}%
-\contentsline {subsection}{\numberline {3.5.3}Remoção de \textit {Outliers}}{36}{subsection.3.5.3}%
-\contentsline {section}{\numberline {3.6}Modelagem do Grau de Risco}{37}{section.3.6}%
-\contentsline {subsection}{\numberline {3.6.1}Volatilidade Anualizada}{37}{subsection.3.6.1}%
-\contentsline {subsection}{\numberline {3.6.2}Coeficiente Beta com Referência ao S\&P 500}{38}{subsection.3.6.2}%
-\contentsline {subsection}{\numberline {3.6.3}Unificação por \textit {Z-score}}{38}{subsection.3.6.3}%
-\contentsline {subsection}{\numberline {3.6.4}Normalização Min-Max}{39}{subsection.3.6.4}%
-\contentsline {subsection}{\numberline {3.6.5}Faixas de Risco}{39}{subsection.3.6.5}%
-\contentsline {subsection}{\numberline {3.6.6}Materialização das Faixas no Repositório Analítico}{41}{subsection.3.6.6}%
-\contentsline {section}{\numberline {3.7}Lógica de Alocação da Carteira}{41}{section.3.7}%
-\contentsline {subsection}{\numberline {3.7.1}Ordenação por Score de Qualidade e Transformação Exponencial}{41}{subsection.3.7.1}%
-\contentsline {subsection}{\numberline {3.7.2}Faixas de Risco como Critério Objetivo de Inclusão}{42}{subsection.3.7.2}%
+\contentsline {chapter}{\chapternumberline {3}\MakeTextUppercase []{Projetando o Ambiente Analítico}}{26}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Identificação de Dados}{26}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Universo de ativos analisados}{26}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Séries históricas de preços e volume}{26}{subsection.3.1.2}%
+\contentsline {subsection}{\numberline {3.1.3}Indicadores}{27}{subsection.3.1.3}%
+\contentsline {subsection}{\numberline {3.1.4}Recorte temporal}{27}{subsection.3.1.4}%
+\contentsline {section}{\numberline {3.2}Modelagem Dimensional do \textit {Data Mart}}{28}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Dimensões}{28}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Fatos}{29}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Dicionário de Dados}{29}{subsection.3.2.3}%
+\contentsline {section}{\numberline {3.3}Planejamento do ETL}{33}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Construção do \textit {Pipeline} ETL}{35}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Tratamento de Dados}{36}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}Limpeza e Padronização}{36}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2}Tratamento de Carência Estatística}{37}{subsection.3.5.2}%
+\contentsline {subsection}{\numberline {3.5.3}Remoção de \textit {Outliers}}{37}{subsection.3.5.3}%
+\contentsline {section}{\numberline {3.6}Modelagem do Grau de Risco}{38}{section.3.6}%
+\contentsline {subsection}{\numberline {3.6.1}Volatilidade Anualizada}{38}{subsection.3.6.1}%
+\contentsline {subsection}{\numberline {3.6.2}Coeficiente Beta com Referência ao S\&P 500}{39}{subsection.3.6.2}%
+\contentsline {subsection}{\numberline {3.6.3}Unificação por \textit {Z-score}}{39}{subsection.3.6.3}%
+\contentsline {subsection}{\numberline {3.6.4}Normalização Min-Max}{40}{subsection.3.6.4}%
+\contentsline {subsection}{\numberline {3.6.5}Faixas de Risco}{40}{subsection.3.6.5}%
+\contentsline {subsection}{\numberline {3.6.6}Materialização das Faixas no Repositório Analítico}{42}{subsection.3.6.6}%
+\contentsline {section}{\numberline {3.7}Lógica de Alocação da Carteira}{42}{section.3.7}%
+\contentsline {subsection}{\numberline {3.7.1}Ordenação por Score de Qualidade e Transformação Exponencial}{43}{subsection.3.7.1}%
+\contentsline {subsection}{\numberline {3.7.2}Faixas de Risco como Critério Objetivo de Inclusão}{43}{subsection.3.7.2}%
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
-\contentsline {chapter}{\chapternumberline {4}\MakeTextUppercase []{Implementação}}{44}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Stack Tecnológico}{44}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Conversão do Modelo Lógico para o Modelo Físico}{45}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Planejamento das Análises}{45}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Construção do \textit {Dashboard}}{46}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}Protótipo Dinâmico e Detalhamento por Setor e Faixa de Risco}{47}{subsection.4.4.1}%
-\contentsline {subsection}{\numberline {4.4.2}Visão Histórica e Visão de Cenário Atual}{48}{subsection.4.4.2}%
-\contentsline {subsection}{\numberline {4.4.3}Consulta Paramétrica de Ações}{49}{subsection.4.4.3}%
+\contentsline {chapter}{\chapternumberline {4}\MakeTextUppercase []{Implementação}}{45}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Stack Tecnológico}{45}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Conversão do Modelo Lógico para o Modelo Físico}{46}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Planejamento das Análises}{46}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Construção do \textit {Dashboard}}{47}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Protótipo Dinâmico e Detalhamento por Setor e Faixa de Risco}{49}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Visão Histórica e Visão de Cenário Atual}{50}{subsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.4.3}Consulta Paramétrica de Ações}{50}{subsection.4.4.3}%
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
-\contentsline {chapter}{\chapternumberline {5}\MakeTextUppercase []{Experimentação e Avaliação}}{50}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Metodologia de Validação Cruzada com o S\&P 500}{50}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1}\textit {Benchmark} Único de Comparação}{50}{subsection.5.1.1}%
-\contentsline {subsection}{\numberline {5.1.2}Métricas de Avaliação Comparativa}{50}{subsection.5.1.2}%
-\contentsline {section}{\numberline {5.2}Análise Setorial}{51}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}Painel de Performance}{51}{subsection.5.2.1}%
-\contentsline {subsection}{\numberline {5.2.2}Painel de Volatilidade}{55}{subsection.5.2.2}%
-\contentsline {subsection}{\numberline {5.2.3}Painel de Sazonalidade}{57}{subsection.5.2.3}%
-\contentsline {subsection}{\numberline {5.2.4}Painel de Correlação}{58}{subsection.5.2.4}%
-\contentsline {section}{\numberline {5.3}Análise de Risco}{59}{section.5.3}%
-\contentsline {subsection}{\numberline {5.3.1}Retorno Anualizado por Faixa de Risco}{60}{subsection.5.3.1}%
-\contentsline {subsection}{\numberline {5.3.2}Retração Máxima por Faixa de Risco}{62}{subsection.5.3.2}%
-\contentsline {subsection}{\numberline {5.3.3}Exposição Setorial de Risco}{64}{subsection.5.3.3}%
-\contentsline {section}{\numberline {5.4}Análise de Alocação}{66}{section.5.4}%
-\contentsline {subsection}{\numberline {5.4.1}Painel de Evolução por Risco}{66}{subsection.5.4.1}%
-\contentsline {subsection}{\numberline {5.4.2}Painel de Listagem de Ações}{67}{subsection.5.4.2}%
-\contentsline {subsection}{\numberline {5.4.3}Painel de Teste de Alocação e Validação Cruzada}{68}{subsection.5.4.3}%
-\contentsline {subsubsection}{\numberline {5.4.3.1}Faixa Muito Baixo}{69}{subsubsection.5.4.3.1}%
-\contentsline {subsubsection}{\numberline {5.4.3.2}Faixa Baixo}{70}{subsubsection.5.4.3.2}%
-\contentsline {subsubsection}{\numberline {5.4.3.3}Faixa Médio}{71}{subsubsection.5.4.3.3}%
-\contentsline {subsubsection}{\numberline {5.4.3.4}Faixa Alto}{73}{subsubsection.5.4.3.4}%
-\contentsline {subsubsection}{\numberline {5.4.3.5}Faixa Muito Alto}{75}{subsubsection.5.4.3.5}%
-\contentsline {subsubsection}{\numberline {5.4.3.6}Composição Cruzada por Setor sem Restrição de Faixa}{76}{subsubsection.5.4.3.6}%
-\contentsline {section}{\numberline {5.5}Resultados Finais}{77}{section.5.5}%
+\contentsline {chapter}{\chapternumberline {5}\MakeTextUppercase []{Experimentação e Avaliação}}{53}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Metodologia de Validação Cruzada com o S\&P 500}{53}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}\textit {Benchmark} Único de Comparação}{53}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}Métricas de Avaliação Comparativa}{53}{subsection.5.1.2}%
+\contentsline {section}{\numberline {5.2}Análise Setorial}{54}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Painel de Performance}{54}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Painel de Volatilidade}{58}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}Painel de Sazonalidade}{60}{subsection.5.2.3}%
+\contentsline {subsection}{\numberline {5.2.4}Painel de Correlação}{61}{subsection.5.2.4}%
+\contentsline {section}{\numberline {5.3}Análise de Risco}{63}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Retorno Anualizado por Faixa de Risco}{63}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Retração Máxima por Faixa de Risco}{65}{subsection.5.3.2}%
+\contentsline {subsection}{\numberline {5.3.3}Exposição Setorial de Risco}{67}{subsection.5.3.3}%
+\contentsline {section}{\numberline {5.4}Análise de Alocação}{69}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1}Painel de Evolução por Risco}{69}{subsection.5.4.1}%
+\contentsline {subsection}{\numberline {5.4.2}Painel de Listagem de Ações}{71}{subsection.5.4.2}%
+\contentsline {subsection}{\numberline {5.4.3}Painel de Teste de Alocação e Validação Cruzada}{72}{subsection.5.4.3}%
+\contentsline {subsubsection}{\numberline {5.4.3.1}Faixa Muito Baixo}{72}{subsubsection.5.4.3.1}%
+\contentsline {subsubsection}{\numberline {5.4.3.2}Faixa Baixo}{73}{subsubsection.5.4.3.2}%
+\contentsline {subsubsection}{\numberline {5.4.3.3}Faixa Médio}{74}{subsubsection.5.4.3.3}%
+\contentsline {subsubsection}{\numberline {5.4.3.4}Faixa Alto}{76}{subsubsection.5.4.3.4}%
+\contentsline {subsubsection}{\numberline {5.4.3.5}Faixa Muito Alto}{78}{subsubsection.5.4.3.5}%
+\contentsline {subsubsection}{\numberline {5.4.3.6}Composição Cruzada por Setor sem Restrição de Faixa}{79}{subsubsection.5.4.3.6}%
+\contentsline {section}{\numberline {5.5}Resultados Finais}{81}{section.5.5}%
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
-\contentsline {chapter}{\chapternumberline {6}\MakeTextUppercase []{CONSIDERAÇÕES FINAIS}}{80}{chapter.6}%
-\contentsline {section}{\numberline {6.1}CONCLUSÕES}{80}{section.6.1}%
-\contentsline {section}{\numberline {6.2}LIMITAÇÕES}{80}{section.6.2}%
-\contentsline {section}{\numberline {6.3}TRABALHOS FUTUROS}{81}{section.6.3}%
+\contentsline {chapter}{\chapternumberline {6}\MakeTextUppercase []{CONSIDERAÇÕES FINAIS}}{84}{chapter.6}%
+\contentsline {section}{\numberline {6.1}CONCLUSÕES}{84}{section.6.1}%
+\contentsline {section}{\numberline {6.2}LIMITAÇÕES}{84}{section.6.2}%
+\contentsline {section}{\numberline {6.3}TRABALHOS FUTUROS}{85}{section.6.3}%
 \vspace {\cftbeforechapterskip }
 \setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
-\contentsline {chapter}{\MakeTextUppercase []{Refer\^encias}}{83}{section*.16}%
+\contentsline {chapter}{\MakeTextUppercase []{Refer\^encias}}{87}{section*.56}%

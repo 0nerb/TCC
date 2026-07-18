@@ -12,22 +12,20 @@ A camada de aplicação foi construída em \textit{Node.js} sobre o \textit{fram
 
 A camada de visualização foi desenvolvida em \textit{React}, com gráficos renderizados pela biblioteca \textit{Recharts}. A escolha do \textit{Recharts} se deveu à sua integração nativa com o paradigma declarativo do \textit{React} e à flexibilidade na composição de eixos, séries e indicadores customizados, necessária para a apresentação simultânea do índice sintético, do \textit{benchmark} e dos modificadores de risco. O stack tecnológico completo deste trabalho pode ser verificado no Quadro \ref{tab:stack}
 
-\begin{table}[ht]
+\begin{quadro}[ht]
 \centering
 \caption{Componentes da stack tecnológica do ambiente analítico}
 \label{tab:stack}
 \begin{tabular}{|p{4.5cm}|p{4.5cm}|p{5cm}|}
 \hline
-\textbf{Camada} & \textbf{Tecnologia} & \textbf{Função} \\
-\hline
-Coleta e transformação & \textit{Python}, \textit{pandas}, \textit{yfinance}, \textit{Tableau} & Extração, tratamento e cálculo de risco \\
-Armazenamento & PostgreSQL & Data Warehouse dimensional \\
-Aplicação & Node.js, Express & API REST analítica \\
-Visualização & React, Recharts & Painel interativo \\
-\hline
+\textbf{Camada} & \textbf{Tecnologia} & \textbf{Função} \\ \hline
+Coleta e transformação & \textit{Python}, \textit{pandas}, \textit{yfinance}, \textit{Tableau} & Extração, tratamento e cálculo de risco \\ \hline
+Armazenamento & PostgreSQL & Data Warehouse dimensional \\ \hline
+Aplicação & Node.js, Express & API REST analítica \\ \hline
+Visualização & React, Recharts & Painel interativo \\ \hline
 \end{tabular}
 \fonte{Elaborado pelos autores.}
-\end{table}
+\end{quadro}
 
 \section{Conversão do Modelo Lógico para o Modelo Físico}
 \label{sec:arquitetura-dw}
@@ -69,7 +67,7 @@ No bloco de construção de carteira individual, as perguntas foram:
 
 Cada uma dessas perguntas foi mapeada de forma direta para um \textit{endpoint} da API \textit{REST} e para uma aba do painel, preservando a rastreabilidade entre a intenção analítica original e a sua materialização técnica. O Quadro \ref{tab:mapeamentoconsultas} descreve esse mapeamento.
 
-\begin{table}[h]
+\begin{quadro}[h]
 \centering
 \caption{Mapeamento entre as perguntas em linguagem natural, os \textit{endpoints} da API e as abas do painel.}
 \label{tab:mapeamentoconsultas}
@@ -88,7 +86,7 @@ Alocação \textit{smart beta} por setor & \texttt{/mapa-mercado} & Mapa de Merc
 Backtest de carteira customizada & \texttt{/indice-customizado} & Mapa de Mercado \\ \hline
 Listagem detalhada com Risco Modificado por ativo & \texttt{/listagem-acoes} & Listagem de Ações \\ \hline
 \end{tabular}
-\end{table}
+\end{quadro}
 
 \section{Construção do \textit{Dashboard}}
 \label{sec:construcao-dashboard}

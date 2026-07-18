@@ -13,7 +13,6 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
 Database file #1: abntex2-options.bib
 Database file #2: elementos-postextuais/referencias.bib
-Warning--I didn't find a database entry for "kimball_ross_2013"
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
 Reallocated global_strs (elt_size=200001) to 20 items from 10.
@@ -25,43 +24,42 @@ Reallocated glb_str_end (elt_size=4) to 20 items from 10.
 +---------------------------------------------------------+
 You've used 42 entries,
             6714 wiz_defined-function locations,
-            1471 strings with 16850 characters,
-and the built_in function-call counts, 44612 in all, are:
-= -- 4413
+            1499 strings with 18488 characters,
+and the built_in function-call counts, 78785 in all, are:
+= -- 9898
 > -- 1131
-< -- 702
-+ -- 1083
+< -- 2406
++ -- 2787
 - -- 343
-* -- 2978
-:= -- 5673
-add.period$ -- 153
+* -- 4802
+:= -- 9352
+add.period$ -- 221
 call.type$ -- 42
-change.case$ -- 397
+change.case$ -- 436
 chr.to.int$ -- 119
 cite$ -- 40
-duplicate$ -- 3493
-empty$ -- 2476
+duplicate$ -- 8664
+empty$ -- 2544
 format.name$ -- 1619
-if$ -- 9670
+if$ -- 15291
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 744
-newline$ -- 214
+missing$ -- 783
+newline$ -- 259
 num.names$ -- 200
-pop$ -- 949
+pop$ -- 964
 preamble$ -- 1
 purify$ -- 157
 quote$ -- 0
-skip$ -- 3599
+skip$ -- 8619
 stack$ -- 1
-substring$ -- 1946
-swap$ -- 1441
-text.length$ -- 66
+substring$ -- 3758
+swap$ -- 3194
+text.length$ -- 95
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 5
 warning$ -- 0
-while$ -- 301
+while$ -- 330
 width$ -- 0
-write$ -- 655
-(There was 1 warning)
+write$ -- 723

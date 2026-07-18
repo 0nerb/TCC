@@ -57,17 +57,17 @@ A dimensão Tempo e a dimensão Ação são compartilhadas pelos dois fatos, car
 \subsection{Dicionário de Dados}
 \label{sec:dicionario-dados}
 
-O dicionário de dados formaliza a documentação do modelo dimensional apresentado nas subseções anteriores, associando a cada atributo persistido no repositório a tabela em que ele reside, sua descrição semântica e o campo de origem no dado bruto do qual ele é derivado. O Quadro \ref{tab:dicionario-dados} apresenta essa consolidação.
+O dicionário de dados formaliza a documentação do modelo dimensional apresentado nas subseções anteriores, associando a cada atributo persistido no repositório a tabela em que ele reside, sua descrição semântica e o campo de origem no dado bruto do qual ele é derivado. O Quadro \ref{quad:dicionario-dados} apresenta essa consolidação.
 
 {\footnotesize
+\captionof{quadro}{Dicionário de dados do modelo dimensional.}
+\label{quad:dicionario-dados}
 \begin{longtable}{|p{2.5cm}|p{4cm}|p{5.5cm}|p{2.5cm}|}
-\caption{Dicionário de dados do modelo dimensional.}
-\label{tab:dicionario-dados}\\
 \hline
 \textbf{Tabela} & \textbf{Campo} & \textbf{Descrição} & \textbf{Campo Origem} \\ \hline
 \endfirsthead
 
-\multicolumn{4}{c}{\tablename\ \thetable\ -- Continuação}\\
+\multicolumn{4}{c}{\quadroname\ \thequadro\ -- Continuação}\\
 \hline
 \textbf{Tabela} & \textbf{Campo} & \textbf{Descrição} & \textbf{Campo Origem} \\ \hline
 \endhead
@@ -137,17 +137,17 @@ Definido o modelo dimensional, é necessário planejar o processo de Extração,
 
 A primeira etapa consistiu na identificação dos artefatos brutos produzidos pelos scripts de coleta, delimitando os arquivos de entrada. A segunda etapa estabeleceu o mapeamento entre os campos desses artefatos e os atributos das tabelas do modelo dimensional apresentado na Seção~\ref{sec:modelagem-dimensional}, incluindo o tratamento requerido em cada correspondência (renomeação, conversão de tipo, cálculo derivado ou agregação). A terceira etapa organizou essas correspondências em uma sequência lógica de transformações, cujo resultado orienta a implementação do fluxo apresentada na Seção \ref{sec:pipeline-etl}.
 
-O mapeamento de-para consolidado durante a segunda etapa do planejamento é apresentado no Quadro~\ref{tab:mapeamento-etl}. Ele documenta a origem de cada atributo materializado no \textit{data mart}, a transformação aplicada até a carga e a tabela de destino, permitindo a rastreabilidade completa entre o dado bruto e o dado consumido pelas consultas analíticas.
+O mapeamento de-para consolidado durante a segunda etapa do planejamento é apresentado no Quadro~\ref{quad:mapeamento-etl}. Ele documenta a origem de cada atributo materializado no \textit{data mart}, a transformação aplicada até a carga e a tabela de destino, permitindo a rastreabilidade completa entre o dado bruto e o dado consumido pelas consultas analíticas.
 
 {\footnotesize
+\captionof{quadro}{Mapeamento de-para entre os campos do dado bruto e os atributos do modelo dimensional.}
+\label{quad:mapeamento-etl}
 \begin{longtable}{|p{4cm}|p{5cm}|p{2cm}|p{3cm}|}
-\caption{Mapeamento de-para entre os campos do dado bruto e os atributos do modelo dimensional.}
-\label{tab:mapeamento-etl}\\
 \hline
 \textbf{Campo Origem} & \textbf{Transformação} & \textbf{Tabela Destino} & \textbf{Campo Destino} \\ \hline
 \endfirsthead
 
-\multicolumn{4}{c}{\tablename\ \thetable\ -- Continuação}\\
+\multicolumn{4}{c}{\quadroname\ \thequadro\ -- Continuação}\\
 \hline
 \textbf{Campo Origem (JSON Path)} & \textbf{Transformação} & \textbf{Tabela Destino} & \textbf{Campo Destino} \\ \hline
 \endhead
@@ -313,29 +313,38 @@ A calibração das fronteiras entre as faixas foi conduzida a partir do exame da
 
 As duas primeiras estratégias produziram distribuições insatisfatórias para os propósitos do estudo, concentrando a maioria expressiva dos registros em uma única faixa central e esvaziando as faixas extremas. Esse comportamento decorre da assimetria e da presença de caudas longas na distribuição observada, característica recorrente em séries financeiras. A estratégia baseada em quantis, por outro lado, produziu uma distribuição equitativa em volume e revelou as fronteiras empíricas naturais entre os comportamentos de risco no universo analisado.
 
-A partir dessa observação, optou-se por uma calibração híbrida, em que as fronteiras entre as faixas são derivadas dos limites dos quantis observados, porém arredondadas e espelhadas em torno do zero, de modo a produzir uma estrutura simétrica em relação ao \textit{score} neutro de mercado. A simetria confere ao modelo o benefício da classificação interpretável de forma direta, já que cada faixa positiva tem uma contraparte negativa de mesma amplitude. As fronteiras adotadas são apresentadas na Tabela \ref{tab:faixas-risco}.
+A partir dessa observação, optou-se por uma calibração híbrida, em que as fronteiras entre as faixas são derivadas dos limites dos quantis observados, porém arredondadas e espelhadas em torno do zero, de modo a produzir uma estrutura simétrica em relação ao \textit{score} neutro de mercado. A simetria confere ao modelo o benefício da classificação interpretável de forma direta, já que cada faixa positiva tem uma contraparte negativa de mesma amplitude. As fronteiras adotadas são apresentadas no Quadro \ref{quad:faixas-risco}.
 
-\begin{table}[htb]
-\centering
-\caption{Definição das faixas de risco}
-\label{tab:faixas-risco}
-\renewcommand{\arraystretch}{1.6}
-\begin{supertabular}{m{4.0cm}m{7.0cm}}
+{\footnotesize
+\captionof{quadro}{Definição das faixas de risco.}
+\label{quad:faixas-risco}
+\begin{longtable}{|p{4cm}|p{7cm}|}
 \hline
-\multicolumn{1}{m{4.0cm}|}{\centering \textbf{Faixa}} &
-\centering\arraybslash \textbf{Condição sobre o risco base}\\\hline
-\centering Muito Baixo &
-\centering\arraybslash \(\text{risco}_{\text{base}} \leq -0{,}60\)\\
-\centering Baixo &
-\centering\arraybslash \(-0{,}60 < \text{risco}_{\text{base}} \leq -0{,}25\)\\
-\centering Médio &
-\centering\arraybslash \(-0{,}25 < \text{risco}_{\text{base}} \leq 0{,}25\)\\
-\centering Alto &
-\centering\arraybslash \(0{,}25 < \text{risco}_{\text{base}} \leq 0{,}60\)\\
-\centering Muito Alto &
-\centering\arraybslash \(\text{risco}_{\text{base}} > 0{,}60\)\\\hline
-\end{supertabular}
-\end{table}
+\textbf{Faixa} & \textbf{Condição sobre o risco base} \\ \hline
+\endfirsthead
+
+\multicolumn{2}{c}{\quadroname\ \thequadro\ -- Continuação}\\
+\hline
+\textbf{Faixa} & \textbf{Condição sobre o risco base} \\ \hline
+\endhead
+
+\hline
+\multicolumn{2}{r}{\textit{Continua na próxima página}}\\
+\endfoot
+
+\hline
+\endlastfoot
+
+Muito Baixo & \(\text{risco}_{\text{base}} \leq -0{,}60\) \\ \hline
+Baixo & \(-0{,}60 < \text{risco}_{\text{base}} \leq -0{,}25\) \\ \hline
+Médio & \(-0{,}25 < \text{risco}_{\text{base}} \leq 0{,}25\) \\ \hline
+Alto & \(0{,}25 < \text{risco}_{\text{base}} \leq 0{,}60\) \\ \hline
+Muito Alto & \(\text{risco}_{\text{base}} > 0{,}60\) \\ \hline
+
+\end{longtable}
+}
+
+\fonte{Elaborado pelos autores.}
 
 A faixa central, denominada Médio, opera como uma zona neutra, agrupando ativos cujo \textit{score} não se distancia significativamente do comportamento típico do universo. As demais faixas representam afastamentos progressivos dessa neutralidade em direção a perfis de menor ou maior risco.
 

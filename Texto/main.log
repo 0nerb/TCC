@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.7.3)  9 JUL 2026 12:12
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.7.3)  18 JUL 2026 19:21
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -732,6 +732,30 @@ Package: mhsetup 2021/03/18 v1.4 programming setup (MH)
 \xmathstrut@dim=\dimen289
 ) (/usr/local/texlive/2026basic/texmf-dist/tex/latex/seqsplit/seqsplit.sty
 Package: seqsplit 2006/08/07 v0.1 Splitting long sequences (DNA, RNA, proteins, etc.) 
+) (/usr/local/texlive/2026basic/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2023/08/05 v3.6o Customizing captions (AR)
+ (/usr/local/texlive/2026basic/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
+\caption@tempdima=\dimen290
+\captionmargin=\dimen291
+\caption@leftmargin=\dimen292
+\caption@rightmargin=\dimen293
+\caption@width=\dimen294
+\caption@indent=\dimen295
+\caption@parindent=\dimen296
+\caption@hangindent=\dimen297
+Package caption Info: memoir document class detected.
+ (/usr/local/texlive/2026basic/texmf-dist/tex/latex/caption/caption-memoir.sto
+File: caption-memoir.sto 2023/09/08 v2.2c Adaption of the caption package to the memoir document class (AR)
+))
+\c@caption@flags=\count386
+\c@continuedfloat=\count387
+Package caption Info: changepage package is loaded.
+\caption@adjustwidth@hsize=\dimen298
+\caption@adjustwidth@linewidth=\dimen299
+Package caption Info: hyperref package is loaded.
+Package caption Info: listings package is loaded.
+Package caption Info: supertabular package is loaded.
 ) (/usr/local/texlive/2026basic/texmf-dist/tex/latex/glossaries/base/glossaries.sty
 Package: glossaries 2026/04/21 v5.1 (NLCT)
  (/usr/local/texlive/2026basic/texmf-dist/tex/latex/xkeyval/xkeyval.sty
@@ -741,7 +765,7 @@ Package: xkeyval 2025/11/04 v2.10 package option processing (HA)
 \XKV@tempa@toks=\toks35
 \XKV@tempb@toks=\toks36
 )
-\XKV@depth=\count386
+\XKV@depth=\count388
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
 )) (/usr/local/texlive/2026basic/texmf-dist/tex/latex/mfirstuc/mfirstuc.sty
 Package: mfirstuc 2025/04/03 v2.09 (NLCT)
@@ -771,40 +795,40 @@ Package glossaries Warning: No language module detected for `brazil'.
 
 (/usr/local/texlive/2026basic/texmf-dist/tex/latex/datatool/datatool-base.sty
 Package: datatool-base 2025/12/04 v3.4.3 (NLCT)
-\l__datatool_tmpa_int=\count387
-\l__datatool_tmpb_int=\count388
-\l__datatool_tmpc_int=\count389
-\l__datatool_tmpd_int=\count390
-\l__datatool_count_int=\count391
-\l__datatool_tmp_datatype_int=\count392
-\l__datatool_tmpa_dim=\dimen290
-\l__datatool_tmpb_dim=\dimen291
+\l__datatool_tmpa_int=\count389
+\l__datatool_tmpb_int=\count390
+\l__datatool_tmpc_int=\count391
+\l__datatool_tmpd_int=\count392
+\l__datatool_count_int=\count393
+\l__datatool_tmp_datatype_int=\count394
+\l__datatool_tmpa_dim=\dimen300
+\l__datatool_tmpb_dim=\dimen301
  (/usr/local/texlive/2026basic/texmf-dist/tex/latex/datatool/datatool-l3fp.def
 File: datatool-l3fp.def 2025/12/04 v3.4.3 (NLCT)
 )
 \@dtl@toks=\toks39
-\@dtl@tmpcount=\count393
+\@dtl@tmpcount=\count395
 \dtl@tmplength=\skip265
 \l__datatool_measure_box=\box65
-\dtl@sortresult=\count394
+\dtl@sortresult=\count396
  (/usr/local/texlive/2026basic/texmf-dist/tex/latex/datatool/datatool-utf8.ldf
 File: datatool-utf8.ldf 2025/12/04 v3.4.3 (NLCT)
 )
-\@dtl@datatype=\count395
-\c_datatool_unknown_int=\count396
-\l__datatool_year_int=\count397
-\l__datatool_month_int=\count398
-\l__datatool_day_int=\count399
-\l__datatool_hour_int=\count400
-\l__datatool_minute_int=\count401
-\l__datatool_second_int=\count402
-\l__datatool_tzhour_int=\count403
-\l__datatool_tzminute_int=\count404
-\l__datatool_julian_int=\count405
-\l__datatool_local_julian_int=\count406
-\l__datatool_prefix_int=\count407
-\l__datatool_suffix_int=\count408
-\@dtl@foreach@level=\count409
+\@dtl@datatype=\count397
+\c_datatool_unknown_int=\count398
+\l__datatool_year_int=\count399
+\l__datatool_month_int=\count400
+\l__datatool_day_int=\count401
+\l__datatool_hour_int=\count402
+\l__datatool_minute_int=\count403
+\l__datatool_second_int=\count404
+\l__datatool_tzhour_int=\count405
+\l__datatool_tzminute_int=\count406
+\l__datatool_julian_int=\count407
+\l__datatool_local_julian_int=\count408
+\l__datatool_prefix_int=\count409
+\l__datatool_suffix_int=\count410
+\@dtl@foreach@level=\count411
 
 
 Package tracklang Warning: No `datatool' support for dialect `english'  on input line 9924.
@@ -815,15 +839,15 @@ Package tracklang Warning: No `datatool' support for dialect `brazil'  on input 
 
 Package tracklang Warning: No `datatool' support for dialect `brazil'  on input line 9924.
 
-\dtl@codeA=\count410
-\dtl@codeB=\count411
+\dtl@codeA=\count412
+\dtl@codeB=\count413
 )
-\gls@level=\count412
+\gls@level=\count414
 \@gls@tmpb=\toks40
 \gls@tmplen=\skip266
-\l__glossaries_tmpa_dim=\dimen292
-\l__glossaries_tmpb_dim=\dimen293
-\c@glossarysubentry=\count413
+\l__glossaries_tmpa_dim=\dimen302
+\l__glossaries_tmpb_dim=\dimen303
+\c@glossarysubentry=\count415
 \glskeylisttok=\toks41
 \glslabeltok=\toks42
 \glsshorttok=\toks43
@@ -841,17 +865,17 @@ Package: longtable 2025-10-13 v4.24 Multi-page Table package (DPC)
 \LTright=\skip269
 \LTpre=\skip270
 \LTpost=\skip271
-\LTchunksize=\count414
-\LTcapwidth=\dimen294
+\LTchunksize=\count416
+\LTcapwidth=\dimen304
 \LT@head=\box66
 \LT@firsthead=\box67
 \LT@foot=\box68
 \LT@lastfoot=\box69
 \LT@gbox=\box70
-\LT@cols=\count415
-\LT@rows=\count416
-\c@LT@tables=\count417
-\c@LT@chunks=\count418
+\LT@cols=\count417
+\LT@rows=\count418
+\c@LT@tables=\count419
+\c@LT@chunks=\count420
 \LT@p@ftn=\toks45
 )
 \glsdescwidth=\skip272
@@ -860,25 +884,25 @@ Package: longtable 2025-10-13 v4.24 Multi-page Table package (DPC)
 Package: glossary-super 2026/04/21 v5.1 (NLCT)
 ) (/usr/local/texlive/2026basic/texmf-dist/tex/latex/glossaries/styles/glossary-tree.sty
 Package: glossary-tree 2026/04/21 v5.1 (NLCT)
-\l__glossaries_tree_max_known_level_int=\count419
-\l__glossaries_tree_offset_dim=\dimen295
-\l__glossaries_tree_namewidth_dim=\dimen296
-\l__glossaries_tree_symbolwidth_dim=\dimen297
-\l__glossaries_tree_prenamesym_width_dim=\dimen298
-\l__glossaries_tree_presubnamesym_width_dim=\dimen299
-\l__glossaries_tree_namewidth_padding_dim=\dimen300
-\l__glossaries_tree_symbolwidth_padding_dim=\dimen301
-\l__glossaries_tree_namesymbolwidth_dim=\dimen302
-\l__glossaries_tree_namesymbolwidth_padding_dim=\dimen303
-\l__glossaries_tree_level_int=\count420
+\l__glossaries_tree_max_known_level_int=\count421
+\l__glossaries_tree_offset_dim=\dimen305
+\l__glossaries_tree_namewidth_dim=\dimen306
+\l__glossaries_tree_symbolwidth_dim=\dimen307
+\l__glossaries_tree_prenamesym_width_dim=\dimen308
+\l__glossaries_tree_presubnamesym_width_dim=\dimen309
+\l__glossaries_tree_namewidth_padding_dim=\dimen310
+\l__glossaries_tree_symbolwidth_padding_dim=\dimen311
+\l__glossaries_tree_namesymbolwidth_dim=\dimen312
+\l__glossaries_tree_namesymbolwidth_padding_dim=\dimen313
+\l__glossaries_tree_level_int=\count422
 \glstreeindent=\skip274
 )) (/usr/local/texlive/2026basic/texmf-dist/tex/latex/abntex2/abntex2cite.sty
 Package: abntex2cite 2018/11/24 v-1.9.7 abnTeX2
  (/usr/local/texlive/2026basic/texmf-dist/tex/latex/abntex2/abntex2abrev.sty)
 \minimumbiblabelwidth=\skip275
 \ABCIauxlen=\skip276
-\c@ABCIaux=\count421
-\c@ABCImax=\count422
+\c@ABCIaux=\count423
+\c@ABCImax=\count424
  (/usr/local/texlive/2026basic/texmf-dist/tex/generic/iftex/ifpdf.sty
 Package: ifpdf 2019/10/25 v3.4 ifpdf legacy package. Use iftex instead.
 ) (/usr/local/texlive/2026basic/texmf-dist/tex/generic/iftex/ifxetex.sty
@@ -893,17 +917,17 @@ Package: geometry 2020/01/02 v5.9 Page Geometry
  (/usr/local/texlive/2026basic/texmf-dist/tex/generic/iftex/ifvtex.sty
 Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 )
-\Gm@cnth=\count423
-\Gm@cntv=\count424
-\c@Gm@tempcnt=\count425
-\Gm@bindingoffset=\dimen304
-\Gm@wd@mp=\dimen305
-\Gm@odd@mp=\dimen306
-\Gm@even@mp=\dimen307
-\Gm@layoutwidth=\dimen308
-\Gm@layoutheight=\dimen309
-\Gm@layouthoffset=\dimen310
-\Gm@layoutvoffset=\dimen311
+\Gm@cnth=\count425
+\Gm@cntv=\count426
+\c@Gm@tempcnt=\count427
+\Gm@bindingoffset=\dimen314
+\Gm@wd@mp=\dimen315
+\Gm@odd@mp=\dimen316
+\Gm@even@mp=\dimen317
+\Gm@layoutwidth=\dimen318
+\Gm@layoutheight=\dimen319
+\Gm@layouthoffset=\dimen320
+\Gm@layoutvoffset=\dimen321
 \Gm@dimlist=\toks47
 ) (./elementos-pretextuais/personalizar.tex) (./url16023.sty
 
@@ -912,12 +936,12 @@ LaTeX Warning: You have requested package `url16023',
 
 Package: url6023 
 )
-\c@quadro=\count426
-\c@loqdepth=\count427
+\c@quadro=\count428
+\c@loqdepth=\count429
 \cftbeforequadroskip=\skip278
 \cftquadroindent=\skip279
 \cftquadronumwidth=\skip280
-Package hyperref Info: Option `colorlinks' set `true' on input line 175.
+Package hyperref Info: Option `colorlinks' set `true' on input line 176.
  (./codigos/linguagens.tex))
 \glswrite=\write4
 \glo@main@file=\write5
@@ -957,16 +981,16 @@ Package hyperref Info: Link coloring ON on input line 19.
 \myptabboxwidth=\skip281
  (/usr/local/texlive/2026basic/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count428
-\scratchdimen=\dimen312
+\scratchcounter=\count430
+\scratchdimen=\dimen322
 \scratchbox=\box72
-\nofMPsegments=\count429
-\nofMParguments=\count430
+\nofMPsegments=\count431
+\nofMParguments=\count432
 \everyMPshowfont=\toks48
-\MPscratchCnt=\count431
-\MPscratchDim=\dimen313
-\MPnumerator=\count432
-\makeMPintoPDFobject=\count433
+\MPscratchCnt=\count433
+\MPscratchDim=\dimen323
+\MPnumerator=\count434
+\makeMPintoPDFobject=\count435
 \everyMPtoPDFconversion=\toks49
 ) (/usr/local/texlive/2026basic/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -974,7 +998,13 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
  (/usr/local/texlive/2026basic/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-\c@lstlisting=\count434
+\c@lstlisting=\count436
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: longtable package is loaded.
+ (/usr/local/texlive/2026basic/texmf-dist/tex/latex/caption/ltcaption.sty
+Package: ltcaption 2021/01/08 v1.4c longtable captions (AR)
+)
+Package caption Info: End \AtBeginDocument code.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1041,9 +1071,9 @@ l.2 \vspace
 ]) (./elementos-pretextuais/dedicatoria.tex) (./elementos-pretextuais/agradecimentos.tex [3
 
 
-]) (./elementos-pretextuais/resumo.tex [4
+] [4]) (./elementos-pretextuais/resumo.tex [5
 
-]) (./elementos-pretextuais/abstract.tex [5
+]) (./elementos-pretextuais/abstract.tex [6
 
 ]) (./main.lof
 LaTeX Font Info:    Trying to load font information for U+msa on input line 2.
@@ -1053,45 +1083,47 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 LaTeX Font Info:    Trying to load font information for U+msb on input line 2.
  (/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [6
+) [7
 
-]) [7] (./main.lot) [8
+]) [8] (./main.loq) [9
 
-] (./elementos-pretextuais/abreviaturas.tex [9
+] (./elementos-pretextuais/abreviaturas.tex [10
 
 
-] [10]) (./elementos-pretextuais/simbolos.tex) (./main.toc [11
+] [11]) (./elementos-pretextuais/simbolos.tex) (./main.toc [12
 
-] [12]) [13] (./elementos-textuais/1-Introducao.tex
+] [13]) [14] (./elementos-textuais/1-Introducao.tex
 Cap\'{\i }tulo 1.
-[14
+[15
 
 
-] [15]) (./elementos-textuais/2-Fundamentacao.tex [16]
+] [16]) (./elementos-textuais/2-Fundamentacao.tex [17]
 Cap\'{\i }tulo 2.
-[17
+[18
 
-] [18] [19] [20]
-
-LaTeX Warning: Citation `kimball_ross_2013' on page 21 undefined on input line 54.
-
-[21]
-<figuras/estrela.png, id=505, 845.1575pt x 574.145pt>
+] [19] [20] [21] [22]
+<figuras/estrela.png, id=524, 845.1575pt x 574.145pt>
 File: figuras/estrela.png Graphic file (type png)
 <use figuras/estrela.png>
 Package pdftex.def Info: figuras/estrela.png  used on input line 59.
 (pdftex.def)             Requested size: 455.24411pt x 309.2715pt.
- [22 <./figuras/estrela.png>] [23]) (./elementos-textuais/3-Metodologia.tex [24]
+ [23 <./figuras/estrela.png>] [24]) (./elementos-textuais/3-Metodologia.tex [25]
 Cap\'{\i }tulo 3.
-[25
+[26
 
-] [26] [27]
+] [27] [28]
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 63.
+See the caption package documentation for explanation.
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 67--67
 []|\T1/cmr/bx/n/10 Campo Ori-
  []
 
 
-Overfull \hbox (7.32079pt too wide) in alignment at lines 63--68
+Overfull \hbox (7.32079pt too wide) in alignment at lines 65--68
  [] [] [] [] 
  []
 
@@ -1161,15 +1193,21 @@ Overfull \hbox (7.32079pt too wide) in alignment at lines 80--118
  []
 
 
-ignored: Infinite glue shrinkage found in box being split [28]
 ignored: Infinite glue shrinkage found in box being split [29]
 ignored: Infinite glue shrinkage found in box being split [30]
-<figuras/logico_2.png, id=589, 1293.83376pt x 841.1425pt>
+ignored: Infinite glue shrinkage found in box being split [31]
+<figuras/logico_2.png, id=609, 1609.01125pt x 1121.18875pt>
 File: figuras/logico_2.png Graphic file (type png)
 <use figuras/logico_2.png>
 Package pdftex.def Info: figuras/logico_2.png  used on input line 129.
-(pdftex.def)             Requested size: 409.71692pt x 266.36028pt.
- [31 <./figuras/logico_2.png (PNG copy)>]
+(pdftex.def)             Requested size: 409.71692pt x 285.49731pt.
+ [32 <./figuras/logico_2.png (PNG copy)>]
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 143.
+See the caption package documentation for explanation.
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 147--147
 []|\T1/cmr/bx/n/10 Tabela
  []
@@ -1305,212 +1343,239 @@ Underfull \hbox (badness 1275) in paragraph at lines 198--198
  []
 
 
-ignored: Infinite glue shrinkage found in box being split [32]
 ignored: Infinite glue shrinkage found in box being split [33]
-<figuras/fluxo2.png, id=611, 1693.32625pt x 913.4125pt>
+ignored: Infinite glue shrinkage found in box being split [34]
+<figuras/fluxo2.png, id=632, 1693.32625pt x 913.4125pt>
 File: figuras/fluxo2.png Graphic file (type png)
 <use figuras/fluxo2.png>
 Package pdftex.def Info: figuras/fluxo2.png  used on input line 214.
 (pdftex.def)             Requested size: 455.24411pt x 245.56541pt.
- [34 <./figuras/fluxo2.png (PNG copy)>] [35] [36] [37] [38] [39] [40] [41] [42]) (./elementos-textuais/4-Implementacao.tex [43]
-Cap\'{\i }tulo 4.
-[44
+ [35 <./figuras/fluxo2.png (PNG copy)>] [36] [37] [38] [39] [40]
 
-] [45]
-Overfull \hbox (3.48534pt too wide) in paragraph at lines 85--85
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 319.
+See the caption package documentation for explanation.
+
+[41] [42] [43]) (./elementos-textuais/4-Implementacao.tex [44]
+Cap\'{\i }tulo 4.
+
+Underfull \hbox (badness 10000) in paragraph at lines 22--22
+[]|\T1/cmr/m/it/12 Python\T1/cmr/m/n/12 , \T1/cmr/m/it/12 pan-das\T1/cmr/m/n/12 , \T1/cmr/m/it/12 yfi-
+ []
+
+[45
+
+] [46]
+Overfull \hbox (3.48534pt too wide) in paragraph at lines 83--83
 []|\T1/cmtt/m/n/12 /exposicao-setorial| 
  []
 
 
-Overfull \hbox (3.48534pt too wide) in paragraph at lines 88--88
+Overfull \hbox (3.48534pt too wide) in paragraph at lines 86--86
 []|\T1/cmtt/m/n/12 /indice-customizado| 
  []
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-
-LaTeX Warning: Reference `ap:consultas' on page 46 undefined on input line 93.
-
-[46]
-<figuras/filtros.png, id=733, 1649.16125pt x 207.77625pt>
+<figuras/capaCompleto.jpg, id=745, 1634.105pt x 847.165pt>
+File: figuras/capaCompleto.jpg Graphic file (type jpg)
+<use figuras/capaCompleto.jpg>
+Package pdftex.def Info: figuras/capaCompleto.jpg  used on input line 99.
+(pdftex.def)             Requested size: 455.24411pt x 236.0024pt.
+[47] [48 <./figuras/capaCompleto.jpg>]
+<figuras/filtros.png, id=764, 1649.16125pt x 207.77625pt>
 File: figuras/filtros.png Graphic file (type png)
 <use figuras/filtros.png>
-Package pdftex.def Info: figuras/filtros.png  used on input line 110.
+Package pdftex.def Info: figuras/filtros.png  used on input line 116.
 (pdftex.def)             Requested size: 455.24411pt x 57.35263pt.
- [47] [48 <./figuras/filtros.png>]) (./elementos-textuais/5-Resultados.tex [49]
+ [49 <./figuras/filtros.png>]
+<figuras/alocacaoCompleto.png, id=773, 1334.9875pt x 1368.11125pt>
+File: figuras/alocacaoCompleto.png Graphic file (type png)
+<use figuras/alocacaoCompleto.png>
+Package pdftex.def Info: figuras/alocacaoCompleto.png  used on input line 133.
+(pdftex.def)             Requested size: 455.24411pt x 466.52946pt.
+<figuras/listagemCompleto.jpg, id=775, 1475.5125pt x 1053.9375pt>
+File: figuras/listagemCompleto.jpg Graphic file (type jpg)
+<use figuras/listagemCompleto.jpg>
+Package pdftex.def Info: figuras/listagemCompleto.jpg  used on input line 146.
+(pdftex.def)             Requested size: 455.24411pt x 325.1734pt.
+) [50] (./elementos-textuais/5-Resultados.tex [51 <./figuras/alocacaoCompleto.png (PNG copy)>] [52 <./figuras/listagemCompleto.jpg>]
 Cap\'{\i }tulo 5.
-[50
+[53
 
-] [51]
-<figuras/PerformanceIndiceSintetico1.png, id=762, 938.50626pt x 748.7975pt>
+] [54]
+<figuras/PerformanceIndiceSintetico1.png, id=801, 938.50626pt x 748.7975pt>
 File: figuras/PerformanceIndiceSintetico1.png Graphic file (type png)
 <use figuras/PerformanceIndiceSintetico1.png>
 Package pdftex.def Info: figuras/PerformanceIndiceSintetico1.png  used on input line 42.
 (pdftex.def)             Requested size: 455.24411pt x 363.21205pt.
- [52 <./figuras/PerformanceIndiceSintetico1.png>]
-<figuras/PerformanceIndiceSintetico4.png, id=777, 1009.7725pt x 807.015pt>
+ [55 <./figuras/PerformanceIndiceSintetico1.png>]
+<figuras/PerformanceIndiceSintetico4.png, id=816, 1009.7725pt x 807.015pt>
 File: figuras/PerformanceIndiceSintetico4.png Graphic file (type png)
 <use figuras/PerformanceIndiceSintetico4.png>
 Package pdftex.def Info: figuras/PerformanceIndiceSintetico4.png  used on input line 52.
 (pdftex.def)             Requested size: 455.24411pt x 363.83067pt.
- [53 <./figuras/PerformanceIndiceSintetico4.png>]
-<figuras/PerformanceIndiceSintetico2.png, id=790, 991.705pt x 795.97375pt>
+ [56 <./figuras/PerformanceIndiceSintetico4.png>]
+<figuras/PerformanceIndiceSintetico2.png, id=828, 991.705pt x 795.97375pt>
 File: figuras/PerformanceIndiceSintetico2.png Graphic file (type png)
 <use figuras/PerformanceIndiceSintetico2.png>
 Package pdftex.def Info: figuras/PerformanceIndiceSintetico2.png  used on input line 62.
 (pdftex.def)             Requested size: 455.24411pt x 365.3872pt.
-<figuras/PerformanceIndiceSintetico3.png, id=793, 1003.75pt x 645.41125pt>
+<figuras/PerformanceIndiceSintetico3.png, id=831, 1003.75pt x 645.41125pt>
 File: figuras/PerformanceIndiceSintetico3.png Graphic file (type png)
 <use figuras/PerformanceIndiceSintetico3.png>
 Package pdftex.def Info: figuras/PerformanceIndiceSintetico3.png  used on input line 72.
 (pdftex.def)             Requested size: 455.24411pt x 292.727pt.
- [54 <./figuras/PerformanceIndiceSintetico2.png>]
-<figuras/desviopadrao1016.jpg, id=801, 1015.795pt x 491.8375pt>
+ [57 <./figuras/PerformanceIndiceSintetico2.png>]
+<figuras/desviopadrao1016.jpg, id=838, 1015.795pt x 491.8375pt>
 File: figuras/desviopadrao1016.jpg Graphic file (type jpg)
 <use figuras/desviopadrao1016.jpg>
 Package pdftex.def Info: figuras/desviopadrao1016.jpg  used on input line 87.
 (pdftex.def)             Requested size: 455.24411pt x 220.42424pt.
- [55 <./figuras/PerformanceIndiceSintetico3.png>]
-<figuras/desviopadrao1622.jpg, id=808, 1016.79875pt x 490.83376pt>
+ [58 <./figuras/PerformanceIndiceSintetico3.png>]
+<figuras/desviopadrao1622.jpg, id=845, 1016.79875pt x 490.83376pt>
 File: figuras/desviopadrao1622.jpg Graphic file (type jpg)
 <use figuras/desviopadrao1622.jpg>
 Package pdftex.def Info: figuras/desviopadrao1622.jpg  used on input line 97.
 (pdftex.def)             Requested size: 455.24411pt x 219.7572pt.
- [56 <./figuras/desviopadrao1016.jpg> <./figuras/desviopadrao1622.jpg>]
-<figuras/desviopadrao2025.jpg, id=814, 1016.79875pt x 490.83376pt>
+ [59 <./figuras/desviopadrao1016.jpg> <./figuras/desviopadrao1622.jpg>]
+<figuras/desviopadrao2025.jpg, id=852, 1016.79875pt x 490.83376pt>
 File: figuras/desviopadrao2025.jpg Graphic file (type jpg)
 <use figuras/desviopadrao2025.jpg>
 Package pdftex.def Info: figuras/desviopadrao2025.jpg  used on input line 113.
 (pdftex.def)             Requested size: 455.24411pt x 219.7572pt.
-<figuras/sazonalidadegeral.jpg, id=816, 1013.7875pt x 523.9575pt>
+<figuras/sazonalidadegeral.jpg, id=854, 1013.7875pt x 523.9575pt>
 File: figuras/sazonalidadegeral.jpg Graphic file (type jpg)
 <use figuras/sazonalidadegeral.jpg>
 Package pdftex.def Info: figuras/sazonalidadegeral.jpg  used on input line 126.
 (pdftex.def)             Requested size: 455.24411pt x 235.283pt.
-
-
-LaTeX Warning: Reference `fig:sazonalidade-filtrada' on page 57 undefined on input line 131.
-
-[57 <./figuras/desviopadrao2025.jpg>]
-<figuras/matriz.jpg, id=829, 1015.795pt x 658.46pt>
-File: figuras/matriz.jpg Graphic file (type jpg)
-<use figuras/matriz.jpg>
-Package pdftex.def Info: figuras/matriz.jpg  used on input line 141.
-(pdftex.def)             Requested size: 455.24411pt x 295.09859pt.
- [58 <./figuras/sazonalidadegeral.jpg>] [59 <./figuras/matriz.jpg>]
-<figuras/Retornogeral.jpg, id=841, 1016.79875pt x 465.74pt>
+<figuras/sazonalidadesemfs.jpg, id=860, 1015.795pt x 524.96124pt>
+File: figuras/sazonalidadesemfs.jpg Graphic file (type jpg)
+<use figuras/sazonalidadesemfs.jpg>
+Package pdftex.def Info: figuras/sazonalidadesemfs.jpg  used on input line 136.
+(pdftex.def)             Requested size: 455.24411pt x 235.26915pt.
+ [60 <./figuras/desviopadrao2025.jpg>] [61 <./figuras/sazonalidadegeral.jpg> <./figuras/sazonalidadesemfs.jpg>]
+<figuras/matriz.png, id=873, 950.55125pt x 591.20876pt>
+File: figuras/matriz.png Graphic file (type png)
+<use figuras/matriz.png>
+Package pdftex.def Info: figuras/matriz.png  used on input line 149.
+(pdftex.def)             Requested size: 455.24411pt x 283.1455pt.
+ [62 <./figuras/matriz.png>]
+<figuras/Retornogeral.jpg, id=881, 1016.79875pt x 465.74pt>
 File: figuras/Retornogeral.jpg Graphic file (type jpg)
 <use figuras/Retornogeral.jpg>
-Package pdftex.def Info: figuras/Retornogeral.jpg  used on input line 169.
+Package pdftex.def Info: figuras/Retornogeral.jpg  used on input line 177.
 (pdftex.def)             Requested size: 386.96027pt x 177.24597pt.
-<figuras/retorno1215.jpg, id=843, 1014.79124pt x 465.74pt>
+ [63 <./figuras/Retornogeral.jpg>]
+<figuras/retorno1215.jpg, id=887, 1014.79124pt x 465.74pt>
 File: figuras/retorno1215.jpg Graphic file (type jpg)
 <use figuras/retorno1215.jpg>
-Package pdftex.def Info: figuras/retorno1215.jpg  used on input line 181.
+Package pdftex.def Info: figuras/retorno1215.jpg  used on input line 189.
 (pdftex.def)             Requested size: 386.96027pt x 177.59421pt.
-<figuras/retorno2023.jpg, id=845, 1013.7875pt x 464.73625pt>
+<figuras/retorno2023.jpg, id=889, 1013.7875pt x 464.73625pt>
 File: figuras/retorno2023.jpg Graphic file (type jpg)
 <use figuras/retorno2023.jpg>
-Package pdftex.def Info: figuras/retorno2023.jpg  used on input line 193.
+Package pdftex.def Info: figuras/retorno2023.jpg  used on input line 201.
 (pdftex.def)             Requested size: 386.96027pt x 177.38873pt.
- [60 <./figuras/Retornogeral.jpg>] [61 <./figuras/retorno1215.jpg> <./figuras/retorno2023.jpg>]
-<figuras/mddgeral.jpg, id=856, 1018.80624pt x 466.74374pt>
+ [64 <./figuras/retorno1215.jpg>]
+<figuras/mddgeral.jpg, id=896, 1018.80624pt x 466.74374pt>
 File: figuras/mddgeral.jpg Graphic file (type jpg)
 <use figuras/mddgeral.jpg>
-Package pdftex.def Info: figuras/mddgeral.jpg  used on input line 210.
+Package pdftex.def Info: figuras/mddgeral.jpg  used on input line 219.
 (pdftex.def)             Requested size: 386.96027pt x 177.27899pt.
-<figuras/mdd1017.jpg, id=859, 1015.795pt x 467.7475pt>
+ [65 <./figuras/retorno2023.jpg>]
+<figuras/mdd1017.jpg, id=904, 1015.795pt x 467.7475pt>
 File: figuras/mdd1017.jpg Graphic file (type jpg)
 <use figuras/mdd1017.jpg>
-Package pdftex.def Info: figuras/mdd1017.jpg  used on input line 222.
+Package pdftex.def Info: figuras/mdd1017.jpg  used on input line 231.
 (pdftex.def)             Requested size: 386.96027pt x 178.18126pt.
- [62 <./figuras/mddgeral.jpg>]
-<figuras/mdd1923.jpg, id=865, 1018.80624pt x 466.74374pt>
+<figuras/mdd1923.jpg, id=906, 1018.80624pt x 466.74374pt>
 File: figuras/mdd1923.jpg Graphic file (type jpg)
 <use figuras/mdd1923.jpg>
-Package pdftex.def Info: figuras/mdd1923.jpg  used on input line 234.
+Package pdftex.def Info: figuras/mdd1923.jpg  used on input line 243.
 (pdftex.def)             Requested size: 386.96027pt x 177.27899pt.
- [63 <./figuras/mdd1017.jpg> <./figuras/mdd1923.jpg>]
-<figuras/riscopsgeral.jpg, id=870, 1013.7875pt x 464.73625pt>
+ [66 <./figuras/mddgeral.jpg> <./figuras/mdd1017.jpg>]
+<figuras/riscopsgeral.jpg, id=911, 1013.7875pt x 464.73625pt>
 File: figuras/riscopsgeral.jpg Graphic file (type jpg)
 <use figuras/riscopsgeral.jpg>
-Package pdftex.def Info: figuras/riscopsgeral.jpg  used on input line 251.
+Package pdftex.def Info: figuras/riscopsgeral.jpg  used on input line 260.
 (pdftex.def)             Requested size: 386.96027pt x 177.38873pt.
- [64 <./figuras/riscopsgeral.jpg>]
-<figuras/riscops1923.jpg, id=876, 1014.79124pt x 463.7325pt>
+ [67 <./figuras/mdd1923.jpg>]
+<figuras/riscops1923.jpg, id=918, 1014.79124pt x 463.7325pt>
 File: figuras/riscops1923.jpg Graphic file (type jpg)
 <use figuras/riscops1923.jpg>
-Package pdftex.def Info: figuras/riscops1923.jpg  used on input line 261.
+Package pdftex.def Info: figuras/riscops1923.jpg  used on input line 270.
 (pdftex.def)             Requested size: 386.96027pt x 176.8287pt.
- [65 <./figuras/riscops1923.jpg>]
-<figuras/evolucaogeral.jpg, id=884, 1017.8025pt x 522.95375pt>
+ [68 <./figuras/riscopsgeral.jpg> <./figuras/riscops1923.jpg>]
+<figuras/evolucaogeral.jpg, id=925, 1017.8025pt x 522.95375pt>
 File: figuras/evolucaogeral.jpg Graphic file (type jpg)
 <use figuras/evolucaogeral.jpg>
-Package pdftex.def Info: figuras/evolucaogeral.jpg  used on input line 285.
+Package pdftex.def Info: figuras/evolucaogeral.jpg  used on input line 294.
 (pdftex.def)             Requested size: 455.24411pt x 233.90663pt.
- [66 <./figuras/evolucaogeral.jpg>]
-<figuras/listagem.jpg, id=890, 1442.38875pt x 764.8575pt>
+ [69] [70 <./figuras/evolucaogeral.jpg>]
+<figuras/listagem.jpg, id=935, 1442.38875pt x 764.8575pt>
 File: figuras/listagem.jpg Graphic file (type jpg)
 <use figuras/listagem.jpg>
-Package pdftex.def Info: figuras/listagem.jpg  used on input line 306.
+Package pdftex.def Info: figuras/listagem.jpg  used on input line 315.
 (pdftex.def)             Requested size: 455.24411pt x 241.39821pt.
- [67] [68 <./figuras/listagem.jpg>]
-<figuras/perfmuitobaixosem.jpg, id=901, 1018.80624pt x 460.72125pt>
+ [71 <./figuras/listagem.jpg>]
+<figuras/perfmuitobaixosem.jpg, id=943, 1018.80624pt x 460.72125pt>
 File: figuras/perfmuitobaixosem.jpg Graphic file (type jpg)
 <use figuras/perfmuitobaixosem.jpg>
-Package pdftex.def Info: figuras/perfmuitobaixosem.jpg  used on input line 330.
+Package pdftex.def Info: figuras/perfmuitobaixosem.jpg  used on input line 339.
 (pdftex.def)             Requested size: 455.24411pt x 205.86743pt.
- [69 <./figuras/perfmuitobaixosem.jpg>]
-<figuras/perfbaixosem.jpg, id=908, 1015.795pt x 451.6875pt>
+ [72]
+<figuras/perfbaixosem.jpg, id=949, 1015.795pt x 451.6875pt>
 File: figuras/perfbaixosem.jpg Graphic file (type jpg)
 <use figuras/perfbaixosem.jpg>
-Package pdftex.def Info: figuras/perfbaixosem.jpg  used on input line 349.
+Package pdftex.def Info: figuras/perfbaixosem.jpg  used on input line 358.
 (pdftex.def)             Requested size: 455.24411pt x 202.43042pt.
- [70 <./figuras/perfbaixosem.jpg>]
-<figuras/perfmediosem.jpg, id=916, 1014.79124pt x 454.69875pt>
+ [73 <./figuras/perfmuitobaixosem.jpg>]
+<figuras/perfmediosem.jpg, id=957, 1014.79124pt x 454.69875pt>
 File: figuras/perfmediosem.jpg Graphic file (type jpg)
 <use figuras/perfmediosem.jpg>
-Package pdftex.def Info: figuras/perfmediosem.jpg  used on input line 366.
+Package pdftex.def Info: figuras/perfmediosem.jpg  used on input line 375.
 (pdftex.def)             Requested size: 455.24411pt x 203.98117pt.
- [71 <./figuras/perfmediosem.jpg>]
-<figuras/perfmediocom.jpg, id=923, 1012.78375pt x 446.66875pt>
+ [74 <./figuras/perfbaixosem.jpg>]
+<figuras/perfmediocom.jpg, id=963, 1012.78375pt x 446.66875pt>
 File: figuras/perfmediocom.jpg Graphic file (type jpg)
 <use figuras/perfmediocom.jpg>
-Package pdftex.def Info: figuras/perfmediocom.jpg  used on input line 378.
+Package pdftex.def Info: figuras/perfmediocom.jpg  used on input line 387.
 (pdftex.def)             Requested size: 455.24411pt x 200.77415pt.
- [72 <./figuras/perfmediocom.jpg>]
-<figuras/perfaltosem.jpg, id=929, 1015.795pt x 448.67625pt>
+ [75 <./figuras/perfmediosem.jpg> <./figuras/perfmediocom.jpg>]
+<figuras/perfaltosem.jpg, id=969, 1015.795pt x 448.67625pt>
 File: figuras/perfaltosem.jpg Graphic file (type jpg)
 <use figuras/perfaltosem.jpg>
-Package pdftex.def Info: figuras/perfaltosem.jpg  used on input line 397.
+Package pdftex.def Info: figuras/perfaltosem.jpg  used on input line 406.
 (pdftex.def)             Requested size: 455.24411pt x 201.08089pt.
-<figuras/perfaltosetor.jpg, id=932, 1012.78375pt x 451.6875pt>
+ [76 <./figuras/perfaltosem.jpg>]
+<figuras/perfaltosetor.jpg, id=976, 1012.78375pt x 451.6875pt>
 File: figuras/perfaltosetor.jpg Graphic file (type jpg)
 <use figuras/perfaltosetor.jpg>
-Package pdftex.def Info: figuras/perfaltosetor.jpg  used on input line 409.
+Package pdftex.def Info: figuras/perfaltosetor.jpg  used on input line 418.
 (pdftex.def)             Requested size: 455.24411pt x 203.03004pt.
- [73 <./figuras/perfaltosem.jpg>] [74 <./figuras/perfaltosetor.jpg>]
-<figuras/perfmuitoaltosem.jpg, id=942, 1011.78pt x 452.69125pt>
+ [77 <./figuras/perfaltosetor.jpg>]
+<figuras/perfmuitoaltosem.jpg, id=983, 1011.78pt x 452.69125pt>
 File: figuras/perfmuitoaltosem.jpg Graphic file (type jpg)
 <use figuras/perfmuitoaltosem.jpg>
-Package pdftex.def Info: figuras/perfmuitoaltosem.jpg  used on input line 426.
+Package pdftex.def Info: figuras/perfmuitoaltosem.jpg  used on input line 435.
 (pdftex.def)             Requested size: 455.24411pt x 203.68845pt.
- [75 <./figuras/perfmuitoaltosem.jpg>]
-<figuras/perfbalanceadosetor.jpg, id=951, 1015.795pt x 447.6725pt>
+ [78 <./figuras/perfmuitoaltosem.jpg>] [79]
+<figuras/perfbalanceadosetor.jpg, id=995, 1015.795pt x 447.6725pt>
 File: figuras/perfbalanceadosetor.jpg Graphic file (type jpg)
 <use figuras/perfbalanceadosetor.jpg>
-Package pdftex.def Info: figuras/perfbalanceadosetor.jpg  used on input line 449.
+Package pdftex.def Info: figuras/perfbalanceadosetor.jpg  used on input line 456.
 (pdftex.def)             Requested size: 455.24411pt x 200.63104pt.
- [76] [77 <./figuras/perfbalanceadosetor.jpg>] [78]) (./elementos-textuais/6-Conclusao.tex [79]
+ [80 <./figuras/perfbalanceadosetor.jpg>] [81]) [82] (./elementos-textuais/6-Conclusao.tex [83]
 Cap\'{\i }tulo 6.
-[80
+[84
 
-] [81]) (./main.bbl [82]
+] [85]) (./main.bbl [86]
 bibitemlist
-[83
+[87
 
-] [84]) [85]
+] [88] [89]) [90]
 
 Package glossaries Warning: No \printglossary or \printglossaries found. 
 (Remove \makeglossaries if you don't want any glossaries.) 
@@ -1519,8 +1584,8 @@ This document will not have a glossary.
 \tf@lof=\write6
 \openout6 = `main.lof'.
 
-\tf@lot=\write7
-\openout7 = `main.lot'.
+\tf@loq=\write7
+\openout7 = `main.loq'.
 
 \tf@toc=\write8
 \openout8 = `main.toc'.
@@ -1534,25 +1599,22 @@ L3 programming layer <2020/03/25>
  ***********
 
 
-LaTeX Warning: There were undefined references.
-
-
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 27233 strings out of 469006
- 493869 string characters out of 5454814
- 1049491 words of memory out of 5000000
- 55253 multiletter control sequences out of 15000+600000
+ 28628 strings out of 469006
+ 522094 string characters out of 5454814
+ 1072924 words of memory out of 5000000
+ 56619 multiletter control sequences out of 15000+600000
  645091 words of font info for 83 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 99i,16n,107p,2582b,741s stack positions out of 10000i,1000n,20000p,200000b,200000s
- </Users/brenokernrangel/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1000.600pk> </Users/brenokernrangel/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1000.600pk> </Users/brenokernrangel/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1000.600pk> </Users/brenokernrangel/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1200.600pk> </Users/brenokernrangel/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0800.600pk> </Users/brenokernrangel/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </Users/brenokernrangel/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk> </Users/brenokernrangel/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1095.600pk> </Users/brenokernrangel/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbi1200.600pk> </Users/brenokernrangel/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1200.600pk> </Users/brenokernrangel/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </Users/brenokernrangel/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600pk> </Users/brenokernrangel/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on main.pdf (87 pages, 5003553 bytes).
+ 99i,12n,107p,2582b,737s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ </Users/brenokernrangel/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0700.600pk> </Users/brenokernrangel/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1000.600pk> </Users/brenokernrangel/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1000.600pk> </Users/brenokernrangel/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1000.600pk> </Users/brenokernrangel/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1200.600pk> </Users/brenokernrangel/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0800.600pk> </Users/brenokernrangel/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </Users/brenokernrangel/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk> </Users/brenokernrangel/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1095.600pk> </Users/brenokernrangel/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbi1200.600pk> </Users/brenokernrangel/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1200.600pk> </Users/brenokernrangel/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </Users/brenokernrangel/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600pk> </Users/brenokernrangel/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+Output written on main.pdf (92 pages, 6849428 bytes).
 PDF statistics:
- 1986 PDF objects out of 2073 (max. 8388607)
- 1288 compressed objects within 13 object streams
- 281 named destinations out of 1000 (max. 500000)
- 841 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 2097 PDF objects out of 2487 (max. 8388607)
+ 1374 compressed objects within 14 object streams
+ 297 named destinations out of 1000 (max. 500000)
+ 861 words of extra memory for PDF output out of 10000 (max. 10000000)
 
