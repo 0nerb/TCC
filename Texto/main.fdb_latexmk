@@ -1,18 +1,16 @@
 # Fdb version 4
-["bibtex main"] 1784413299.08923 "main.aux" "main.bbl" "main" 1784413300.93674 0
-  "./elementos-postextuais/referencias.bib" 1784410321.91251 22570 ce2d6d03a7f69cf96b0077d9f28dadca ""
+["bibtex main"] 1784676936.9395 "main.aux" "main.bbl" "main" 1784676991.07599 0
+  "./elementos-postextuais/referencias.bib" 1784676411.23607 22302 4e3c0d8ffd442569f3d0c6ec5f302bb8 ""
   "/usr/local/texlive/2026basic/texmf-dist/bibtex/bib/abntex2/abntex2-options.bib" 1357081713 5396 4eb260dac60f150ae608d45252853090 ""
   "/usr/local/texlive/2026basic/texmf-dist/bibtex/bst/abntex2/abntex2-alf.bst" 1543183680 60064 0819ac8568f9a482510a46e3a8a6f605 ""
-  "main.aux" 1784413300.80919 72997 fcfcd7176389dc708ec90f56407eca4e "pdflatex"
+  "main.aux" 1784676990.93345 72997 fcfcd7176389dc708ec90f56407eca4e "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1784413299.11279 "/Users/brenokernrangel/Documents/TCC/Texto/main.tex" "main.pdf" "main" 1784413300.93697 0
-  "/Users/brenokernrangel/Documents/TCC/Texto/main.tex" 1784413123.57471 7366 b391846fa2d9185487a488a1aac38976 ""
+["pdflatex"] 1784676989.35267 "main.tex" "main.pdf" "main" 1784676991.07617 0
   "/Users/brenokernrangel/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbi1200.600pk" 1783109184.59544 42704 679ecd45f0213d229dab2e6ff79df5ad ""
   "/Users/brenokernrangel/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1000.600pk" 1783606047.73921 25396 b383999d17a1a0388aff09545cf11486 ""
-  "/Users/brenokernrangel/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1095.600pk" 1783109188.58148 28952 b5c456d77c6ffa18353b73bca81f420d ""
   "/Users/brenokernrangel/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk" 1783109185.75673 31928 a99da2362f92c69b3b9e0c0cf9e5ebfc ""
   "/Users/brenokernrangel/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0700.600pk" 1784329065.73006 16976 a0005fefc1486058dd54a623b631743c ""
   "/Users/brenokernrangel/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0800.600pk" 1783109184.91663 19056 786935d94d0f67225afcc5865bc79889 ""
@@ -26,7 +24,6 @@
   "/Users/brenokernrangel/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk" 1783109185.17697 14040 e649581524fa6eeea8583da02d486436 ""
   "/usr/local/texlive/2026basic/texmf-dist/fonts/tfm/jknappen/ec/ecbi1200.tfm" 1136768653 3072 ccae1a240ab272417e4399fe942df546 ""
   "/usr/local/texlive/2026basic/texmf-dist/fonts/tfm/jknappen/ec/ecbx1000.tfm" 1136768653 3584 2d666ecf6d466d8b007246bc2f94d9da ""
-  "/usr/local/texlive/2026basic/texmf-dist/fonts/tfm/jknappen/ec/ecbx1095.tfm" 1136768653 3584 21b378cca2e40816b0e6d74a4dc98f04 ""
   "/usr/local/texlive/2026basic/texmf-dist/fonts/tfm/jknappen/ec/ecbx1200.tfm" 1136768653 3584 402da0b29eafbad07963b1224b222f18 ""
   "/usr/local/texlive/2026basic/texmf-dist/fonts/tfm/jknappen/ec/ecrm0500.tfm" 1136768653 3584 178baad7ffca7f5d3428a83bd7cc64c3 ""
   "/usr/local/texlive/2026basic/texmf-dist/fonts/tfm/jknappen/ec/ecrm0600.tfm" 1136768653 3584 291a5713401683441e0a8c8f4417b17b ""
@@ -244,13 +241,13 @@
   "figuras/riscopsgeral.jpg" 1784339792 103918 b81431095600e2337d1fd0201ff2d3db ""
   "figuras/sazonalidadegeral.jpg" 1784339792 168706 ba3438ea036783066fdc47ce09d8ef8c ""
   "figuras/sazonalidadesemfs.jpg" 1784339792 189590 68cee3b94cffd88cc4f84a9964168b29 ""
-  "formatacao.tex" 1784411992.28481 6491 b810c7888d80c523a3833372a81a27a2 ""
-  "main.aux" 1784413300.80919 72997 fcfcd7176389dc708ec90f56407eca4e "pdflatex"
-  "main.bbl" 1784413299.11058 15107 0eff54ea3c542a9914c8faf070484b0f "bibtex main"
-  "main.lof" 1784413300.81903 6098 7284f2ce9b6bb4968bc99b2128372487 "pdflatex"
-  "main.loq" 1784413300.81909 698 db11df6f97d2f0bb7c348b260cd366a3 "pdflatex"
+  "formatacao.tex" 1784676963.71614 6673 c2fe4ab7deba653fc23b74454496117a ""
+  "main.aux" 1784676990.93345 72997 fcfcd7176389dc708ec90f56407eca4e "pdflatex"
+  "main.bbl" 1784676936.96072 15324 ed314fd888d25e24de127bfcf5ade1ff "bibtex main"
+  "main.lof" 1784676990.94293 6098 7284f2ce9b6bb4968bc99b2128372487 "pdflatex"
+  "main.loq" 1784676990.94298 698 db11df6f97d2f0bb7c348b260cd366a3 "pdflatex"
   "main.tex" 1784413123.57471 7366 b391846fa2d9185487a488a1aac38976 ""
-  "main.toc" 1784413300.81927 8628 3b0938f2b05eff8f652d3738be84f425 "pdflatex"
+  "main.toc" 1784676990.94302 8628 3b0938f2b05eff8f652d3738be84f425 "pdflatex"
   "url16023.sty" 1784339794 355 c5c805f7af03547bc161038576544e80 ""
   (generated)
   "main.aux"

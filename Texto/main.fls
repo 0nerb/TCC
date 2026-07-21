@@ -2,7 +2,7 @@ PWD /Users/brenokernrangel/Documents/TCC/Texto
 INPUT /usr/local/texlive/2026basic/texmf.cnf
 INPUT /usr/local/texlive/2026basic/texmf-dist/web2c/texmf.cnf
 INPUT /usr/local/texlive/2026basic/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT /Users/brenokernrangel/Documents/TCC/Texto/main.tex
+INPUT main.tex
 OUTPUT main.log
 INPUT /usr/local/texlive/2026basic/texmf-dist/tex/latex/abntex2/abntex2.cls
 INPUT /usr/local/texlive/2026basic/texmf-dist/tex/latex/abntex2/abntex2.cls
@@ -356,7 +356,6 @@ INPUT elementos-pretextuais/simbolos.tex
 INPUT ./main.toc
 INPUT ./main.toc
 INPUT main.toc
-INPUT /usr/local/texlive/2026basic/texmf-dist/fonts/tfm/jknappen/ec/ecbx1095.tfm
 INPUT ./elementos-textuais/1-Introducao.tex
 INPUT ./elementos-textuais/1-Introducao.tex
 INPUT elementos-textuais/1-Introducao.tex
@@ -582,7 +581,6 @@ INPUT /Users/brenokernrangel/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour
 INPUT /Users/brenokernrangel/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0800.600pk
 INPUT /Users/brenokernrangel/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk
 INPUT /Users/brenokernrangel/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk
-INPUT /Users/brenokernrangel/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1095.600pk
 INPUT /Users/brenokernrangel/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbi1200.600pk
 INPUT /Users/brenokernrangel/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1200.600pk
 INPUT /Users/brenokernrangel/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk
