@@ -11,7 +11,7 @@
   month      = jan,
   year       = {2012},
   doi        = {10.1002/9781119202400},
-  urlaccessdate = {7 jul. 2026}
+  note       = {Acesso em: 7 jul. 2026}
 }
 
 @misc{investir_perfil_2022,
@@ -25,7 +25,7 @@
   author     = {Investir, Redação Bora},
   month      = sep,
   year       = {2022},
-  urlaccessdate = {7 jul. 2026}
+  note       = {Acesso em: 7 jul. 2026}
 }
 
 @book{siegel_future_2005,
@@ -38,7 +38,7 @@
   author     = {Siegel, Jeremy J.},
   year       = {2005},
   url        = {https://static.cambridge.org/content/id/urn:cambridge.org:id:article:S1474747205211897/resource/name/S1474747205001897a.pdf},
-  urlaccessdate = {7 jul. 2026}
+  note       = {Acesso em: 7 jul. 2026}
 }
 
 @book{bodie_essentials_2024,
@@ -52,7 +52,7 @@
   author    = {Bodie, Zvi and Kane, Alex and Marcus, Alan J.},
   year      = {2024},
   url       = {https://studylib.net/doc/27153051/essentials-of-investments-12th-edition--zvi-bodie-alex-ka...#google_vignette},
-  urlaccessdate = {7 jul. 2026}
+  note      = {Acesso em: 7 jul. 2026}
 }
 
 @book{PALESTINO2014,
@@ -66,7 +66,7 @@
   year       = {2014},
   keywords   = {Administração e serviços auxiliares},
   url        = {https://biblioteca.itl.org.br/cgi-bin/koha/opac-detail.pl?biblionumber=1134},
-  urlaccessdate = {7 jul. 2026}
+  note       = {Acesso em: 7 jul. 2026}
 }
 
 @book{pardo_evaluation_2008,
@@ -80,7 +80,7 @@
   author    = {Pardo, Robert},
   year      = {2008},
   url       = {https://www.academia.edu/126119881/The_Evaluation_and_Optimization_of_Trading_Strategies},
-  urlaccessdate = {7 jul. 2026}
+  note      = {Acesso em: 7 jul. 2026}
 }
 
 @book{assaf_neto_mercado_2022,
@@ -95,7 +95,7 @@
   year      = {2022},
   keywords  = {Administração e serviços auxiliares, sociais, Aplicadas},
   url       = {https://dokumen.pub/mercado-financeiro-14nbsped-8597017791-9788597017793.html},
-  urlaccessdate = {7 jul. 2026}
+  note      = {Acesso em: 7 jul. 2026}
 }
 
 @article{Alekseev2016Benchmark-based,
@@ -107,7 +107,7 @@
   pages   = {409-440},
   doi     = {10.1007/s10436-016-0286-4},
   url     = {https://ideas.repec.org/a/kap/annfin/v12y2016i3d10.1007_s10436-016-0286-4.html},
-  urlaccessdate = {7 jul. 2026}
+  note    = {Acesso em: 7 jul. 2026}
 }
 
 @article{Wu2022An,
@@ -119,7 +119,7 @@
   pages   = {108794},
   doi     = {10.1016/j.knosys.2022.108794},
   url     = {https://doi.org/10.1016/j.knosys.2022.108794},
-  urlaccessdate = {7 jul. 2026}
+  note    = {Acesso em: 7 jul. 2026}
 }
 
 @article{Indices2018TREND:,
@@ -129,7 +129,7 @@
   year    = {2018},
   doi     = {10.6068/dp16451956d880},
   url     = {https://doi.org/10.6068/dp16451956d880},
-  urlaccessdate = {7 jul. 2026}
+  note    = {Acesso em: 7 jul. 2026}
 }
 
 @article{Amenc2013Smart,
@@ -141,7 +141,7 @@
   pages   = {15 - 23},
   doi     = {10.3905/jii.2013.4.3.015},
   url     = {https://doi.org/10.3905/jii.2013.4.3.015},
-  urlaccessdate = {7 jul. 2026}
+  note    = {Acesso em: 7 jul. 2026}
 }
 
 @article{Asem2012The,
@@ -153,7 +153,7 @@
   pages   = {15},
   doi     = {10.5539/ijef.v4n12p15},
   url     = {https://doi.org/10.5539/ijef.v4n12p15},
-  urlaccessdate = {7 jul. 2026}
+  note    = {Acesso em: 7 jul. 2026}
 }
 
 @article{Arnott2006NOISE,
@@ -163,7 +163,7 @@
   year    = {2006},
   doi     = {10.2139/ssrn.928167},
   url     = {https://doi.org/10.2139/ssrn.928167},
-  urlaccessdate = {7 jul. 2026}
+  note    = {Acesso em: 7 jul. 2026}
 }
 
 @article{Baker2011Benchmarks,
@@ -175,7 +175,7 @@
   pages   = {40 - 54},
   doi     = {10.2469/faj.v67.n1.4},
   url     = {https://doi.org/10.2469/faj.v67.n1.4},
-  urlaccessdate = {7 jul. 2026}
+  note    = {Acesso em: 7 jul. 2026}
 }
 
 @article{Intrisano2024Accounting,
@@ -185,7 +185,7 @@
   year    = {2024},
   doi     = {10.5539/ijbm.v20n1p72},
   url     = {https://doi.org/10.5539/ijbm.v20n1p72},
-  urlaccessdate = {7 jul. 2026}
+  note    = {Acesso em: 7 jul. 2026}
 }
 
 @inproceedings{Dirman2020FINANCIALDT,
@@ -194,7 +194,7 @@
   booktitle = {International Journal of Business, Economics and Law},
   year      = {2020},
   url       = {https://api.semanticscholar.org/CorpusID:260488229},
-  urlaccessdate = {7 jul. 2026}
+  note      = {Acesso em: 7 jul. 2026}
 }
 
 @article{Zaremba2019And,
@@ -206,7 +206,7 @@
   pages   = {84 - 98},
   doi     = {10.3905/jpm.2019.45.5.084},
   url     = {https://doi.org/10.3905/jpm.2019.45.5.084},
-  urlaccessdate = {7 jul. 2026}
+  note    = {Acesso em: 7 jul. 2026}
 }
 
 @article{Leary2011Determinants,
@@ -218,7 +218,7 @@
   pages   = {3197-3249},
   doi     = {10.2139/ssrn.1572618},
   url     = {https://doi.org/10.2139/ssrn.1572618},
-  urlaccessdate = {7 jul. 2026}
+  note    = {Acesso em: 7 jul. 2026}
 }
 
 @misc{Rozeff1984Dividend,
@@ -229,7 +229,7 @@
   pages  = {68 - 75},
   doi    = {10.3905/jpm.1984.408980},
   url    = {https://doi.org/10.3905/jpm.1984.408980},
-  urlaccessdate = {7 jul. 2026}
+  note   = {Acesso em: 7 jul. 2026}
 }
 
 @article{Fama1992CrossSection,
@@ -241,7 +241,7 @@
   number  = {2},
   pages   = {427-465},
   url     = {https://doi.org/10.1111/j.1540-6261.1992.tb04398.x},
-  urlaccessdate = {7 jul. 2026}
+  note    = {Acesso em: 7 jul. 2026}
 }
 
 @article{sharpe1964,
@@ -253,7 +253,7 @@
   number  = {3},
   pages   = {425-442},
   url     = {https://doi.org/10.1111/j.1540-6261.1964.tb02865.x},
-  urlaccessdate = {7 jul. 2026}
+  note    = {Acesso em: 7 jul. 2026}
 }
 
 @article{markowitz1952,
@@ -265,7 +265,7 @@
   number  = {1},
   pages   = {77-91},
   url     = {https://doi.org/10.1111/j.1540-6261.1952.tb01525.x},
-  urlaccessdate = {7 jul. 2026}
+  note    = {Acesso em: 7 jul. 2026}
 }
 
 @article{lintner1965,
@@ -280,7 +280,7 @@
   month   = feb,
   year    = {1965},
   pages   = {13--37},
-  urlaccessdate = {7 jul. 2026}
+  note    = {Acesso em: 7 jul. 2026}
 }
 
 @article{kahneman_prospect_1979,
@@ -297,7 +297,7 @@
   month      = mar,
   year       = {1979},
   pages      = {263--291},
-  urlaccessdate = {7 jul. 2026}
+  note       = {Acesso em: 7 jul. 2026}
 }
 
 @article{chekhlov_drawdown_2005,
@@ -312,7 +312,7 @@
   author  = {Chekhlov, Alexei and Uryasev, Stanislav and Zabarankin, Michael},
   year    = {2005},
   pages   = {13--58},
-  urlaccessdate = {7 jul. 2026}
+  note    = {Acesso em: 7 jul. 2026}
 }
 
 @book{barbieri_bi_2001,
@@ -324,7 +324,7 @@
   month      = mar,
   year       = {2001},
   url        = {https://books.google.com/books/about/BI_business_intelligence.html?id=HD1KAAAACAAJ},
-  urlaccessdate = {7 jul. 2026}
+  note       = {Acesso em: 7 jul. 2026}
 }
 
 @misc{torra_porras_market_2010,
@@ -337,7 +337,7 @@
   author   = {Torra Porras, Salvador and Andreu Corbatón, Jordi},
   month    = mar,
   year     = {2010},
-  urlaccessdate = {7 jul. 2026}
+  note     = {Acesso em: 7 jul. 2026}
 }
 
 @article{benturk_alternative_2024,
@@ -355,7 +355,7 @@
   author     = {Benturk, Mehmet},
   year       = {2024},
   pages      = {171--179},
-  urlaccessdate = {7 jul. 2026}
+  note       = {Acesso em: 7 jul. 2026}
 }
 
 @thesis{sampaio2013,
@@ -368,7 +368,7 @@
   author     = {Sampaio, Agnes Natasha Maciel de},
   year       = {2016},
   urldate    = {2026-06-28},
-  urlaccessdate = {7 jul. 2026}
+  note       = {Acesso em: 7 jul. 2026}
 }
 
 @article{codd1970relational,
@@ -381,7 +381,7 @@
   year      = {1970},
   publisher = {ACM New York, NY, USA},
   url       = {https://doi.org/10.1145/362384.362685},
-  urlaccessdate = {7 jul. 2026}
+  note      = {Acesso em: 7 jul. 2026}
 }
 
 @book{kimball_data_2013,
@@ -395,7 +395,7 @@
   year       = {2013},
   keywords   = {Data warehousing, Database design, Business intelligence, Business enterprises, Data processing},
   url        = {https://www.wiley.com/en-us/The+Data+Warehouse+Toolkit:+The+Definitive+Guide+to+Dimensional+Modeling,+3rd+Edition-p-9781118530801},
-  urlaccessdate = {7 jul. 2026}
+  note       = {Acesso em: 7 jul. 2026}
 }
 
 @book{mcfadden1973,
@@ -407,7 +407,7 @@
   year      = {1974},
   pages     = {252},
   url       = {https://books.google.com/books/about/Frontiers_in_Econometrics.html?id=wSm7AAAAIAAJ},
-  urlaccessdate = {7 jul. 2026}
+  note      = {Acesso em: 7 jul. 2026}
 }
 
 @article{ALI2022169,
@@ -422,7 +422,7 @@
   author   = {Heba Ali and Aya Yasser Hegazy},
   keywords = {Dividend changes, Risk, Downside risk, Asymmetric information, Stock returns, India},
   abstract = {We invoke theories of dividend policy and asset pricing to investigate the impact of dividend changes on stock price risk, stock returns, and the cross-sectional risk-return tradeoff. We use a large sample of Indian firms during the period from 1999 to 2018. We find that favorable dividend changes trigger higher stock returns because they convey new information about firm's future profitability, as posited by the dividend signaling theory. Our analysis also shows that the higher (lower) stock returns following dividend increases (decreases) are more pronounced among stocks with greater information asymmetry. The results reveal a new empirical evidence of the heterogeneity of the risk–return trade-off across firms with different dividend changes. We show that the positive risk–return relation is much more pronounced among dividend-increasing firms, but the risk–return relation is negative among dividend-decreasing firms.},
-  urlaccessdate = {7 jul. 2026}
+  note     = {Acesso em: 7 jul. 2026}
 }
 
 @techreport{baffes2015,
@@ -434,7 +434,7 @@
   year        = {2015},
   address     = {Washington, DC},
   url         = {https://www.worldbank.org/content/dam/Worldbank/Research/PRN01_Mar2015_Oil_Prices.pdf},
-  urlaccessdate = {7 jul. 2026}
+  note        = {Acesso em: 7 jul. 2026}
 }
 
 @article{baumeisterkilian2016,
@@ -446,7 +446,7 @@
   pages   = {131--158},
   year    = {2016},
   url     = {https://doi.org/10.1086/684160},
-  urlaccessdate = {7 jul. 2026}
+  note    = {Acesso em: 7 jul. 2026}
 }
 
 @article{thakor2017,
@@ -458,7 +458,7 @@
   pages   = {1149--1151},
   year    = {2017},
   url     = {https://www.nature.com/articles/nbt.4023},
-  urlaccessdate = {7 jul. 2026}
+  note    = {Acesso em: 7 jul. 2026}
 }
 
 @article{goleconvernon2009,
@@ -470,7 +470,7 @@
   pages   = {615--628},
   year    = {2009},
   url     = {https://doi.org/10.2165/11535580-000000000-00000},
-  urlaccessdate = {7 jul. 2026}
+  note    = {Acesso em: 7 jul. 2026}
 }
 
 @article{boumanjacobsen2002,
@@ -482,7 +482,7 @@
   pages   = {1618--1635},
   year    = {2002},
   url     = {https://doi.org/10.1257/000282802762024683},
-  urlaccessdate = {7 jul. 2026}
+  note    = {Acesso em: 7 jul. 2026}
 }
 
 @article{andrade2013,
@@ -494,7 +494,7 @@
   pages   = {94--105},
   year    = {2013},
   url     = {https://doi.org/10.2469/faj.v69.n4.4},
-  urlaccessdate = {7 jul. 2026}
+  note    = {Acesso em: 7 jul. 2026}
 }
 
 @book{gitman_joehnk_2005,
@@ -505,7 +505,7 @@
   address   = {S{\~a}o Paulo},
   publisher = {Addison Wesley},
   url       = {https://www.bvirtual.com.br/NossoAcervo/Publicacao/287},
-  urlaccessdate = {7 jul. 2026}
+  note      = {Acesso em: 7 jul. 2026}
 }
 
 @book{campbell_econometrics_1997,
@@ -515,7 +515,7 @@
   address   = {Princeton},
   publisher = {Princeton University Press},
   url       = {https://press.princeton.edu/books/hardcover/9780691043012/the-econometrics-of-financial-markets},
-  urlaccessdate = {7 jul. 2026}
+  note      = {Acesso em: 7 jul. 2026}
 }
 
 @misc{microsoft_star_schema_2024,
@@ -523,7 +523,7 @@
   title        = {Entender o esquema em estrela e sua import{\^a}ncia para o Power BI},
   year         = {2024},
   howpublished = {\url{https://learn.microsoft.com/pt-br/power-bi/guidance/star-schema}},
-  urlaccessdate = {7 jul. 2026}
+  note         = {Acesso em: 7 jul. 2026}
 }
 
 @article{deng_grey_1989,
@@ -535,5 +535,5 @@
   pages   = {1--24},
   year    = {1989},
   url     = {https://dl.acm.org/doi/10.5555/90757.90758},
-  urlaccessdate = {7 jul. 2026}
+  note    = {Acesso em: 7 jul. 2026}
 }

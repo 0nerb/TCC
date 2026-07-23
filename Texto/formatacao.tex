@@ -20,6 +20,7 @@
 \usepackage{mathtools}
 \graphicspath{ {./figuras/} }
 \usepackage{seqsplit}
+\usepackage{caption} % necessário para \captionof em longtable como Quadro
 \newcommand{\ttbreak}[1]{\texttt{\seqsplit{#1}}}
 
 % retira as mensagens de aviso do pacote Glossaries
@@ -72,6 +73,9 @@
 \renewcommand{\ABNTEXsectionfontsize}{\normalsize}
 \renewcommand{\ABNTEXsubsectionfont}{\bfseries}         % Subseções em Bold apenas
 \renewcommand{\ABNTEXsubsectionfontsize}{\normalsize}
+% Sumário: seções quaternárias (subsubsection) em caixa baixa sem negrito
+\renewcommand{\cftsubsubsectionfont}{\normalfont}
+\renewcommand{\cftsubsubsectionpagefont}{\normalfont}
 \renewcommand{\lstlistingname}{Código}                  % Nome para os códigos no texto
 \renewcommand{\lstlistlistingname}{Lista de \lstlistingname s}
 \makeatletter                                          % Configura a linha da lista de códigos
